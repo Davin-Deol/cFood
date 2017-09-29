@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Results list</string>
+    <string name="temperatures">Select temperature</string>
+    <string-array name="temperatures">
+        <item>Celsius to Fahrenheit</item>
+        <item>Celsius to Kelvin</item>
+        <item>Fahrenheit to Kelvin</item>
+        <item>Fahrenheit to Celsius</item>
+        <item>Kelvin to Celsius</item>
+        <item>Kelvin to Fahrenheit</item>
+    </string-array>
+</resources>
