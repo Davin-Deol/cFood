@@ -9,4 +9,5 @@
         <item>Kelvin to Celsius</item>
         <item>Kelvin to Fahrenheit</item>
     </string-array>
+    <string name="title_activity_results">Results</string>
 </resources>

@@ -1,61 +1,42 @@
 package ca.bcit.ass1.cfood;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button generateListButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        final Results[] resultsArray = {
-                new Results("Neighbourhood 1", "Description - noisy area", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 2", "Description - bad place to live", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 3", "Description - high density", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 4", "Description - far away from everything", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 5", "Description - close to everything", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 1", "Description - noisy area", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 2", "Description - bad place to live", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 3", "Description - high density", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 4", "Description - far away from everything", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 5", "Description - close to everything", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 1", "Description - noisy area", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 2", "Description - bad place to live", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 3", "Description - high density", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 4", "Description - far away from everything", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
-                new Results("Neighbourhood 5", "Description - close to everything", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2")
-        };
+        addListenerOnButton();
+    }
 
-        ListView resultsList = new ListView(this);
-        ArrayAdapter<Results> resultsAdapter = new ArrayAdapter<Results>(this,
-                0, resultsArray) {
+    public void addListenerOnButton()
+    {
 
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    Results currentResult = resultsArray[position];
-                    if(convertView == null) {
-                        convertView = getLayoutInflater()
-                                .inflate(R.layout.activity_list, null, false);
-                    }
-                    TextView resultsNHood = (TextView)convertView.findViewById(R.id.results);
-                    TextView resultsDesc = (TextView)convertView.findViewById(R.id.resultsDescription);
-                    TextView resultsRate = (TextView)convertView.findViewById(R.id.resultsRating);
+        generateListButton = (Button) findViewById(R.id.generateListButton);
 
-                    resultsNHood.setText(currentResult.neighbourhood);
-                    resultsDesc.setText(currentResult.description);
-                    resultsRate.setText(currentResult.rating);
-
-                    return convertView;
-                }
-                };
-        setContentView(resultsList);
-        resultsList.setAdapter(resultsAdapter);
-
+        generateListButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, Results.class);
+                startActivity(intent);
+            }
+        });
     }
 }
