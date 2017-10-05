@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -68,6 +69,33 @@ public class Results extends AppCompatActivity {
                 return convertView;
             }
         };
+
+        resultsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg3 ) {
+                TextView expandable = (TextView)view.findViewById(R.id.expandable);
+                TextView resultsNHood = (TextView)view.findViewById(R.id.results);
+                TextView resultsDesc = (TextView)view.findViewById(R.id.resultsDescription);
+                TextView resultsRate = (TextView)view.findViewById(R.id.resultsRating);
+
+                if ( expandable.getVisibility() == View.GONE)
+                {
+                    //expandedChildList.set(arg2, true);
+//                    resultsNHood.setVisibility(View.GONE);
+//                    resultsDesc.setVisibility(View.GONE);
+//                    resultsRate.setVisibility(View.GONE);
+                    expandable.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    //expandedChildList.set(arg2, false);
+//                    resultsNHood.setVisibility(View.VISIBLE);
+//                    resultsDesc.setVisibility(View.VISIBLE);
+//                    resultsRate.setVisibility(View.VISIBLE);
+                    expandable.setVisibility(View.GONE);
+                }
+            }
+        });
         setContentView(resultsList);
         resultsList.setAdapter(resultsAdapter);
 
