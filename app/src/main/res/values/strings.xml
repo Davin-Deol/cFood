@@ -1,13 +1,20 @@
 <resources>
-    <string name="app_name">Results list</string>
-    <string name="temperatures">Select temperature</string>
-    <string-array name="temperatures">
-        <item>Celsius to Fahrenheit</item>
-        <item>Celsius to Kelvin</item>
-        <item>Fahrenheit to Kelvin</item>
-        <item>Fahrenheit to Celsius</item>
-        <item>Kelvin to Celsius</item>
-        <item>Kelvin to Fahrenheit</item>
-    </string-array>
+    <string name="app_name">What Are You Looking For?</string>
+    <string name="generateListButtonLabel">Generate</string>
     <string name="title_activity_results">Results</string>
+
+    <string name="busStop">Bus Stop</string>
+    <string name="dogPark">Dog Park</string>
+    <string name="grocery">Grocery</string>
+    <string name="highway">Highway</string>
+    <string name="hobby">Hobby</string>
+    <string name="mall">Mall</string>
+    <string name="noise">Noise</string>
+    <string name="parks">Parks</string>
+    <string name="schools">Schools</string>
+    <string name="skyTrain">Sky Train</string>
+
+    <string name="defaultNumberValue">0</string>
+    <string name="plusSign">+</string>
+    <string name="minusSign">-</string>
 </resources>

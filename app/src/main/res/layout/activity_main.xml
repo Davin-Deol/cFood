@@ -5,27 +5,517 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ca.bcit.ass1.cfood.MainActivity">
-
-    <TextView
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="450dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/generateListButton"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="7dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+            <LinearLayout
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/inputNameBusStop"
+                        android:text="@string/busStop"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/inputValueBusStop"
+                        android:text="@string/defaultNumberValue"
+                        android:layout_width="49dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textAlignment="center"
+                        android:ems="10" />
+
+                    <Button
+                        android:id="@+id/incrementButtonBusStop"
+                        android:text="@string/plusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:tag="BusStop"
+                        android:onClick="increment" />
+
+                    <Button
+                        android:id="@+id/decrementButtonBusStop"
+                        android:text="@string/minusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:tag="BusStop"
+                        android:onClick="decrement" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/inputNameDogPark"
+                        android:text="@string/dogPark"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/inputValueDogPark"
+                        android:text="@string/defaultNumberValue"
+                        android:layout_width="49dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textAlignment="center"
+                        android:ems="10" />
+
+                    <Button
+                        android:id="@+id/incrementButtonDogPark"
+                        android:text="@string/plusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:tag="DogPark"
+                        android:onClick="increment" />
+
+                    <Button
+                        android:id="@+id/decrementButtonDogPark"
+                        android:text="@string/minusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:tag="DogPark"
+                        android:onClick="decrement" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/inputNameGrocery"
+                        android:text="@string/grocery"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/inputValueGrocery"
+                        android:text="@string/defaultNumberValue"
+                        android:layout_width="49dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textAlignment="center"
+                        android:ems="10" />
+
+                    <Button
+                        android:id="@+id/incrementButtonGrocery"
+                        android:text="@string/plusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:tag="Grocery"
+                        android:onClick="increment" />
+
+                    <Button
+                        android:id="@+id/decrementButtonGrocery"
+                        android:text="@string/minusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:tag="Grocery"
+                        android:onClick="decrement" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/inputNameHighway"
+                        android:text="@string/highway"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/inputValueHighway"
+                        android:text="@string/defaultNumberValue"
+                        android:layout_width="49dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textAlignment="center"
+                        android:ems="10" />
+
+                    <Button
+                        android:id="@+id/incrementButtonHighway"
+                        android:text="@string/plusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:tag="Highway"
+                        android:onClick="increment" />
+
+                    <Button
+                        android:id="@+id/decrementButtonHighway"
+                        android:text="@string/minusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:tag="Highway"
+                        android:onClick="decrement" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/inputNameHobby"
+                        android:text="@string/hobby"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/inputValueHobby"
+                        android:text="@string/defaultNumberValue"
+                        android:layout_width="49dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textAlignment="center"
+                        android:ems="10" />
+
+                    <Button
+                        android:id="@+id/incrementButtonHobby"
+                        android:text="@string/plusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:tag="Hobby"
+                        android:onClick="increment" />
+
+                    <Button
+                        android:id="@+id/decrementButtonHobby"
+                        android:text="@string/minusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:tag="Hobby"
+                        android:onClick="decrement" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/inputNameMall"
+                        android:text="@string/mall"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/inputValueMall"
+                        android:text="@string/defaultNumberValue"
+                        android:layout_width="49dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textAlignment="center"
+                        android:ems="10" />
+
+                    <Button
+                        android:id="@+id/incrementButtonMall"
+                        android:text="@string/plusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:tag="Mall"
+                        android:onClick="increment" />
+
+                    <Button
+                        android:id="@+id/decrementButtonMall"
+                        android:text="@string/minusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:tag="Mall"
+                        android:onClick="decrement" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/inputNameNoise"
+                        android:text="@string/noise"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/inputValueNoise"
+                        android:text="@string/defaultNumberValue"
+                        android:layout_width="49dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textAlignment="center"
+                        android:ems="10" />
+
+                    <Button
+                        android:id="@+id/incrementButtonNoise"
+                        android:text="@string/plusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:tag="Noise"
+                        android:onClick="increment" />
+
+                    <Button
+                        android:id="@+id/decrementButtonNoise"
+                        android:text="@string/minusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:tag="Noise"
+                        android:onClick="decrement" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/inputNameParks"
+                        android:text="@string/parks"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/inputValueParks"
+                        android:text="@string/defaultNumberValue"
+                        android:layout_width="49dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textAlignment="center"
+                        android:ems="10" />
+
+                    <Button
+                        android:id="@+id/incrementButtonParks"
+                        android:text="@string/plusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:tag="Parks"
+                        android:onClick="increment" />
+
+                    <Button
+                        android:id="@+id/decrementButtonParks"
+                        android:text="@string/minusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:tag="Parks"
+                        android:onClick="decrement" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/inputNameSchools"
+                        android:text="@string/schools"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/inputValueSchools"
+                        android:text="@string/defaultNumberValue"
+                        android:layout_width="49dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textAlignment="center"
+                        android:ems="10" />
+
+                    <Button
+                        android:id="@+id/incrementButtonSchools"
+                        android:text="@string/plusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:tag="Schools"
+                        android:onClick="increment" />
+
+                    <Button
+                        android:id="@+id/decrementButtonSchools"
+                        android:text="@string/minusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:tag="Schools"
+                        android:onClick="decrement" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/inputNameSkyTrain"
+                        android:text="@string/skyTrain"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/inputValueSkyTrain"
+                        android:text="@string/defaultNumberValue"
+                        android:layout_width="49dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textAlignment="center"
+                        android:ems="10" />
+
+                    <Button
+                        android:id="@+id/incrementButtonSkyTrain"
+                        android:text="@string/plusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginStart="20dp"
+                        android:tag="SkyTrain"
+                        android:onClick="increment" />
+
+                    <Button
+                        android:id="@+id/decrementButtonSkyTrain"
+                        android:text="@string/minusSign"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="1dp"
+                        android:tag="SkyTrain"
+                        android:onClick="decrement" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/generateListButton"
-        android:layout_width="394dp"
+        android:layout_width="384dp"
         android:layout_height="60dp"
-        android:text="Button"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="#3f51b5"
+        android:textColor="#ffffff"
+        android:onClick="generate"
+        android:text="@string/generateListButtonLabel"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        tools:layout_editor_absoluteY="443dp" />
-
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

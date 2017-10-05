@@ -4,39 +4,55 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button generateListButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        addListenerOnButton();
     }
 
-    public void addListenerOnButton()
-    {
+    public void increment(View v) {
+        String textValueID = v.getTag().toString();
+        String buttonID = "inputValue" + textValueID;
+        int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+        TextView text = (TextView) findViewById(resID);
 
-        generateListButton = (Button) findViewById(R.id.generateListButton);
+        int value = Integer.parseInt(text.getText().toString());
 
-        generateListButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(MainActivity.this, Results.class);
-                startActivity(intent);
-            }
-        });
+        if (value >= 9) {
+            text.setText("" + value);
+        } else {
+            value++;
+            text.setText("" + value);
+        }
+    }
+
+    public void decrement(View v) {
+        String textValueID = v.getTag().toString();
+        String buttonID = "inputValue" + textValueID;
+        int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+        TextView text = (TextView) findViewById(resID);
+
+        int value = Integer.parseInt(text.getText().toString());
+
+        if (value <= 0) {
+            text.setText("" + value);
+        } else {
+            value--;
+            text.setText("" + value);
+        }
+    }
+
+    /**
+     * This function is only used by the button that starts the search
+     * @param v
+     */
+    public void generate(View v) {
+        Intent intent = new Intent(MainActivity.this, Results.class);
+
+        startActivity(intent);
     }
 }
