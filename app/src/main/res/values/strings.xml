@@ -14,7 +14,18 @@
     <string name="schools">Schools</string>
     <string name="skyTrain">Sky Train</string>
 
-    <string name="defaultNumberValue">0</string>
+    <string name="defaultNumberValue">Doesn\'t Matter</string>
     <string name="plusSign">+</string>
     <string name="minusSign">-</string>
+    <string-array name="distances">
+        <item>Doesn\'t Matter</item>
+        <item>100m</item>
+        <item>250m</item>
+        <item>500m</item>
+        <item>1 km</item>
+        <item>2.5 km</item>
+        <item>5 km</item>
+        <item>7.5 km</item>
+        <item>10 km</item>
+    </string-array>
 </resources>

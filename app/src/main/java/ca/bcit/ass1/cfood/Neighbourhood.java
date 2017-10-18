@@ -10,8 +10,7 @@ public class Neighbourhood {
     String description;
     String rating;
 
-    public Neighbourhood(String neighbourhood, String description,
-                         String rating) {
+    public Neighbourhood(String neighbourhood, String description, String rating) {
         this.neighbourhood = neighbourhood;
         this.description = description;
         this.rating = rating;

@@ -8,10 +8,14 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    String[] distances;
+    int value = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        distances = getResources().getStringArray(R.array.distances);
     }
 
     public void increment(View v) {
@@ -20,13 +24,11 @@ public class MainActivity extends AppCompatActivity {
         int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
         TextView text = (TextView) findViewById(resID);
 
-        int value = Integer.parseInt(text.getText().toString());
-
-        if (value >= 9) {
-            text.setText("" + value);
+        if (value >= (distances.length - 1)) {
+            text.setText("" + distances[value]);
         } else {
             value++;
-            text.setText("" + value);
+            text.setText("" + distances[value]);
         }
     }
 
@@ -36,13 +38,11 @@ public class MainActivity extends AppCompatActivity {
         int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
         TextView text = (TextView) findViewById(resID);
 
-        int value = Integer.parseInt(text.getText().toString());
-
         if (value <= 0) {
-            text.setText("" + value);
+            text.setText("" + distances[value]);
         } else {
             value--;
-            text.setText("" + value);
+            text.setText("" + distances[value]);
         }
     }
 
