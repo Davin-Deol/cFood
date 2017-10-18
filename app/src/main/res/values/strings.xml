@@ -3,20 +3,32 @@
     <string name="generateListButtonLabel">Generate</string>
     <string name="title_activity_results">Results</string>
 
-    <string name="busStop">Bus Stop</string>
-    <string name="dogPark">Dog Park</string>
-    <string name="grocery">Grocery</string>
-    <string name="highway">Highway</string>
-    <string name="hobby">Hobby</string>
-    <string name="mall">Mall</string>
-    <string name="noise">Noise</string>
+    <string name="busStop">Alternative Fuels and Electric Charging Stations</string>
+    <string name="dogPark">Bike Routes</string>
+    <string name="grocery">Bus Stops</string>
+    <string name="hobby">Drop-In Centres</string>
+    <string name="mall">Hospital</string>
+    <string name="noise">Off Leash Dog Areas</string>
     <string name="parks">Parks</string>
-    <string name="schools">Schools</string>
-    <string name="skyTrain">Sky Train</string>
+    <string name="schools">Playgrounds</string>
+    <string name="skyTrain">Seniors Services</string>
 
     <string name="defaultNumberValue">Doesn\'t Matter</string>
     <string name="plusSign">+</string>
     <string name="minusSign">-</string>
+
+    <string-array name="categories">
+        <item>Alternative Fuels and Electric Charging Stations</item>
+        <item>Bike Routes</item>
+        <item>Bus Stops</item>
+        <item>Drop-In Centres</item>
+        <item>Hospital</item>
+        <item>Off Leash Dog Areas</item>
+        <item>Parks</item>
+        <item>Playgrounds</item>
+        <item>Seniors Services</item>
+    </string-array>
+
     <string-array name="distances">
         <item>Doesn\'t Matter</item>
         <item>100m</item>
