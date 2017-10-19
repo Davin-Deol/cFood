@@ -5,6 +5,9 @@
     <string name="saved_zones">Saved Zones</string>
     <string name="saved_zones_title">Saved Zones</string>
     <string name="clear">Clear</string>
+    <string name="search">Search</string>
+    <string name="saveSearch">Save Search</string>
+    <string name="loadSearch">Load Search</string>
 
     <string name="defaultNumberValue">Doesn\'t Matter</string>
     <string name="plusSign">+</string>
