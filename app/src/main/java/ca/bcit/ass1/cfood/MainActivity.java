@@ -66,13 +66,13 @@ public class MainActivity extends AppCompatActivity {
             TextView valueTextView = (TextView) view.findViewById(R.id.inputValue);
             String valueID = "inputValue" + i;
             int valueResID = getResources().getIdentifier(valueID, "id", getPackageName());
-            valueTextView.setId(valueResID);
+            valueTextView.setId(i);
 
             Button incrementButton = (Button) view.findViewById(R.id.incrementButton);
             incrementButton.setTag(i);
 
             Button decrementButton = (Button) view.findViewById(R.id.decrementButton);
-            decrementButton.setId(i);
+            decrementButton.setTag(i);
 
             return view;
         }
@@ -81,8 +81,7 @@ public class MainActivity extends AppCompatActivity {
     public void increment(View v) {
         String textValueID = v.getTag().toString();
         String valueID = "inputValue" + textValueID;
-        int resID = getResources().getIdentifier(valueID, "id", getPackageName());
-        TextView text = (TextView) findViewById(resID);
+        TextView text = (TextView) findViewById(Integer.parseInt(textValueID));
 
         if (value >= (distances.length - 1)) {
             text.setText("" + distances[value]);
@@ -94,8 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void decrement(View v) {
         String textValueID = v.getTag().toString();
-        String buttonID = "inputValue" + textValueID;
-        int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+        int resID = getResources().getIdentifier(textValueID, "id", getPackageName());
         TextView text = (TextView) findViewById(resID);
 
         if (value <= 0) {
