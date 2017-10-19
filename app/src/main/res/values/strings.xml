@@ -2,6 +2,9 @@
     <string name="app_name">What Are You Looking For?</string>
     <string name="generateListButtonLabel">Generate</string>
     <string name="title_activity_results">Results</string>
+    <string name="saved_zones">Saved Zones</string>
+    <string name="saved_zones_title">Saved Zones</string>
+    <string name="clear">Clear</string>
 
     <string name="defaultNumberValue">Doesn\'t Matter</string>
     <string name="plusSign">+</string>
