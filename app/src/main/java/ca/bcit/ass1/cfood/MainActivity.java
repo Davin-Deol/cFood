@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     String[] distances;
     String[] categories;
-    int value = 0;
+    int[] value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         categories = getResources().getStringArray(R.array.categories);
         distances = getResources().getStringArray(R.array.distances);
+        value = new int[categories.length];
+        for (int i = 0; i < value.length; i++) {
+            value[i] = 0;
+        }
         ListView listView = (ListView) findViewById(R.id.listView);
 
         CustomAdapter customAdapter = new CustomAdapter();
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -103,14 +107,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void increment(View v) {
         String textValueID = v.getTag().toString();
-        String valueID = "inputValue" + textValueID;
         TextView text = (TextView) findViewById(Integer.parseInt(textValueID));
 
-        if (value >= (distances.length - 1)) {
-            text.setText("" + distances[value]);
+        if (value[Integer.parseInt(textValueID)] >= (distances.length - 1)) {
+            text.setText("" + distances[value[Integer.parseInt(textValueID)]]);
         } else {
-            value++;
-            text.setText("" + distances[value]);
+            value[Integer.parseInt(textValueID)]++;
+            text.setText("" + distances[value[Integer.parseInt(textValueID)]]);
         }
     }
 
@@ -119,11 +122,11 @@ public class MainActivity extends AppCompatActivity {
         int resID = getResources().getIdentifier(textValueID, "id", getPackageName());
         TextView text = (TextView) findViewById(resID);
 
-        if (value <= 0) {
-            text.setText("" + distances[value]);
+        if (value[Integer.parseInt(textValueID)] <= 0) {
+            text.setText("" + distances[value[Integer.parseInt(textValueID)]]);
         } else {
-            value--;
-            text.setText("" + distances[value]);
+            value[Integer.parseInt(textValueID)]--;
+            text.setText("" + distances[value[Integer.parseInt(textValueID)]]);
         }
     }
 
