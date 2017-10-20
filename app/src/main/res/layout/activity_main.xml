@@ -15,23 +15,10 @@
         android:id="@+id/listView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/generateListButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
     </ListView>
-
-
-    <Button
-        android:id="@+id/generateListButton"
-        android:layout_width="384dp"
-        android:layout_height="60dp"
-        android:background="#3f51b5"
-        android:textColor="#ffffff"
-        android:onClick="generate"
-        android:text="@string/generateListButtonLabel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

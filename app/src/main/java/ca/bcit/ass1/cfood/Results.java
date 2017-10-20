@@ -32,7 +32,7 @@ public class Results extends AppCompatActivity {
             }
         });
         final Neighbourhood[] resultsArray = {
-                new Neighbourhood("Neighbourhood 1", "Description - noisy area", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
+                new Neighbourhood("Neighbourhood 1", getResources().getStringArray(R.array.distances)[arrayB[0]], "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
                 new Neighbourhood("Neighbourhood 2", "Description - bad place to live", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
                 new Neighbourhood("Neighbourhood 3", "Description - high density", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
                 new Neighbourhood("Neighbourhood 4", "Description - far away from everything", "Noise: 3, Parks: 3, Schools: 3, Shopping: 2"),
