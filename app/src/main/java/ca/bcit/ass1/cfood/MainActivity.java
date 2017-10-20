@@ -20,15 +20,14 @@ public class MainActivity extends AppCompatActivity {
     String[] distances;
     String[] categories;
     int[] value;
-    private ShareActionProvider shareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        categories = getResources().getStringArray(R.array.categories);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        categories = getResources().getStringArray(R.array.categories);
         distances = getResources().getStringArray(R.array.distances);
         value = new int[categories.length];
         for (int i = 0; i < value.length; i++) {
@@ -43,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
-        MenuItem menuItem = menu.findItem(R.id.share);
-        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        setShareActionIntent("Looking for a place in New Westminster");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -59,13 +55,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void setShareActionIntent(String text) {
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("text/plain");
-        i.putExtra(Intent.EXTRA_TEXT, text);
-        shareActionProvider.setShareIntent(i);
     }
 
     private class CustomAdapter extends BaseAdapter {
@@ -147,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void generate(View v) {
         Intent intent = new Intent(MainActivity.this, Results.class);
-
+        intent.putExtra("INPUTS", value);
         startActivity(intent);
     }
 }

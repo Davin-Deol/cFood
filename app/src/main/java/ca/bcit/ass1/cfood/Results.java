@@ -20,6 +20,8 @@ public class Results extends AppCompatActivity {
         setContentView(R.layout.activity_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        int[] arrayB = getIntent().getExtras().getIntArray("INPUTS");
+        String test = "" + arrayB[0];
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,7 @@
 <resources>
+    <string name="plusSign">+</string>
+    <string name="minusSign">-</string>
+
     <string name="app_name">cFood</string>
     <string name="generateListButtonLabel">Generate</string>
     <string name="title_activity_results">Results</string>
@@ -9,11 +12,9 @@
     <string name="share">Share</string>
     <string name="saveSearch">Save Search</string>
     <string name="loadSearch">Load Search</string>
+    <string name="ifInputLabelIsNotFound">Failed to get name</string>
 
-    <string name="defaultNumberValue">Doesn\'t Matter</string>
-    <string name="plusSign">+</string>
-    <string name="minusSign">-</string>
-
+    <string name="defaultInputValue">Doesn\'t Matter</string>
     <string-array name="categories">
         <item>Alternative Fuels and Electric Charging Stations</item>
         <item>Bike Routes</item>

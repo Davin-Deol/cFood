@@ -14,7 +14,7 @@
         android:layout_width="110dp"
         android:layout_height="65dp"
         android:layout_marginStart="20dp"
-        android:text="input"
+        android:text="@string/ifInputLabelIsNotFound"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_weight="0.38"
         android:gravity="center"/>
@@ -26,7 +26,7 @@
         android:layout_marginBottom="1dp"
         android:layout_marginStart="10dp"
         android:ems="10"
-        android:text="Doesn't matter"
+        android:text="@string/defaultInputValue"
         android:textAlignment="center"
         android:gravity="center"/>
 
