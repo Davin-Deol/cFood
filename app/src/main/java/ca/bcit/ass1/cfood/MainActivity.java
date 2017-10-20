@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            view = getLayoutInflater().inflate(R.layout.inputlayout, null);
+            view = getLayoutInflater().inflate(R.layout.input_layout, null);
             TextView labelTextView = view.findViewById(R.id.inputLabel);
             labelTextView.setText(categories[i]);
 

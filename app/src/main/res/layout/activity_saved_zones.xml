@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="ca.bcit.ass1.cfood.SavedZonesActivity">
 
-    <include layout="@layout/toolbar_main"
+    <include layout="@layout/toolbar_top"
         android:id="@+id/toolbar" />
 
 </android.support.constraint.ConstraintLayout>
