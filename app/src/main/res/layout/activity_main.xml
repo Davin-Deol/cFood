@@ -8,8 +8,7 @@
 
 
     <include layout="@layout/toolbar_top"
-        android:id="@+id/toolbar"/>
-
+        android:id="@+id/toolbar" />
 
     <ListView
         android:id="@+id/listView"
@@ -19,9 +18,18 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintBottom_toTopOf="@+id/navigation"/>
 
-    </ListView>
+    <android.support.design.widget.BottomNavigationView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:menu="@menu/menu_sections"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteX="8dp"
+        app:backgroundColor="#AAA"/>
 
 </android.support.constraint.ConstraintLayout>
