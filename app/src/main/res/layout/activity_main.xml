@@ -29,7 +29,6 @@
         app:menu="@menu/menu_sections"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteX="8dp"
-        app:backgroundColor="#AAA"/>
+        tools:layout_editor_absoluteX="8dp" />
 
 </android.support.constraint.ConstraintLayout>
