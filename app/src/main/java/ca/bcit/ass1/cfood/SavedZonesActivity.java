@@ -93,7 +93,6 @@ public class SavedZonesActivity extends AppCompatActivity {
             TextView savedZonesZoneDescription = view.findViewById(R.id.savedZonesZoneDescription);
             savedZonesZoneDescription.setText("flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl");
             final View finalView = view;
-            final int index = i;
             view.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
