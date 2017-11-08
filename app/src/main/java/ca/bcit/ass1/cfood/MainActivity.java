@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         break;
                 }
-                // handle desired action here
-                // One possibility of action is to replace the contents above the nav bar
-                // return true if you want the item to be displayed as the selected item
                 return true;
             }
         });

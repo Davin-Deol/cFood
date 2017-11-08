@@ -26,7 +26,9 @@
             android:name=".SavedZonesActivity"
             android:label="@string/saved_zones"></activity>
         <activity android:name=".ResultsActivity" />
-        <activity android:name=".ZoneDetailsActivity"></activity>
+        <activity
+            android:name=".ZoneDetailsActivity"
+            android:label="Neighbourhood Details" />
     </application>
 
 </manifest>

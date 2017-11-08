@@ -27,13 +27,6 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:text="Zone ID" />
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginEnd="20dp"
-            app:srcCompat="@drawable/ic_share_black_24dp" />
     </LinearLayout>
 
     <TextView
