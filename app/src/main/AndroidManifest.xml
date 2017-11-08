@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:label="Search">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +22,11 @@
             android:name=".Results"
             android:label="@string/title_activity_results"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SavedZonesActivity"
-            android:label="@string/saved_zones">
-
-        </activity>
+        <activity
+            android:name=".SavedZonesActivity"
+            android:label="@string/saved_zones"></activity>
         <activity android:name=".ResultsActivity" />
+        <activity android:name=".ZoneDetailsActivity"></activity>
     </application>
+
 </manifest>

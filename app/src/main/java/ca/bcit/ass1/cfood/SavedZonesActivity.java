@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,20 +16,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class SavedZonesActivity extends AppCompatActivity {
-
+    SavedZonesActivity.CustomAdapter customAdapter;
+    boolean[] values = new boolean[10];
+    boolean deleteMode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_zones);
         Toolbar toolbar = findViewById(R.id.savedZonesToolbar);
         setSupportActionBar(toolbar);
-        boolean[] values = new boolean[10];
         ListView listView = findViewById(R.id.savedZonesListView);
-
-        SavedZonesActivity.CustomAdapter customAdapter = new SavedZonesActivity.CustomAdapter(this, values);
+        customAdapter = new SavedZonesActivity.CustomAdapter(this, values);
         listView.setAdapter(customAdapter);
         BottomNavigationView bottomNavigationView;
-        bottomNavigationView = findViewById(R.id.navigation);
+        bottomNavigationView = findViewById(R.id.savedZonesNavigation);
         bottomNavigationView.setSelectedItemId(R.id.favourites);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -59,6 +58,7 @@ public class SavedZonesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.remove:
+                customAdapter.deleteModeChanged();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -90,28 +90,49 @@ public class SavedZonesActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            view = getLayoutInflater().inflate(R.layout.layout_saved_zone, null);
+            if (deleteMode) {
+                view = getLayoutInflater().inflate(R.layout.layout_delete_saved_zone, null);
+                final int index = i;
+                final View finalView = view;
+                CheckBox checkBox = finalView.findViewById(R.id.checkBox);
+                checkBox.setChecked(items[i]);
+                view.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        if (items[index]) {
+                            items[index] = false;
+                        } else {
+                            items[index] = true;
+                        }
+                        notifyDataSetChanged();
+                    }
+
+                });
+            } else {
+                view = getLayoutInflater().inflate(R.layout.layout_saved_zone, null);
+                view.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(SavedZonesActivity.this, ZoneDetailsActivity.class);
+                        startActivity(i);
+                    }
+
+                });
+            }
             TextView zoneID = view.findViewById(R.id.savedZonesZoneID);
             zoneID.setText("Zone " + i);
             TextView savedZonesZoneDescription = view.findViewById(R.id.savedZonesZoneDescription);
             savedZonesZoneDescription.setText("flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl");
-            final View finalView = view;
-            final int index = i;
-            CheckBox checkBox = finalView.findViewById(R.id.checkBox);
-            checkBox.setChecked(items[i]);
-            view.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    if (items[index]) {
-                        items[index] = false;
-                    } else {
-                        items[index] = true;
-                    }
-                    notifyDataSetChanged();
-                }
-
-            });
             return view;
+        }
+
+        public void deleteModeChanged() {
+            if (deleteMode) {
+                deleteMode = false;
+            } else {
+                deleteMode = true;
+            }
+            notifyDataSetChanged();
         }
     }
 }
