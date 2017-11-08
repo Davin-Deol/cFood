@@ -12,6 +12,7 @@
     <string name="share">Share</string>
     <string name="saveSearch">Save Search</string>
     <string name="loadSearch">Load Search</string>
+    <string name="removeFavouriteZone">Remove</string>
     <string name="ifInputLabelIsNotFound">Failed to get name</string>
 
     <string name="defaultInputValue">Doesn\'t Matter</string>
