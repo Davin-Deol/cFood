@@ -69,7 +69,7 @@ public class SavedZonesActivity extends AppCompatActivity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.layout_saved_zone, null);
             TextView zoneID = view.findViewById(R.id.savedZonesZoneID);
-            zoneID.setText("Zone");
+            zoneID.setText("Zone " + i);
             TextView savedZonesZoneDescription = view.findViewById(R.id.savedZonesZoneDescription);
             savedZonesZoneDescription.setText("flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas ");
             return view;
