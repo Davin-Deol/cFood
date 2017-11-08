@@ -69,7 +69,6 @@ public class SavedZonesActivity extends AppCompatActivity {
     }
 
     private class CustomAdapter extends BaseAdapter {
-        boolean isChecked = false;
         @Override
         public int getCount() {
             return 10;
@@ -96,12 +95,13 @@ public class SavedZonesActivity extends AppCompatActivity {
             view.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
+                    CheckBox checkBox = finalView.findViewById(R.id.checkBox);
+                    boolean isChecked = checkBox.isChecked();
                     if (isChecked) {
                         isChecked = false;
                     } else {
                         isChecked = true;
                     }
-                    CheckBox checkBox = finalView.findViewById(R.id.checkBox);
                     checkBox.setChecked(isChecked);
                 }
 
