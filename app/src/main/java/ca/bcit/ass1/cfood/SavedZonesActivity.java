@@ -1,24 +1,20 @@
 package ca.bcit.ass1.cfood;
 
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.provider.Settings;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class SavedZonesActivity extends AppCompatActivity {
 
@@ -28,9 +24,10 @@ public class SavedZonesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_saved_zones);
         Toolbar toolbar = findViewById(R.id.savedZonesToolbar);
         setSupportActionBar(toolbar);
+        boolean[] values = new boolean[10];
         ListView listView = findViewById(R.id.savedZonesListView);
 
-        SavedZonesActivity.CustomAdapter customAdapter = new SavedZonesActivity.CustomAdapter();
+        SavedZonesActivity.CustomAdapter customAdapter = new SavedZonesActivity.CustomAdapter(this, values);
         listView.setAdapter(customAdapter);
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.navigation);
@@ -69,6 +66,13 @@ public class SavedZonesActivity extends AppCompatActivity {
     }
 
     private class CustomAdapter extends BaseAdapter {
+        private Context context; //context
+        private boolean[] items; //data source of the list adapter
+        public CustomAdapter(Context context, boolean[] items) {
+            this.context = context;
+            this.items = items;
+        }
+
         @Override
         public int getCount() {
             return 10;
@@ -92,17 +96,18 @@ public class SavedZonesActivity extends AppCompatActivity {
             TextView savedZonesZoneDescription = view.findViewById(R.id.savedZonesZoneDescription);
             savedZonesZoneDescription.setText("flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl");
             final View finalView = view;
+            final int index = i;
+            CheckBox checkBox = finalView.findViewById(R.id.checkBox);
+            checkBox.setChecked(items[i]);
             view.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    CheckBox checkBox = finalView.findViewById(R.id.checkBox);
-                    boolean isChecked = checkBox.isChecked();
-                    if (isChecked) {
-                        isChecked = false;
+                    if (items[index]) {
+                        items[index] = false;
                     } else {
-                        isChecked = true;
+                        items[index] = true;
                     }
-                    checkBox.setChecked(isChecked);
+                    notifyDataSetChanged();
                 }
 
             });
