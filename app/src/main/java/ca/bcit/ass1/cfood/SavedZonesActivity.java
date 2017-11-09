@@ -75,7 +75,7 @@ public class SavedZonesActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 10;
+            return 2;
         }
 
         @Override

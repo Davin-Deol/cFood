@@ -26,6 +26,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:menu="@menu/menu_sections"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@drawable/navbar_colour"
+        app:itemTextColor="@drawable/navbar_colour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

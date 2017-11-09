@@ -32,7 +32,7 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         zoneDetailsListView.setAdapter(customAdapter);
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        bottomNavigationView.setSelectedItemId(R.id.search);
+        bottomNavigationView.setSelectedItemId(R.id.favourites);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
