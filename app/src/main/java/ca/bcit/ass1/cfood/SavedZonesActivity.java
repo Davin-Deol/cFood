@@ -15,16 +15,27 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class SavedZonesActivity extends AppCompatActivity {
     SavedZonesActivity.CustomAdapter customAdapter;
-    boolean[] values = new boolean[10];
+    private static int MAX_DESCRIPTION_LENGTH = 100;
+    boolean[] values = new boolean[2];
     boolean deleteMode = false;
+    public ArrayList<Neighbourhood> neighbourhoods = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_zones);
         Toolbar toolbar = findViewById(R.id.savedZonesToolbar);
         setSupportActionBar(toolbar);
+
+        Neighbourhood neighbourhood1 = new Neighbourhood("Willington, Deer Lake", "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl", "5/5");
+        Neighbourhood neighbourhood2 = new Neighbourhood("Bernard, CampBell", "dfk dlfalsdfd fd flkahld fdsj fsadl", "4/5");
+
+        neighbourhoods.add(neighbourhood1);
+        neighbourhoods.add(neighbourhood2);
+
         ListView listView = findViewById(R.id.savedZonesListView);
         customAdapter = new SavedZonesActivity.CustomAdapter(this, values);
         listView.setAdapter(customAdapter);
@@ -75,7 +86,7 @@ public class SavedZonesActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return values.length;
         }
 
         @Override
@@ -120,9 +131,13 @@ public class SavedZonesActivity extends AppCompatActivity {
                 });
             }
             TextView zoneID = view.findViewById(R.id.savedZonesZoneID);
-            zoneID.setText("Zone " + i);
+            zoneID.setText(neighbourhoods.get(i).neighbourhood);
             TextView savedZonesZoneDescription = view.findViewById(R.id.savedZonesZoneDescription);
-            savedZonesZoneDescription.setText("flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl");
+            if (neighbourhoods.get(i).description.length() > MAX_DESCRIPTION_LENGTH) {
+                savedZonesZoneDescription.setText(neighbourhoods.get(i).description.substring(0, MAX_DESCRIPTION_LENGTH) + "...");
+            } else {
+                savedZonesZoneDescription.setText(neighbourhoods.get(i).description);
+            }
             return view;
         }
 
