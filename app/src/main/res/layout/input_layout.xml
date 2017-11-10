@@ -36,15 +36,13 @@
         android:layout_width="64dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
-        android:tag="Example"
-        android:onClick="increment" />
+        android:tag="Example" />
 
     <Button
         android:id="@+id/decrementButton"
         android:text="@string/minusSign"
         android:layout_width="64dp"
         android:layout_height="48dp"
-        android:tag="Example"
-        android:onClick="decrement" />
+        android:tag="Example" />
 
 </LinearLayout>

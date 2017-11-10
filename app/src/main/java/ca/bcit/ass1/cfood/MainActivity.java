@@ -2,7 +2,6 @@ package ca.bcit.ass1.cfood;
 
 import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     String[] distances;
     String[] categories;
     int[] value;
+    CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         }
         ListView listView = findViewById(R.id.listView);
 
-        CustomAdapter customAdapter = new CustomAdapter();
+        customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.clear:
-                Intent i = new Intent(this, MainActivity.class);
-                startActivity(i);
+                value = new int[categories.length];
+                customAdapter.notifyDataSetChanged();
                 return true;
             case R.id.search:
                 generate(null);
@@ -100,7 +100,12 @@ public class MainActivity extends AppCompatActivity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.input_layout, null);
             TextView labelTextView = view.findViewById(R.id.inputLabel);
+            final TextView valueTextView = view.findViewById(R.id.inputValue);
+            Button incrementButton = view.findViewById(R.id.incrementButton);
+            Button decrementButton = view.findViewById(R.id.decrementButton);
+
             labelTextView.setText(categories[i]);
+            valueTextView.setText(distances[value[i]]);
 
             if (labelTextView.getText().length() < 10) {
                 labelTextView.setTextSize(20);
@@ -114,41 +119,28 @@ public class MainActivity extends AppCompatActivity {
                 labelTextView.setTextSize(12);
             }
 
-            TextView valueTextView = view.findViewById(R.id.inputValue);
-            valueTextView.setId(i);
+            final int index = i;
+            incrementButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    if (value[index] < (distances.length - 1)) {
+                        value[index]++;
+                    }
+                    notifyDataSetChanged();
+                }
+            });
 
-            Button incrementButton = view.findViewById(R.id.incrementButton);
-            incrementButton.setTag(i);
-
-            Button decrementButton = view.findViewById(R.id.decrementButton);
-            decrementButton.setTag(i);
+            decrementButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    if (value[index] > 0) {
+                        value[index]--;
+                    }
+                    notifyDataSetChanged();
+                }
+            });
 
             return view;
-        }
-    }
-
-    public void increment(View v) {
-        String textValueID = v.getTag().toString();
-        TextView text = findViewById(Integer.parseInt(textValueID));
-        int valueIndex = Integer.parseInt(textValueID);
-        if (value[valueIndex] >= (distances.length - 1)) {
-            text.setText(distances[value[valueIndex]]);
-        } else {
-            value[Integer.parseInt(textValueID)]++;
-            text.setText(distances[value[valueIndex]]);
-        }
-    }
-
-    public void decrement(View v) {
-        String textValueID = v.getTag().toString();
-        int resID = getResources().getIdentifier(textValueID, "id", getPackageName());
-        TextView text = findViewById(resID);
-        int valueIndex = Integer.parseInt(textValueID);
-        if (value[valueIndex] <= 0) {
-            text.setText(distances[value[valueIndex]]);
-        } else {
-            value[Integer.parseInt(textValueID)]--;
-            text.setText(distances[value[valueIndex]]);
         }
     }
 
