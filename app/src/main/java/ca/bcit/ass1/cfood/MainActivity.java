@@ -2,6 +2,7 @@ package ca.bcit.ass1.cfood;
 
 import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -56,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.mainFloatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                generate(null);
+            }
+        });
+
     }
 
     @Override
@@ -70,9 +79,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.clear:
                 value = new int[categories.length];
                 customAdapter.notifyDataSetChanged();
-                return true;
-            case R.id.search:
-                generate(null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
