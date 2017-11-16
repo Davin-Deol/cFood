@@ -61,18 +61,37 @@ public class SavedZonesActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_saved_zones, menu);
+        if (deleteMode) {
+            getMenuInflater().inflate(R.menu.menu_saved_zones_delete_mode, menu);
+        } else {
+            getMenuInflater().inflate(R.menu.menu_saved_zones, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.remove:
-                customAdapter.deleteModeChanged();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (deleteMode) {
+            switch(item.getItemId()) {
+                case R.id.remove:
+                    // Remove selected zones from database
+                    return true;
+                case R.id.cancel:
+                    customAdapter.deleteModeChanged();
+                    this.invalidateOptionsMenu();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        } else {
+            switch(item.getItemId()) {
+                case R.id.remove:
+                    customAdapter.deleteModeChanged();
+                    this.invalidateOptionsMenu();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
     }
 
