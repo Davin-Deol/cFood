@@ -70,7 +70,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:menu="@menu/menu_sections"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorBottomNavigationBar"
         app:itemIconTint="@drawable/navbar_colour"
         app:itemTextColor="@drawable/navbar_colour"
         app:layout_constraintBottom_toBottomOf="parent"

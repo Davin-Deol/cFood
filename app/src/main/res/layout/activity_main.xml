@@ -8,7 +8,7 @@
 
 
     <include layout="@layout/toolbar_top"
-        android:id="@+id/toolbar"/>
+        android:id="@+id/toolbar" />
 
     <ListView
         android:id="@+id/listView"
@@ -28,10 +28,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:menu="@menu/menu_sections"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorBottomNavigationBar"
         app:itemIconTint="@drawable/navbar_colour"
         app:itemTextColor="@drawable/navbar_colour"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@drawable/shadow"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
     <android.support.design.widget.FloatingActionButton
