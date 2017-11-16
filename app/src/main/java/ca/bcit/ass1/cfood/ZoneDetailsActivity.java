@@ -2,6 +2,8 @@ package ca.bcit.ass1.cfood;
 
 import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -48,6 +50,11 @@ public class ZoneDetailsActivity extends AppCompatActivity {
                 return true;
             }
         });
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        MapsActivity fragment = new MapsActivity();
+        fragmentTransaction.replace(R.id.mapView, fragment);
+        fragmentTransaction.commit();
     }
     private class CustomAdapter extends BaseAdapter {
 
