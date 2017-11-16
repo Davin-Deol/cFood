@@ -62,8 +62,10 @@ public class SavedZonesActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (deleteMode) {
+            this.setTitle(getResources().getText(R.string.ToolbarSavedZonesActivityDeleteMode));
             getMenuInflater().inflate(R.menu.menu_saved_zones_delete_mode, menu);
         } else {
+            this.setTitle(getResources().getText(R.string.ToolbarSavedZonesActivity));
             getMenuInflater().inflate(R.menu.menu_saved_zones, menu);
         }
         return super.onCreateOptionsMenu(menu);

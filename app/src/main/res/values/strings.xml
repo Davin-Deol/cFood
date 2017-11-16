@@ -1,4 +1,9 @@
 <resources>
+    <string name="ToolbarSearchActivity">I Want To Be Within ___ To The Nearest</string>
+    <string name="ToolbarSavedZonesActivity">Saved Zones</string>
+    <string name="ToolbarSavedZonesActivityDeleteMode">Select Zones to Remove</string>
+
+
     <string name="plusSign">+</string>
     <string name="minusSign">-</string>
 

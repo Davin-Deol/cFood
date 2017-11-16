@@ -17,7 +17,7 @@
             android:value="@string/google_maps_key" />
         <activity
             android:name=".MainActivity"
-            android:label="Search">
+            android:label="@string/ToolbarSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SavedZonesActivity"
-            android:label="@string/saved_zones"></activity>
+            android:label="@string/ToolbarSavedZonesActivity" />
         <activity android:name=".ResultsActivity" />
         <activity
             android:name=".ZoneDetailsActivity"
