@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 public class ZoneDetailsActivity extends AppCompatActivity {
     String[] categories;
-    Neighbourhood sampleNeighbourhood = new Neighbourhood("Willington, Deer Lake", "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl", "5/5");
+    Neighbourhood sampleNeighbourhood = new Neighbourhood("Willington, Deer Lake", "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl", "5/5");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,8 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_zone_details);
         Toolbar toolbar = findViewById(R.id.zoneDetailsToolbar);
         setSupportActionBar(toolbar);
-        TextView zoneDetailsDescription = findViewById(R.id.zoneDetailsDescription);
+
+        TextView zoneDetailsDescription = findViewById(R.id.zoneDetailsDescriptionTextView);
         zoneDetailsDescription.setText(sampleNeighbourhood.description);
         ListView zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
         CustomAdapter customAdapter = new CustomAdapter();
