@@ -6,6 +6,8 @@
     <string name="WelcomeScreenInfo">cFood is an app that gives you the user the ability to look up information on popular neighbourhoods in New Westminster</string>
     <string name="WelcomeScreenButton">Get Started</string>
 
+    <string name="ItemShare">Share</string>
+
     <string name="app_name">cFood</string>
 
     <string-array name="categories">

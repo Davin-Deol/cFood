@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +26,15 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_zone_details);
         Toolbar toolbar = findViewById(R.id.zoneDetailsToolbar);
         setSupportActionBar(toolbar);
-        TextView zoneDetailsID = findViewById(R.id.zoneDetailsID);
-        zoneDetailsID.setText(sampleNeighbourhood.neighbourhood);
         TextView zoneDetailsDescription = findViewById(R.id.zoneDetailsDescription);
         zoneDetailsDescription.setText(sampleNeighbourhood.description);
         ListView zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
         CustomAdapter customAdapter = new CustomAdapter();
         zoneDetailsListView.setAdapter(customAdapter);
+
+        setTitle(sampleNeighbourhood.neighbourhood.toString());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -39,6 +42,25 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.mapView, fragment);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_neighbourhood_details, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(this, SavedZonesActivity.class));
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private class CustomAdapter extends BaseAdapter {
 
         @Override

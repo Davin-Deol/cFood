@@ -7,7 +7,7 @@
     tools:context="ca.bcit.ass1.cfood.ZoneDetailsActivity">
 
     <include layout="@layout/toolbar_top"
-        android:id="@+id/zoneDetailsToolbar"/>
+        android:id="@+id/zoneDetailsToolbar" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
@@ -17,58 +17,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/zoneDetailsToolbar"
-        app:layout_constraintBottom_toTopOf="@+id/zoneDetailsLinearLayout"/>
-
-    <LinearLayout
-        android:id="@+id/zoneDetailsLinearLayout"
-        android:layout_width="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/zoneDetailsDescription"/>
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="1dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/zoneDetailsDescription"
-        app:layout_constraintHorizontal_bias="0.4">
-
-        <TextView
-            android:id="@+id/zoneDetailsID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Zone ID"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:id="@+id/zoneDetailsShareIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_share_white_24dp"
-            tools:layout_editor_absoluteY="215dp"
-            app:layout_constraintLeft_toRightOf="@+id/textView"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_bias="0.517" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/zoneDetailsDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="15sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/colorText"
-        android:text="flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="151dp" />
-
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6"/>
     <ListView
         android:id="@+id/zoneDetailsListView"
         android:layout_width="0dp"
@@ -80,4 +35,19 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/zoneDetailsDescription"
         app:layout_constraintVertical_bias="0.0" />
+    <TextView
+        android:id="@+id/zoneDetailsDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/colorText"
+        android:layout_marginBottom="151dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl"
+        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
