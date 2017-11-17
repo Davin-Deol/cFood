@@ -15,23 +15,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#FFF"
-        app:layout_constraintBottom_toTopOf="@+id/savedZonesNavigation"
         app:layout_constraintTop_toBottomOf="@+id/savedZonesToolbar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <android.support.design.widget.BottomNavigationView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/savedZonesNavigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:menu="@menu/menu_sections"
-        android:background="@color/colorBottomNavigationBar"
-        app:itemIconTint="@drawable/navbar_colour"
-        app:itemTextColor="@drawable/navbar_colour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
