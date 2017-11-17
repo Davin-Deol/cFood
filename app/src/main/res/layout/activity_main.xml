@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/WelcomeScreenButton"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/get_started_button_style"
         android:textColor="#FFF"
         android:paddingEnd="20dp"
         android:paddingStart="20dp"

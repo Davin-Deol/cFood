@@ -39,24 +39,6 @@ public class SavedZonesActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.savedZonesListView);
         customAdapter = new SavedZonesActivity.CustomAdapter(this, values);
         listView.setAdapter(customAdapter);
-        BottomNavigationView bottomNavigationView;
-        bottomNavigationView = findViewById(R.id.savedZonesNavigation);
-        bottomNavigationView.setSelectedItemId(R.id.favourites);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                Intent intent;
-                switch(item.getItemId()) {
-                    case R.id.search:
-                        intent = new Intent(SavedZonesActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        break;
-                    default:
-                        break;
-                }
-                return true;
-            }
-        });
     }
 
     @Override
