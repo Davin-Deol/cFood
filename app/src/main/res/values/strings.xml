@@ -26,15 +26,10 @@
 
     <string name="defaultInputValue">Doesn\'t Matter</string>
     <string-array name="categories">
-        <item>Alternative Fuels and Electric Charging Stations</item>
-        <item>Bike Routes</item>
         <item>Bus Stops</item>
-        <item>Drop-In Centres</item>
-        <item>Hospital</item>
-        <item>Off Leash Dog Areas</item>
+        <item>Major Shopping Area</item>
+        <item>Recreational Centre</item>
         <item>Parks</item>
-        <item>Playgrounds</item>
-        <item>Seniors Services</item>
     </string-array>
 
     <string-array name="distances">
