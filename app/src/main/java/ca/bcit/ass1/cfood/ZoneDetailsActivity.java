@@ -41,7 +41,6 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         ListView zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
         CustomAdapter customAdapter = new CustomAdapter();
         zoneDetailsListView.setAdapter(customAdapter);
-
         setTitle(sampleNeighbourhood.neighbourhood.toString());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
