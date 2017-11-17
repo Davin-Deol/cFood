@@ -3,6 +3,8 @@
     <string name="ToolbarSavedZonesActivity">Saved Zones</string>
     <string name="ToolbarSavedZonesActivityDeleteMode">Select Zones to Remove</string>
 
+    <string name="WelcomeScreenHeader">Welcome to cFood</string>
+    <string name="WelcomeScreenInfo">cFood is an app that gives you the user the ability to look up information on popular neighbourhoods in New Westminster</string>
 
     <string name="plusSign">+</string>
     <string name="minusSign">-</string>
