@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,18 +18,20 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                generate(null);
+                Intent intent = new Intent(MainActivity.this, SavedZonesActivity.class);
+                startActivity(intent);
             }
         });
 
-    }
+        Button mainGetStartedButton = (Button) findViewById(R.id.mainGetStartedButton);
+        mainGetStartedButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SavedZonesActivity.class);
+                intent.putExtra("INTROMODE", true);
+                startActivity(intent);
+            }
+        });
 
-    /**
-     * This function is only used by the button that starts the search
-     * @param v - holds the button view
-     */
-    public void generate(View v) {
-        Intent intent = new Intent(MainActivity.this, SavedZonesActivity.class);
-        startActivity(intent);
     }
 }
