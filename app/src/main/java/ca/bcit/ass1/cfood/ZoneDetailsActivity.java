@@ -13,16 +13,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class ZoneDetailsActivity extends AppCompatActivity {
     String[] categories;
     Neighbourhood sampleNeighbourhood = new Neighbourhood("Willington, Deer Lake", "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl", "5/5");
+    private boolean[] checkboxes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         categories = getResources().getStringArray(R.array.categories);
+        checkboxes = new boolean[categories.length];
+        for (boolean checkbox : checkboxes) {
+            checkbox = true;
+        }
         setContentView(R.layout.activity_zone_details);
         Toolbar toolbar = findViewById(R.id.zoneDetailsToolbar);
         setSupportActionBar(toolbar);
@@ -84,8 +93,24 @@ public class ZoneDetailsActivity extends AppCompatActivity {
             view = getLayoutInflater().inflate(R.layout.layout_zones_details_specs, null);
             TextView savedZonesSpecLabel = view.findViewById(R.id.savedZonesSpecLabel);
             savedZonesSpecLabel.setText(categories[i]);
-            TextView savedZonesSpecValue = view.findViewById(R.id.savedZonesSpecValue);
-            savedZonesSpecValue.setText("Spec value: " + i);
+            CheckBox checkbox = (CheckBox) view.findViewById(R.id.savedZonesCheckbox);
+            final int index = i;
+            if (checkboxes[i]) {
+                checkbox.setChecked(false);
+            } else {
+                checkbox.setChecked(true);
+            }
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (checkboxes[index]) {
+                        checkboxes[index] = false;
+                    } else {
+                        checkboxes[index] = true;
+                    }
+                    notifyDataSetChanged();
+                }
+            });
             return view;
         }
     }

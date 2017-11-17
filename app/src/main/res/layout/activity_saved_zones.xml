@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
     tools:context="ca.bcit.ass1.cfood.SavedZonesActivity">
 
     <include layout="@layout/toolbar_top"
@@ -14,7 +13,6 @@
         android:id="@+id/savedZonesListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#FFF"
         app:layout_constraintTop_toBottomOf="@+id/savedZonesToolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
