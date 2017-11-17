@@ -29,6 +29,22 @@ public class SavedZonesActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.savedZonesToolbar);
         setSupportActionBar(toolbar);
 
+        boolean introMode;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                introMode= false;
+            } else {
+                introMode= extras.getBoolean("INTROMODE");
+            }
+        } else {
+            introMode= (boolean) savedInstanceState.getSerializable("INTROMODE");
+        }
+
+        if (introMode) {
+            this.setTitle("Intro Mode");
+        }
+
         Neighbourhood neighbourhood1 = new Neighbourhood("Willington, Deer Lake", "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl", "5/5");
         Neighbourhood neighbourhood2 = new Neighbourhood("Bernard, CampBell", "dfk dlfalsdfd fd flkahld fdsj fsadl", "4/5");
 
