@@ -10,7 +10,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#000"
+        android:background="@color/colorPrimaryDark"
         android:alpha="0.75"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
