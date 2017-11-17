@@ -1,47 +1,18 @@
 <resources>
-    <string name="ToolbarSearchActivity">I Want To Be Within ___ To The Nearest</string>
-    <string name="ToolbarSavedZonesActivity">Saved Zones</string>
-    <string name="ToolbarSavedZonesActivityDeleteMode">Select Zones to Remove</string>
+    <string name="ToolbarSavedZonesActivity">Select A Neighbourhood</string>
+    <string name="ToolbarSearchActivity">Select Zones to Remove</string>
 
     <string name="WelcomeScreenHeader">Welcome to cFood</string>
     <string name="WelcomeScreenInfo">cFood is an app that gives you the user the ability to look up information on popular neighbourhoods in New Westminster</string>
     <string name="WelcomeScreenButton">Get Started</string>
 
-    <string name="plusSign">+</string>
-    <string name="minusSign">-</string>
-
     <string name="app_name">cFood</string>
-    <string name="generateListButtonLabel">Generate</string>
-    <string name="title_activity_results">Results</string>
-    <string name="saved_zones">Saved Zones</string>
-    <string name="saved_zones_title">Saved Zones</string>
-    <string name="clear">Clear</string>
-    <string name="search">Search</string>
-    <string name="share">Share</string>
-    <string name="cancel">Cancel</string>
-    <string name="saveSearch">Save Search</string>
-    <string name="loadSearch">Load Search</string>
-    <string name="removeFavouriteZone">Remove</string>
-    <string name="ifInputLabelIsNotFound">Failed to get name</string>
 
-    <string name="defaultInputValue">Doesn\'t Matter</string>
     <string-array name="categories">
         <item>Bus Stops</item>
         <item>Major Shopping Area</item>
         <item>Recreational Centre</item>
         <item>Parks</item>
-    </string-array>
-
-    <string-array name="distances">
-        <item>Doesn\'t Matter</item>
-        <item>100m</item>
-        <item>250m</item>
-        <item>500m</item>
-        <item>1 km</item>
-        <item>2.5 km</item>
-        <item>5 km</item>
-        <item>7.5 km</item>
-        <item>10 km</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

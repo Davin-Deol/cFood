@@ -21,7 +21,6 @@ public class SavedZonesActivity extends AppCompatActivity {
     SavedZonesActivity.CustomAdapter customAdapter;
     private static int MAX_DESCRIPTION_LENGTH = 100;
     boolean[] values = new boolean[2];
-    boolean deleteMode = false;
     public ArrayList<Neighbourhood> neighbourhoods = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,40 +42,7 @@ public class SavedZonesActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (deleteMode) {
-            this.setTitle(getResources().getText(R.string.ToolbarSavedZonesActivityDeleteMode));
-            getMenuInflater().inflate(R.menu.menu_saved_zones_delete_mode, menu);
-        } else {
-            this.setTitle(getResources().getText(R.string.ToolbarSavedZonesActivity));
-            getMenuInflater().inflate(R.menu.menu_saved_zones, menu);
-        }
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (deleteMode) {
-            switch(item.getItemId()) {
-                case R.id.remove:
-                    // Remove selected zones from database
-                    return true;
-                case R.id.cancel:
-                    customAdapter.deleteModeChanged();
-                    this.invalidateOptionsMenu();
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        } else {
-            switch(item.getItemId()) {
-                case R.id.remove:
-                    customAdapter.deleteModeChanged();
-                    this.invalidateOptionsMenu();
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        }
     }
 
     private class CustomAdapter extends BaseAdapter {
@@ -104,25 +70,7 @@ public class SavedZonesActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            if (deleteMode) {
-                view = getLayoutInflater().inflate(R.layout.layout_delete_saved_zone, null);
-                final int index = i;
-                final View finalView = view;
-                CheckBox checkBox = finalView.findViewById(R.id.checkBox);
-                checkBox.setChecked(items[i]);
-                view.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        if (items[index]) {
-                            items[index] = false;
-                        } else {
-                            items[index] = true;
-                        }
-                        notifyDataSetChanged();
-                    }
 
-                });
-            } else {
                 view = getLayoutInflater().inflate(R.layout.layout_saved_zone, null);
                 view.setOnClickListener(new View.OnClickListener(){
                     @Override
@@ -132,7 +80,6 @@ public class SavedZonesActivity extends AppCompatActivity {
                     }
 
                 });
-            }
             TextView zoneID = view.findViewById(R.id.savedZonesZoneID);
             zoneID.setText(neighbourhoods.get(i).neighbourhood);
             TextView savedZonesZoneDescription = view.findViewById(R.id.savedZonesZoneDescription);
@@ -142,15 +89,6 @@ public class SavedZonesActivity extends AppCompatActivity {
                 savedZonesZoneDescription.setText(neighbourhoods.get(i).description);
             }
             return view;
-        }
-
-        public void deleteModeChanged() {
-            if (deleteMode) {
-                deleteMode = false;
-            } else {
-                deleteMode = true;
-            }
-            notifyDataSetChanged();
         }
     }
 }

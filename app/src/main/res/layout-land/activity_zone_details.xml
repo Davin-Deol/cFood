@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:text="Zone ID"
                     android:layout_weight="1"
-                    android:textColor="#000"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     android:textSize="20sp" />
 
@@ -44,7 +44,7 @@
                     android:id="@+id/zoneDetailsShareIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_share_black_24dp"/>
+                    app:srcCompat="@drawable/ic_share_white_24dp"/>
             </LinearLayout>
             <TextView
                 android:id="@+id/zoneDetailsDescription"

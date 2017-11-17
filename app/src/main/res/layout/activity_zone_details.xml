@@ -12,7 +12,8 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/zoneDetailsToolbar"
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="Zone ID"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:textColor="#000"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_weight="1"/>
@@ -46,7 +47,7 @@
             android:id="@+id/zoneDetailsShareIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_share_black_24dp"
+            app:srcCompat="@drawable/ic_share_white_24dp"
             tools:layout_editor_absoluteY="215dp"
             app:layout_constraintLeft_toRightOf="@+id/textView"
             app:layout_constraintRight_toRightOf="parent"
