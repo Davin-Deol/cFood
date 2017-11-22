@@ -30,6 +30,7 @@
         <activity
             android:name=".ZoneDetailsActivity"
             android:label="Neighbourhood Details" />
+        <!--<activity android:name=".PopulateDB"/>-->
     </application>
 
 </manifest>

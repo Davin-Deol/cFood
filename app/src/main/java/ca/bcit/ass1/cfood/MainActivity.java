@@ -14,6 +14,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ///PopulateDB populate = new PopulateDB(getApplicationContext(), this);
+        //populate.init();
+
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.mainFloatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener(){
             @Override
