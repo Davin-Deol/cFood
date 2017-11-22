@@ -1,17 +1,13 @@
 package ca.bcit.ass1.cfood;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,8 +15,6 @@ import java.util.ArrayList;
 
 public class SavedZonesActivity extends AppCompatActivity {
     SavedZonesActivity.CustomAdapter customAdapter;
-    private static int MAX_DESCRIPTION_LENGTH = 100;
-    boolean[] values = new boolean[2];
     public ArrayList<Neighbourhood> neighbourhoods = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +40,7 @@ public class SavedZonesActivity extends AppCompatActivity {
         neighbourhoods.add(neighbourhood2);
 
         ListView listView = findViewById(R.id.savedZonesListView);
-        customAdapter = new SavedZonesActivity.CustomAdapter(this, values);
+        customAdapter = new SavedZonesActivity.CustomAdapter();
         listView.setAdapter(customAdapter);
     }
 
@@ -56,16 +50,12 @@ public class SavedZonesActivity extends AppCompatActivity {
     }
 
     private class CustomAdapter extends BaseAdapter {
-        private Context context; //context
-        private boolean[] items; //data source of the list adapter
-        public CustomAdapter(Context context, boolean[] items) {
-            this.context = context;
-            this.items = items;
+        public CustomAdapter() {
         }
 
         @Override
         public int getCount() {
-            return values.length;
+            return neighbourhoods.size();
         }
 
         @Override
@@ -93,11 +83,7 @@ public class SavedZonesActivity extends AppCompatActivity {
             TextView zoneID = view.findViewById(R.id.savedZonesZoneID);
             zoneID.setText(neighbourhoods.get(i).neighbourhood);
             TextView savedZonesZoneDescription = view.findViewById(R.id.savedZonesZoneDescription);
-            if (neighbourhoods.get(i).description.length() > MAX_DESCRIPTION_LENGTH) {
-                savedZonesZoneDescription.setText(neighbourhoods.get(i).description.substring(0, MAX_DESCRIPTION_LENGTH) + "...");
-            } else {
-                savedZonesZoneDescription.setText(neighbourhoods.get(i).description);
-            }
+            savedZonesZoneDescription.setText(neighbourhoods.get(i).description);
             return view;
         }
     }
