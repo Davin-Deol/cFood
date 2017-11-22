@@ -32,6 +32,10 @@ public class MapsActivity extends Fragment {
         coordsLong = getArguments().getStringArray("coordsLong");
         latLngs = new LatLng[coordsLat.length];
 
+        for(int i = 0; i < coordsLat.length; i++) {
+            latLngs[i] = new LatLng(Float.parseFloat(coordsLong[i]), Float.parseFloat(coordsLat[i]));
+        }
+
         mMapView = (MapView) rootView.findViewById(R.id.mapView2);
         mMapView.onCreate(savedInstanceState);
 
@@ -51,16 +55,11 @@ public class MapsActivity extends Fragment {
                 // For showing a move to my location button
                 //googleMap.setMyLocationEnabled(true);
 
-                for(int i = 0; i < coordsLat.length; i++) {
-                    latLngs[i] = new LatLng(Float.parseFloat(coordsLat[i]), Float.parseFloat(coordsLong[i]));
-                }
-
                 // For dropping a marker at a point on the Map
-                //LatLng sydney = new LatLng(-84, 152);
-                googleMap.addMarker(new MarkerOptions().position(latLngs[0]).title("test").snippet("Marker Description"));
+               // googleMap.addMarker(new MarkerOptions().position(latLngs[0]).title("test").snippet("Marker Description"));
 
 
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngs[0], 14.0f));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngs[4], 14.0f));
                 PolygonOptions rectOptions = new PolygonOptions()
                         .add(latLngs)
                         .fillColor(Color.argb(50, 50, 0, 255))
@@ -68,8 +67,8 @@ public class MapsActivity extends Fragment {
                 Polygon polygon = mMap.addPolygon(rectOptions);
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(latLngs[0]).zoom(12).build();
-                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                //CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                //googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
 

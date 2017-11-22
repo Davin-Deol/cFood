@@ -200,9 +200,9 @@ public class ZoneDetailsActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             MapsActivity fragment = new MapsActivity();
-            fragment.setArguments(bundle);
             fragmentTransaction.replace(R.id.mapView, fragment);
             fragmentTransaction.commit();
+            fragment.setArguments(bundle);
 
             return null;
         }
