@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Parcelable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -105,6 +104,7 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         switch(item.getItemId()) {
             case android.R.id.home:
                 startActivity(new Intent(this, SavedZonesActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
                 break;
             default:
                 break;
@@ -235,5 +235,6 @@ public class ZoneDetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, SavedZonesActivity.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
     }
 }
