@@ -10,6 +10,8 @@
         <shape
             android:shape="rectangle">
             <solid android:color="@android:color/white"/>
+            <stroke android:width="3px"
+                android:color="@color/colorAccent" />
         </shape>
     </item>
 </layer-list>
