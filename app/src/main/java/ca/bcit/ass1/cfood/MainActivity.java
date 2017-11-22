@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ///PopulateDB populate = new PopulateDB(getApplicationContext(), this);
+        //PopulateDB populate = new PopulateDB(getApplicationContext(), this);
         //populate.init();
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.mainFloatingActionButton);
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         mainGetStartedButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                v.setSelected(true);
                 Intent intent = new Intent(MainActivity.this, SavedZonesActivity.class);
                 intent.putExtra("INTROMODE", true);
                 startActivity(intent);
