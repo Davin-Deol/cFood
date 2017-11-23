@@ -96,6 +96,7 @@ public class SavedZonesActivity extends AppCompatActivity {
                         v.setSelected(true);
                         Intent i = new Intent(SavedZonesActivity.this, ZoneDetailsActivity.class);
                         i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoods.get(index).neighbourhood);
+                        i.putExtra("NEIGHBOURHOOD_DESCRIPTION", neighbourhoods.get(index).description);
                         startActivity(i);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }

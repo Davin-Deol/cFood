@@ -21,8 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ZoneDetailsActivity extends AppCompatActivity {
+    String neighbourhoodSelected;
+    String description;
     String[] categories;
-    Neighbourhood sampleNeighbourhood = new Neighbourhood("Willington, Deer Lake", "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl");
     private boolean[] checkboxes;
     Menu menu;
 
@@ -66,17 +67,18 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         for (int i = 0; i < checkboxes.length; i++) {
             checkboxes[i] = true;
         }
+        neighbourhoodSelected = getIntent().getExtras().getString("NEIGHBOURHOOD_SELECTED");
+        description = getIntent().getExtras().getString("NEIGHBOURHOOD_DESCRIPTION");
         setContentView(R.layout.activity_zone_details);
         Toolbar toolbar = findViewById(R.id.zoneDetailsToolbar);
         setSupportActionBar(toolbar);
 
         TextView zoneDetailsDescription = findViewById(R.id.zoneDetailsDescriptionTextView);
-        zoneDetailsDescription.setText(sampleNeighbourhood.description);
+        zoneDetailsDescription.setText(description);
 
         zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
         CustomAdapter customAdapter = new CustomAdapter(checkboxes);
         zoneDetailsListView.setAdapter(customAdapter);
-        String neighbourhoodSelected = getIntent().getExtras().getString("NEIGHBOURHOOD_SELECTED");
         setTitle(neighbourhoodSelected);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
