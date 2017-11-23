@@ -89,11 +89,13 @@ public class SavedZonesActivity extends AppCompatActivity {
 
                 view = getLayoutInflater().inflate(R.layout.layout_saved_zone, null);
             final View v = view;
+            final int index = i;
                 view.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
                         v.setSelected(true);
                         Intent i = new Intent(SavedZonesActivity.this, ZoneDetailsActivity.class);
+                        i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoods.get(index).neighbourhood);
                         startActivity(i);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }

@@ -76,7 +76,8 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
         CustomAdapter customAdapter = new CustomAdapter(checkboxes);
         zoneDetailsListView.setAdapter(customAdapter);
-        setTitle("Uptown");
+        String neighbourhoodSelected = getIntent().getExtras().getString("NEIGHBOURHOOD_SELECTED");
+        setTitle(neighbourhoodSelected);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
