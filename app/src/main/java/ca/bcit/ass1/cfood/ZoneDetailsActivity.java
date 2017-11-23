@@ -3,7 +3,6 @@ package ca.bcit.ass1.cfood;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -18,11 +17,12 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 public class ZoneDetailsActivity extends AppCompatActivity {
+    String neighbourhoodSelected;
+    String description;
     String[] categories;
-    Neighbourhood sampleNeighbourhood = new Neighbourhood("Willington, Deer Lake", "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl");
     private boolean[] checkboxes;
     Menu menu;
 
@@ -59,6 +59,7 @@ public class ZoneDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        neighbourhoodSelected = getIntent().getExtras().getString("NEIGHBOURHOOD_SELECTED");
         new getQuery().execute();
 
         categories = getResources().getStringArray(R.array.categories);
@@ -70,13 +71,13 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.zoneDetailsToolbar);
         setSupportActionBar(toolbar);
 
+        description = getIntent().getExtras().getString("NEIGHBOURHOOD_DESCRIPTION");
         TextView zoneDetailsDescription = findViewById(R.id.zoneDetailsDescriptionTextView);
-        zoneDetailsDescription.setText(sampleNeighbourhood.description);
+        zoneDetailsDescription.setText(description);
 
         zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
         CustomAdapter customAdapter = new CustomAdapter(checkboxes);
         zoneDetailsListView.setAdapter(customAdapter);
-        String neighbourhoodSelected = getIntent().getExtras().getString("NEIGHBOURHOOD_SELECTED");
         setTitle(neighbourhoodSelected);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -378,5 +379,13 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 
     private void hideBusStopMarkers() {
         fragment.hideBusStops();
+    }
+
+    public void refreshMyData(){
+        Intent i = new Intent(ZoneDetailsActivity.this, ZoneDetailsActivity.class);
+        i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoodSelected);
+        i.putExtra("NEIGHBOURHOOD_DESCRIPTION", description);
+        startActivity(i);
+        this.overridePendingTransition(0, 0);
     }
 }

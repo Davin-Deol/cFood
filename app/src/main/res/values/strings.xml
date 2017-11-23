@@ -5,7 +5,7 @@
 
     <string name="WelcomeScreenHeader">Welcome to cFood</string>
     <string name="WelcomeScreenInfo">cFood is an app that gives you the user the ability to look up information on popular neighbourhoods in New Westminster</string>
-    <string name="WelcomeScreenButton">Get Started</string>
+    <string name="WelcomeScreenButton">Take A Tour</string>
 
     <string name="ItemShare">Share</string>
 
@@ -19,4 +19,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tourTitle_1">Basic Layout</string>
+    <string name="tourDescription_1">The app consists of 3 pages: Main (where we just were), Neighbourhoods (where we are) and Details (where we\'re going to be)</string>
+
+    <string name="tourTitle_2">Neighbourhoods Activity</string>
+    <string name="tourDescription_2">This page lists all the different neighbourhoods. We get the list from the database which is populated using JSON objects</string>
+
+    <string name="tourTitle_3">List of Neighbourhoods</string>
+    <string name="tourDescription_3">This activity main content with a listview with a custom layout for each item</string>
+
+    <string name="tourTitle_4">Neighbourhood</string>
+    <string name="tourDescription_4">You\'ll notice that not only is the layout unique but so is the style. This is done using XML files in the folder: drawable</string>
+
+    <string name="tourTitle_5">Tap Me</string>
+    <string name="tourDescription_5">Now we can move on to the next page by tapping an item</string>
 </resources>

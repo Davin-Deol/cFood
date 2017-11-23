@@ -1,4 +1,5 @@
 package ca.bcit.ass1.cfood;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -6,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -75,6 +78,12 @@ public class MapsActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_maps, container, false);
 
+        if (getArguments() == null) {
+            ZoneDetailsActivity mDashboardActivity = (ZoneDetailsActivity) getActivity();
+            if(mDashboardActivity!=null){
+                mDashboardActivity.refreshMyData();
+            }
+        }
         coordsLat = getArguments().getStringArray("coordsLat");
         coordsLong = getArguments().getStringArray("coordsLong");
 
@@ -122,8 +131,13 @@ public class MapsActivity extends Fragment {
 //        shopsMarkers = new ArrayList<Marker>();
 
         mMapView = (MapView) rootView.findViewById(R.id.mapView2);
+        if (mMapView == null) {
+            ZoneDetailsActivity mDashboardActivity = (ZoneDetailsActivity) getActivity();
+            if(mDashboardActivity!=null){
+                mDashboardActivity.refreshMyData();
+            }
+        }
         mMapView.onCreate(savedInstanceState);
-
         mMapView.onResume(); // needed to get the map to display immediately
 
         try {
@@ -207,7 +221,6 @@ public class MapsActivity extends Fragment {
 
             }
         });
-
         return rootView;
     }
 
