@@ -79,11 +79,14 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         zoneDetailsDescription.setText(description);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
         CustomAdapter customAdapter = new CustomAdapter(checkboxes);
         zoneDetailsListView.setAdapter(customAdapter);
         setTitle(neighbourhoodSelected);
 =======
+=======
+>>>>>>> parent of c246a61... toggle implemented
         ListView zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
         CustomAdapter customAdapter = new CustomAdapter();
         zoneDetailsListView.setAdapter(customAdapter);
@@ -185,6 +188,9 @@ public class ZoneDetailsActivity extends AppCompatActivity {
                         checkboxes[index] = false;
                     } else {
                         checkboxes[index] = true;
+<<<<<<< HEAD
+>>>>>>> parent of c246a61... toggle implemented
+=======
 >>>>>>> parent of c246a61... toggle implemented
                     }
                     notifyDataSetChanged();
@@ -317,9 +323,12 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             CustomAdapter customAdapter = new CustomAdapter(checkboxes);
             zoneDetailsListView.setAdapter(customAdapter);
 =======
+=======
+>>>>>>> parent of c246a61... toggle implemented
 
 //            FragmentManager fragmentManager = getSupportFragmentManager();
 //            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -327,6 +336,9 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 //            fragment.setArguments(bundle);
 //            fragmentTransaction.replace(R.id.mapView, fragment);
 //            fragmentTransaction.commit();
+<<<<<<< HEAD
+>>>>>>> parent of c246a61... toggle implemented
+=======
 >>>>>>> parent of c246a61... toggle implemented
         }
     }
@@ -347,6 +359,7 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         startActivity(new Intent(this, SavedZonesActivity.class));
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     private void putShopsMarkers() {
@@ -396,6 +409,8 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         startActivity(i);
         this.overridePendingTransition(0, 0);
     }
+=======
+>>>>>>> parent of c246a61... toggle implemented
 =======
 >>>>>>> parent of c246a61... toggle implemented
 }
