@@ -380,4 +380,12 @@ public class ZoneDetailsActivity extends AppCompatActivity {
     private void hideBusStopMarkers() {
         fragment.hideBusStops();
     }
+
+    public void refreshMyData(){
+        Intent i = new Intent(ZoneDetailsActivity.this, ZoneDetailsActivity.class);
+        i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoodSelected);
+        i.putExtra("NEIGHBOURHOOD_DESCRIPTION", description);
+        startActivity(i);
+        this.overridePendingTransition(0, 0);
+    }
 }
