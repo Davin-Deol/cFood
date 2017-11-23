@@ -256,7 +256,7 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            QueryDB queryDB = new QueryDB(getApplicationContext(), ZoneDetailsActivity.this, "Uptown");
+            QueryDB queryDB = new QueryDB(getApplicationContext(), ZoneDetailsActivity.this, neighbourhoodSelected);
             queryDB.retrieveAllData();
 
             coordsLong = queryDB.zoneLong;
