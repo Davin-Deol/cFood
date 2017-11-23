@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ca.bcit.ass1.cfood.ZoneDetailsActivity">
-
     <include layout="@layout/toolbar_top"
         android:id="@+id/zoneDetailsToolbar" />
 
