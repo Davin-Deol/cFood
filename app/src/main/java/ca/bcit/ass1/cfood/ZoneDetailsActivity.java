@@ -30,11 +30,9 @@ public class ZoneDetailsActivity extends AppCompatActivity {
     String [] coordsLong;
     String [] coordsLat;
 
-    String [] allShopsNames;
-    Parcelable[] allShopsLatLng;
-
-    String [] allShopsX;
-    String [] allShopsY;
+    String [] shopsNames;
+    String [] shopsX;
+    String [] shopsY;
 
     String [] parksLat;
     String [] parksLong;
@@ -53,15 +51,14 @@ public class ZoneDetailsActivity extends AppCompatActivity {
     String [] schoolsNames;
     Bundle bundle;
 
+    MapsActivity fragment;
+    ListView zoneDetailsListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         new getQuery().execute();
-        String[] test = coordsLong;
-        String [] blah =  allShopsX;
-        String [] blah2 = allShopsY;
-
 
         categories = getResources().getStringArray(R.array.categories);
         checkboxes = new boolean[categories.length];
@@ -75,9 +72,9 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         TextView zoneDetailsDescription = findViewById(R.id.zoneDetailsDescriptionTextView);
         zoneDetailsDescription.setText(sampleNeighbourhood.description);
 
-        ListView zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
-        CustomAdapter customAdapter = new CustomAdapter();
-        zoneDetailsListView.setAdapter(customAdapter);
+        zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
+//        CustomAdapter customAdapter = new CustomAdapter();
+//        zoneDetailsListView.setAdapter(customAdapter);
         setTitle("Uptown");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -146,8 +143,44 @@ public class ZoneDetailsActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (checkboxes[index]) {
                         checkboxes[index] = false;
+                        switch(index) {
+                            case 0:
+                                putBusStopMarkers();
+                                break;
+                            case 1:
+                                putShopsMarkers();
+                                break;
+                            case 2:
+                                putRecMarkers();
+                                break;
+                            case 3:
+                                putParksMarkers();
+                                break;
+                            case 4:
+                                putSchoolsMarkers();
+                                break;
+                            default: break;
+                        }
                     } else {
                         checkboxes[index] = true;
+                        switch(index) {
+                            case 0:
+                                hideBusStopMarkers();
+                                break;
+                            case 1:
+                                hideShopsMarkers();
+                                break;
+                            case 2:
+                                hideRecMarkers();
+                                break;
+                            case 3:
+                                hideParksMarkers();
+                                break;
+                            case 4:
+                                hideSchoolMarkers();
+                                break;
+                            default: break;
+                        }
                     }
                     notifyDataSetChanged();
                 }
@@ -176,33 +209,53 @@ public class ZoneDetailsActivity extends AppCompatActivity {
             coordsLong = queryDB.zoneLong;
             coordsLat = queryDB.zoneLat;
 
-            allShopsNames = queryDB.shopsNames.toArray(new String[queryDB.shopsNames.size()]);
-            allShopsX = queryDB.shopsX.toArray(new String[queryDB.shopsX.size()]);
-            allShopsY = queryDB.shopsY.toArray(new String[queryDB.shopsY.size()]);
+            shopsNames = queryDB.shopsNames.toArray(new String[queryDB.shopsNames.size()]);
+            shopsX = queryDB.shopsX.toArray(new String[queryDB.shopsX.size()]);
+            shopsY = queryDB.shopsY.toArray(new String[queryDB.shopsY.size()]);
 
+            parksNames = queryDB.parksNames.toArray(new String[queryDB.parksNames.size()]);
             parksLat = queryDB.parksLat;
             parksLong = queryDB.parksLong;
-            parksNames = queryDB.parksNames.toArray(new String[queryDB.parksNames.size()]);
 
             busStopX = queryDB.busStopX.toArray(new String[queryDB.busStopX.size()]);
             busStopY = queryDB.busStopY.toArray(new String[queryDB.busStopY.size()]);
             busStopNames = queryDB.busStopNames.toArray(new String[queryDB.busStopNames.size()]);
 
+            recNames = queryDB.recNames.toArray(new String[queryDB.recNames.size()]);
             recX = queryDB.recX.toArray(new String[queryDB.recX.size()]);
             recY = queryDB.recY.toArray(new String[queryDB.recY.size()]);
-            recNames = queryDB.recNames.toArray(new String[queryDB.recNames.size()]);
 
+            schoolsNames = queryDB.schoolsNames.toArray(new String[queryDB.schoolsNames.size()]);
             schoolsX = queryDB.schoolsX.toArray(new String[queryDB.schoolsX.size()]);
             schoolsY = queryDB.schoolsY.toArray(new String[queryDB.schoolsY.size()]);
-            schoolsNames = queryDB.schoolsNames.toArray(new String[queryDB.schoolsNames.size()]);
 
             bundle = new Bundle();
             bundle.putStringArray("coordsLat", coordsLat);
             bundle.putStringArray("coordsLong", coordsLong);
 
+            bundle.putStringArray("shopsNames", shopsNames);
+            bundle.putStringArray("shopsX", shopsX);
+            bundle.putStringArray("shopsY", shopsY);
+
+            bundle.putStringArray("parksNames", parksNames);
+            bundle.putStringArray("parksLat", parksLat);
+            bundle.putStringArray("parksLong", parksLong);
+
+            bundle.putStringArray("recNames", recNames);
+            bundle.putStringArray("recX", recX);
+            bundle.putStringArray("recY", recY);
+
+            bundle.putStringArray("busStopNames", busStopNames);
+            bundle.putStringArray("busStopX", busStopX);
+            bundle.putStringArray("busStopY", busStopY);
+
+            bundle.putStringArray("schoolsNames", schoolsNames);
+            bundle.putStringArray("schoolsX", schoolsX);
+            bundle.putStringArray("schoolsY", schoolsY);
+
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            MapsActivity fragment = new MapsActivity();
+            fragment = new MapsActivity();
             fragmentTransaction.replace(R.id.mapView, fragment);
             fragmentTransaction.commit();
             fragment.setArguments(bundle);
@@ -212,12 +265,9 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 
         protected void onPostExecute(Void result) {
 
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            MapsActivity fragment = new MapsActivity();
-//            fragment.setArguments(bundle);
-//            fragmentTransaction.replace(R.id.mapView, fragment);
-//            fragmentTransaction.commit();
+            CustomAdapter customAdapter = new CustomAdapter();
+            zoneDetailsListView.setAdapter(customAdapter);
+
         }
     }
 
@@ -236,5 +286,45 @@ public class ZoneDetailsActivity extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent(this, SavedZonesActivity.class));
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
+    }
+
+    private void putShopsMarkers() {
+        fragment.showShops();
+    }
+
+    private void hideShopsMarkers() {
+        fragment.hideShops();
+    }
+
+    private void putSchoolsMarkers() {
+        fragment.showSchools();
+    }
+
+    private void hideSchoolMarkers() {
+        fragment.hideSchools();
+    }
+
+    private void putParksMarkers() {
+        fragment.showParks();
+    }
+
+    private void hideParksMarkers() {
+        fragment.hideParks();
+    }
+
+    private void putRecMarkers() {
+        fragment.showRec();
+    }
+
+    private void hideRecMarkers() {
+        fragment.hideRec();
+    }
+
+    private void putBusStopMarkers() {
+        fragment.showBusStops();
+    }
+
+    private void hideBusStopMarkers() {
+        fragment.hideBusStops();
     }
 }
