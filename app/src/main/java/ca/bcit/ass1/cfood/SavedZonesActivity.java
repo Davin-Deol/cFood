@@ -124,6 +124,7 @@ public class SavedZonesActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
     }
 
     public String loadJSONFromAsset() {
