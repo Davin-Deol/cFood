@@ -3,6 +3,7 @@ package ca.bcit.ass1.cfood;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -18,11 +19,9 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 public class ZoneDetailsActivity extends AppCompatActivity {
-    String neighbourhoodSelected;
-    String description;
     String[] categories;
+    Neighbourhood sampleNeighbourhood = new Neighbourhood("Willington, Deer Lake", "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl", "5/5");
     private boolean[] checkboxes;
     Menu menu;
 
@@ -65,36 +64,21 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 
 
         categories = getResources().getStringArray(R.array.categories);
-        checkboxes = new boolean[categories.length + 1];
-        for (int i = 0; i < checkboxes.length; i++) {
-            checkboxes[i] = true;
+        checkboxes = new boolean[categories.length];
+        for (boolean checkbox : checkboxes) {
+            checkbox = true;
         }
-        neighbourhoodSelected = getIntent().getExtras().getString("NEIGHBOURHOOD_SELECTED");
-        description = getIntent().getExtras().getString("NEIGHBOURHOOD_DESCRIPTION");
         setContentView(R.layout.activity_zone_details);
         Toolbar toolbar = findViewById(R.id.zoneDetailsToolbar);
         setSupportActionBar(toolbar);
 
         TextView zoneDetailsDescription = findViewById(R.id.zoneDetailsDescriptionTextView);
-        zoneDetailsDescription.setText(description);
+        zoneDetailsDescription.setText(sampleNeighbourhood.description);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
-        CustomAdapter customAdapter = new CustomAdapter(checkboxes);
-        zoneDetailsListView.setAdapter(customAdapter);
-        setTitle(neighbourhoodSelected);
-=======
-=======
->>>>>>> parent of c246a61... toggle implemented
-=======
->>>>>>> parent of c246a61... toggle implemented
         ListView zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
         CustomAdapter customAdapter = new CustomAdapter();
         zoneDetailsListView.setAdapter(customAdapter);
         setTitle("Uptown");
->>>>>>> parent of c246a61... toggle implemented
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -130,14 +114,9 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 
     private class CustomAdapter extends BaseAdapter {
 
-        boolean[] values;
-        public CustomAdapter(boolean[] values) {
-            this.values = values;
-        }
-
         @Override
         public int getCount() {
-            return categories.length + 1;
+            return categories.length;
         }
 
         @Override
@@ -154,121 +133,26 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.layout_zones_details_specs, null);
             TextView savedZonesSpecLabel = view.findViewById(R.id.savedZonesSpecLabel);
-            if (i == 0) {
-                savedZonesSpecLabel.setText("ALL");
-            } else {
-                savedZonesSpecLabel.setText(categories[i - 1]);
-            }
+            savedZonesSpecLabel.setText(categories[i]);
             CheckBox checkbox = (CheckBox) view.findViewById(R.id.savedZonesCheckbox);
             final int index = i;
-            checkbox.setChecked(values[i]);
+            if (checkboxes[i]) {
+                checkbox.setChecked(false);
+            } else {
+                checkbox.setChecked(true);
+            }
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-<<<<<<< HEAD
-                    if (values[index]) {
-                        values[index] = false;
-                        checkBoxChanges(index, false);
-                    } else {
-                        values[index] = true;
-                        checkBoxChanges(index, true);
-                    }
-                    notifyDataSetChanged();
-                }
-            });
-
-            checkbox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (values[index]) {
-                        values[index] = false;
-                        checkBoxChanges(index, false);
-                    } else {
-                        values[index] = true;
-                        checkBoxChanges(index, true);
-=======
                     if (checkboxes[index]) {
                         checkboxes[index] = false;
                     } else {
                         checkboxes[index] = true;
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of c246a61... toggle implemented
-=======
->>>>>>> parent of c246a61... toggle implemented
-=======
->>>>>>> parent of c246a61... toggle implemented
                     }
                     notifyDataSetChanged();
                 }
             });
             return view;
-        }
-
-        private void checkBoxChanges(int index, boolean show) {
-            if (show) {
-                if (index == 0) {
-                    for (int i = 0; i < values.length; i++) {
-                        values[i] = true;
-                    }
-                    putBusStopMarkers();
-                    putShopsMarkers();
-                    putRecMarkers();
-                    putParksMarkers();
-                    putSchoolsMarkers();
-                } else {
-                    switch (index) {
-                        case 1:
-                            putBusStopMarkers();
-                            break;
-                        case 2:
-                            putShopsMarkers();
-                            break;
-                        case 3:
-                            putRecMarkers();
-                            break;
-                        case 4:
-                            putParksMarkers();
-                            break;
-                        case 5:
-                            putSchoolsMarkers();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            } else {
-                if (index == 0) {
-                    for (int i = 0; i < values.length; i++) {
-                        values[i] = false;
-                    }
-                    hideBusStopMarkers();
-                    hideShopsMarkers();
-                    hideRecMarkers();
-                    hideParksMarkers();
-                    hideSchoolsMarkers();
-                } else {
-                    switch (index) {
-                        case 1:
-                            hideBusStopMarkers();
-                            break;
-                        case 2:
-                            hideShopsMarkers();
-                            break;
-                        case 3:
-                            hideRecMarkers();
-                            break;
-                        case 4:
-                            hideParksMarkers();
-                            break;
-                        case 5:
-                            hideSchoolsMarkers();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
         }
     }
 
@@ -326,18 +210,7 @@ public class ZoneDetailsActivity extends AppCompatActivity {
             return null;
         }
 
-        @Override
         protected void onPostExecute(Void result) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            CustomAdapter customAdapter = new CustomAdapter(checkboxes);
-            zoneDetailsListView.setAdapter(customAdapter);
-=======
-=======
->>>>>>> parent of c246a61... toggle implemented
-=======
->>>>>>> parent of c246a61... toggle implemented
 
 //            FragmentManager fragmentManager = getSupportFragmentManager();
 //            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -345,13 +218,6 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 //            fragment.setArguments(bundle);
 //            fragmentTransaction.replace(R.id.mapView, fragment);
 //            fragmentTransaction.commit();
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of c246a61... toggle implemented
-=======
->>>>>>> parent of c246a61... toggle implemented
-=======
->>>>>>> parent of c246a61... toggle implemented
         }
     }
 
@@ -371,61 +237,4 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         startActivity(new Intent(this, SavedZonesActivity.class));
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    private void putShopsMarkers() {
-        fragment.showShops();
-    }
-
-    private void hideShopsMarkers() {
-        fragment.hideShops();
-    }
-
-    private void putSchoolsMarkers() {
-        fragment.showSchools();
-    }
-
-    private void hideSchoolsMarkers() {
-        fragment.hideSchools();
-    }
-
-    private void putParksMarkers() {
-        fragment.showParks();
-    }
-
-    private void hideParksMarkers() {
-        fragment.hideParks();
-    }
-
-    private void putRecMarkers() {
-        fragment.showRec();
-    }
-
-    private void hideRecMarkers() {
-        fragment.hideRec();
-    }
-
-    private void putBusStopMarkers() {
-        fragment.showBusStops();
-    }
-
-    private void hideBusStopMarkers() {
-        fragment.hideBusStops();
-    }
-
-    public void refreshMyData(){
-        Intent i = new Intent(ZoneDetailsActivity.this, ZoneDetailsActivity.class);
-        i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoodSelected);
-        i.putExtra("NEIGHBOURHOOD_DESCRIPTION", description);
-        startActivity(i);
-        this.overridePendingTransition(0, 0);
-    }
-=======
->>>>>>> parent of c246a61... toggle implemented
-=======
->>>>>>> parent of c246a61... toggle implemented
-=======
->>>>>>> parent of c246a61... toggle implemented
 }
