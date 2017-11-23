@@ -18,6 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ZoneDetailsActivity extends AppCompatActivity {
     String[] categories;
@@ -61,9 +62,9 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         new getQuery().execute();
 
         categories = getResources().getStringArray(R.array.categories);
-        checkboxes = new boolean[categories.length];
-        for (boolean checkbox : checkboxes) {
-            checkbox = true;
+        checkboxes = new boolean[categories.length + 1];
+        for (int i = 0; i < checkboxes.length; i++) {
+            checkboxes[i] = true;
         }
         setContentView(R.layout.activity_zone_details);
         Toolbar toolbar = findViewById(R.id.zoneDetailsToolbar);
@@ -73,8 +74,8 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         zoneDetailsDescription.setText(sampleNeighbourhood.description);
 
         zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
-//        CustomAdapter customAdapter = new CustomAdapter();
-//        zoneDetailsListView.setAdapter(customAdapter);
+        CustomAdapter customAdapter = new CustomAdapter(checkboxes);
+        zoneDetailsListView.setAdapter(customAdapter);
         setTitle("Uptown");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -111,9 +112,14 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 
     private class CustomAdapter extends BaseAdapter {
 
+        boolean[] values;
+        public CustomAdapter(boolean[] values) {
+            this.values = values;
+        }
+
         @Override
         public int getCount() {
-            return categories.length;
+            return categories.length + 1;
         }
 
         @Override
@@ -130,57 +136,23 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.layout_zones_details_specs, null);
             TextView savedZonesSpecLabel = view.findViewById(R.id.savedZonesSpecLabel);
-            savedZonesSpecLabel.setText(categories[i]);
+            if (i == 0) {
+                savedZonesSpecLabel.setText("ALL");
+            } else {
+                savedZonesSpecLabel.setText(categories[i - 1]);
+            }
             CheckBox checkbox = (CheckBox) view.findViewById(R.id.savedZonesCheckbox);
             final int index = i;
-            if (checkboxes[i]) {
-                checkbox.setChecked(false);
-            } else {
-                checkbox.setChecked(true);
-            }
+            checkbox.setChecked(values[i]);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (checkboxes[index]) {
-                        checkboxes[index] = false;
-                        switch(index) {
-                            case 0:
-                                putBusStopMarkers();
-                                break;
-                            case 1:
-                                putShopsMarkers();
-                                break;
-                            case 2:
-                                putRecMarkers();
-                                break;
-                            case 3:
-                                putParksMarkers();
-                                break;
-                            case 4:
-                                putSchoolsMarkers();
-                                break;
-                            default: break;
-                        }
+                    if (values[index]) {
+                        values[index] = false;
+                        checkBoxChanges(index, false);
                     } else {
-                        checkboxes[index] = true;
-                        switch(index) {
-                            case 0:
-                                hideBusStopMarkers();
-                                break;
-                            case 1:
-                                hideShopsMarkers();
-                                break;
-                            case 2:
-                                hideRecMarkers();
-                                break;
-                            case 3:
-                                hideParksMarkers();
-                                break;
-                            case 4:
-                                hideSchoolMarkers();
-                                break;
-                            default: break;
-                        }
+                        values[index] = true;
+                        checkBoxChanges(index, true);
                     }
                     notifyDataSetChanged();
                 }
@@ -189,51 +161,83 @@ public class ZoneDetailsActivity extends AppCompatActivity {
             checkbox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (checkboxes[index]) {
-                        checkboxes[index] = false;
-                        switch(index) {
-                            case 0:
-                                putBusStopMarkers();
-                                break;
-                            case 1:
-                                putShopsMarkers();
-                                break;
-                            case 2:
-                                putRecMarkers();
-                                break;
-                            case 3:
-                                putParksMarkers();
-                                break;
-                            case 4:
-                                putSchoolsMarkers();
-                                break;
-                            default: break;
-                        }
+                    if (values[index]) {
+                        values[index] = false;
+                        checkBoxChanges(index, false);
                     } else {
-                        checkboxes[index] = true;
-                        switch(index) {
-                            case 0:
-                                hideBusStopMarkers();
-                                break;
-                            case 1:
-                                hideShopsMarkers();
-                                break;
-                            case 2:
-                                hideRecMarkers();
-                                break;
-                            case 3:
-                                hideParksMarkers();
-                                break;
-                            case 4:
-                                hideSchoolMarkers();
-                                break;
-                            default: break;
-                        }
+                        values[index] = true;
+                        checkBoxChanges(index, true);
                     }
                     notifyDataSetChanged();
                 }
             });
             return view;
+        }
+
+        private void checkBoxChanges(int index, boolean show) {
+            if (show) {
+                if (index == 0) {
+                    for (int i = 0; i < values.length; i++) {
+                        values[i] = true;
+                    }
+                    putBusStopMarkers();
+                    putShopsMarkers();
+                    putRecMarkers();
+                    putParksMarkers();
+                    putSchoolsMarkers();
+                } else {
+                    switch (index) {
+                        case 1:
+                            putBusStopMarkers();
+                            break;
+                        case 2:
+                            putShopsMarkers();
+                            break;
+                        case 3:
+                            putRecMarkers();
+                            break;
+                        case 4:
+                            putParksMarkers();
+                            break;
+                        case 5:
+                            putSchoolsMarkers();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            } else {
+                if (index == 0) {
+                    for (int i = 0; i < values.length; i++) {
+                        values[i] = false;
+                    }
+                    hideBusStopMarkers();
+                    hideShopsMarkers();
+                    hideRecMarkers();
+                    hideParksMarkers();
+                    hideSchoolsMarkers();
+                } else {
+                    switch (index) {
+                        case 1:
+                            hideBusStopMarkers();
+                            break;
+                        case 2:
+                            hideShopsMarkers();
+                            break;
+                        case 3:
+                            hideRecMarkers();
+                            break;
+                        case 4:
+                            hideParksMarkers();
+                            break;
+                        case 5:
+                            hideSchoolsMarkers();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
     }
 
@@ -311,11 +315,10 @@ public class ZoneDetailsActivity extends AppCompatActivity {
             return null;
         }
 
+        @Override
         protected void onPostExecute(Void result) {
-
-            CustomAdapter customAdapter = new CustomAdapter();
+            CustomAdapter customAdapter = new CustomAdapter(checkboxes);
             zoneDetailsListView.setAdapter(customAdapter);
-
         }
     }
 
@@ -348,7 +351,7 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         fragment.showSchools();
     }
 
-    private void hideSchoolMarkers() {
+    private void hideSchoolsMarkers() {
         fragment.hideSchools();
     }
 
