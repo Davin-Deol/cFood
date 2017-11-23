@@ -55,7 +55,6 @@ public class SavedZonesActivity extends AppCompatActivity {
             System.err.print(e.toString());
         }
 
-        Toast.makeText(this, x, Toast.LENGTH_SHORT).show();
         ListView listView = findViewById(R.id.savedZonesListView);
         customAdapter = new SavedZonesActivity.CustomAdapter();
         listView.setAdapter(customAdapter);

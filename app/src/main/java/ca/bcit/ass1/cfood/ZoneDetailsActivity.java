@@ -185,6 +185,54 @@ public class ZoneDetailsActivity extends AppCompatActivity {
                     notifyDataSetChanged();
                 }
             });
+
+            checkbox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (checkboxes[index]) {
+                        checkboxes[index] = false;
+                        switch(index) {
+                            case 0:
+                                putBusStopMarkers();
+                                break;
+                            case 1:
+                                putShopsMarkers();
+                                break;
+                            case 2:
+                                putRecMarkers();
+                                break;
+                            case 3:
+                                putParksMarkers();
+                                break;
+                            case 4:
+                                putSchoolsMarkers();
+                                break;
+                            default: break;
+                        }
+                    } else {
+                        checkboxes[index] = true;
+                        switch(index) {
+                            case 0:
+                                hideBusStopMarkers();
+                                break;
+                            case 1:
+                                hideShopsMarkers();
+                                break;
+                            case 2:
+                                hideRecMarkers();
+                                break;
+                            case 3:
+                                hideParksMarkers();
+                                break;
+                            case 4:
+                                hideSchoolMarkers();
+                                break;
+                            default: break;
+                        }
+                    }
+                    notifyDataSetChanged();
+                }
+            });
             return view;
         }
     }
