@@ -77,6 +77,7 @@ public class MapsActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_maps, container, false);
 
+        if (getArguments() != null) {
         coordsLat = getArguments().getStringArray("coordsLat");
         coordsLong = getArguments().getStringArray("coordsLong");
 
@@ -208,6 +209,10 @@ public class MapsActivity extends Fragment {
 
             }
         });
+
+        } else {
+            onCreateView(inflater, container, savedInstanceState);
+        }
         return rootView;
     }
 
