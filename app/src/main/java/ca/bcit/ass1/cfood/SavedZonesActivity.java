@@ -11,12 +11,20 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class SavedZonesActivity extends AppCompatActivity {
     SavedZonesActivity.CustomAdapter customAdapter;
     public ArrayList<Neighbourhood> neighbourhoods = new ArrayList<>();
+    String[] allShopsNames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +42,20 @@ public class SavedZonesActivity extends AppCompatActivity {
         if (introMode) {
             this.setTitle("Intro Mode");
         }
-        Neighbourhood neighbourhood1 = new Neighbourhood("Willington, Deer Lake", "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl", "5/5");
-        Neighbourhood neighbourhood2 = new Neighbourhood("Bernard, CampBell", "dfk dlfalsdfd fd flkahld fdsj fsadl", "4/5");
+        String x = null;
+        try {
+            JSONArray parentArray = new JSONArray(loadJSONFromAsset());
+            for (int i = 0; i < parentArray.length(); i++) {
+                JSONObject finalObject = parentArray.getJSONObject(i);
+                if (finalObject != null) {
+                    neighbourhoods.add(new Neighbourhood(finalObject.getString("NEIGH_NAME"), "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl"));
+                }
+            }
+        } catch (JSONException e) {
+            System.err.print(e.toString());
+        }
 
-        neighbourhoods.add(neighbourhood1);
-        neighbourhoods.add(neighbourhood2);
-
+        Toast.makeText(this, x, Toast.LENGTH_SHORT).show();
         ListView listView = findViewById(R.id.savedZonesListView);
         customAdapter = new SavedZonesActivity.CustomAdapter();
         listView.setAdapter(customAdapter);
@@ -106,5 +122,30 @@ public class SavedZonesActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+
+            InputStream is = getAssets().open("nb.json");
+
+            int size = is.available();
+
+            byte[] buffer = new byte[size];
+
+            is.read(buffer);
+
+            is.close();
+
+            json = new String(buffer, "UTF-8");
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+
     }
 }
