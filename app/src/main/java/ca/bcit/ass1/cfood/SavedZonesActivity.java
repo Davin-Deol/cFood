@@ -35,18 +35,19 @@ public class SavedZonesActivity extends AppCompatActivity {
     Toolbar toolbar;
     ListView listView;
     private int tourPhase = 0;
+    boolean tourMode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_zones);
         toolbar = findViewById(R.id.savedZonesToolbar);
         setSupportActionBar(toolbar);
-        boolean introMode = false;
+
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
-            introMode= false;
+            tourMode= false;
         } else {
-            introMode= extras.getBoolean("INTROMODE");
+            tourMode= extras.getBoolean("INTROMODE");
         }
 
         try {
@@ -60,21 +61,11 @@ public class SavedZonesActivity extends AppCompatActivity {
         } catch (JSONException e) {
             System.err.print(e.toString());
         }
-        if (introMode) {
-            mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
-                    .setPointer(new Pointer())
-                    .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_1)).setDescription(getString(R.string.tourDescription_1)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
-                    .setOverlay(new Overlay())
-                    .playOn(toolbar);
-            toolbar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    clickMe(view);
-                }
-            });
+        if (tourMode) {
+            clickMe1();
         } else {
             listView = findViewById(R.id.savedZonesListView);
-            customAdapter = new SavedZonesActivity.CustomAdapter(false, 0);
+            customAdapter = new SavedZonesActivity.CustomAdapter(tourMode, 0);
             listView.setAdapter(customAdapter);
         }
     }
@@ -131,7 +122,6 @@ public class SavedZonesActivity extends AppCompatActivity {
                 });
                 return view;
             } else {
-
                 // Only if we're at the part where we tap the item and nothing happens
                 if (tourPhase == 4) {
                     // Only make the first list item clickable
@@ -144,7 +134,7 @@ public class SavedZonesActivity extends AppCompatActivity {
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                clickMe4(view);
+                                clickMe5(view);
                             }
                         });
                     }
@@ -210,13 +200,11 @@ public class SavedZonesActivity extends AppCompatActivity {
 
     /**
      * This is the part where we talk about what the activity consists of
-     * @param view
      */
-    public void clickMe(View view) {
-        mTourGuideHandler.cleanUp();
+    public void clickMe1() {
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_2)).setDescription(getString(R.string.tourDescription_2)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_1)).setDescription(getString(R.string.tourDescription_1)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
                 .setOverlay(new Overlay())
                 .playOn(toolbar);
         toolbar.setOnClickListener(new View.OnClickListener() {
@@ -228,14 +216,33 @@ public class SavedZonesActivity extends AppCompatActivity {
     }
 
     /**
-     * This is the part where we just show the listview
+     * This is the part where we talk about what the activity consists of
      * @param view
      */
     public void clickMe2(View view) {
         mTourGuideHandler.cleanUp();
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_2)).setDescription(getString(R.string.tourDescription_2)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setOverlay(new Overlay())
+                .playOn(toolbar);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickMe3(view);
+            }
+        });
+    }
+
+    /**
+     * This is the part where we just show the listview
+     * @param view
+     */
+    public void clickMe3(View view) {
+        mTourGuideHandler.cleanUp();
         toolbar.setOnClickListener(null);
         listView = findViewById(R.id.savedZonesListView);
-        customAdapter = new SavedZonesActivity.CustomAdapter(true, 3);
+        customAdapter = new SavedZonesActivity.CustomAdapter(tourMode, 3);
         listView.setAdapter(customAdapter);
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
@@ -244,7 +251,7 @@ public class SavedZonesActivity extends AppCompatActivity {
                 .playOn(listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                clickMe3(view);
+                clickMe4(view);
             }
         });
     }
@@ -253,10 +260,10 @@ public class SavedZonesActivity extends AppCompatActivity {
      * This is the part where we just show a list item
      * @param view
      */
-    public void clickMe3(View view) {
+    public void clickMe4(View view) {
         mTourGuideHandler.cleanUp();
         listView = findViewById(R.id.savedZonesListView);
-        customAdapter = new SavedZonesActivity.CustomAdapter(true, 4);
+        customAdapter = new SavedZonesActivity.CustomAdapter(tourMode, 4);
         listView.setAdapter(customAdapter);
     }
 
@@ -264,10 +271,10 @@ public class SavedZonesActivity extends AppCompatActivity {
      * This is the part where tapping the list item takes them to the next activity
      * @param view
      */
-    public void clickMe4(View view) {
+    public void clickMe5(View view) {
         mTourGuideHandler.cleanUp();
         listView = findViewById(R.id.savedZonesListView);
-        customAdapter = new SavedZonesActivity.CustomAdapter(true, 5);
+        customAdapter = new SavedZonesActivity.CustomAdapter(tourMode, 5);
         listView.setAdapter(customAdapter);
     }
 }
