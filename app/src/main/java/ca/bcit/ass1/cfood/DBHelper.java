@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static String dbName = "cfood.db";
-    private static int version = 2;
+    private static int version = 6;
     private static String tableZoning = "neighbourhoods";
     private static String tableParks = "parks";
     private static String tableShopping = "shopping";

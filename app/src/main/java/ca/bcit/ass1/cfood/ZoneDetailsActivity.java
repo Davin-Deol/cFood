@@ -249,10 +249,10 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-//            pDialog = new ProgressDialog(ZoneDetailsActivity.this);
-//            pDialog.setMessage("Please wait...");
-//            pDialog.setCancelable(false);
-//            pDialog.show();
+            pDialog = new ProgressDialog(ZoneDetailsActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
         }
 
         @Override
@@ -321,6 +321,7 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             CustomAdapter customAdapter = new CustomAdapter(checkboxes);
             zoneDetailsListView.setAdapter(customAdapter);
+            pDialog.dismiss();
         }
     }
 
