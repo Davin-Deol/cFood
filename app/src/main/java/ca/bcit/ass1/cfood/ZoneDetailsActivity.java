@@ -24,6 +24,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class ZoneDetailsActivity extends AppCompatActivity{
     String neighbourhoodSelected;
@@ -37,6 +39,8 @@ public class ZoneDetailsActivity extends AppCompatActivity{
 
     private ShareActionProvider share = null;
     private ProgressDialog pDialog;
+
+    boolean[] values;
 
     String [] coordsLong;
     String [] coordsLat;
@@ -68,6 +72,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     boolean cityRadioSelected = true;
     boolean nbRadioSelected = false;
 
+    ArrayList<CheckBox> allCheckBoxes = new ArrayList<CheckBox>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +160,6 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         }
 
 
-
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.layout_zones_details_specs, null);
@@ -167,6 +171,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
             }
 
             checkbox = (CheckBox) view.findViewById(R.id.savedZonesCheckbox);
+            allCheckBoxes.add(checkbox);
             final int index = i;
             checkbox.setChecked(values[i]);
             view.setOnClickListener(new View.OnClickListener() {
@@ -541,11 +546,16 @@ public class ZoneDetailsActivity extends AppCompatActivity{
                     putRecMarkers();
                     putShopsMarkers();
                     putSchoolsMarkers();
+
+                    for(int i = 0; i < allCheckBoxes.size(); i++) {
+                        allCheckBoxes.get(i).setChecked(true);
+                        if(i < checkboxes.length)
+                            checkboxes[i] = true;
+                    }
                 }
                 cityRadioSelected = true;
                 nbRadioSelected = false;
 
-               // checkbox.setChecked(false);
 
                 break;
             case R.id.neighbourhoodRadio:
@@ -563,6 +573,12 @@ public class ZoneDetailsActivity extends AppCompatActivity{
                     putRecMarkersNB();
                     putShopsMarkersNB();
                     putSchoolsMarkersNB();
+
+                    for(int i = 0; i < allCheckBoxes.size(); i++) {
+                        allCheckBoxes.get(i).setChecked(true);
+                        if(i < checkboxes.length)
+                            checkboxes[i] = true;
+                    }
                 }
 
                 cityRadioSelected = false;
