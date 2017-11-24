@@ -65,6 +65,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        neighbourhoodSelected = getIntent().getExtras().getString("NEIGHBOURHOOD_SELECTED");
         new getQuery().execute();
 
         categories = getResources().getStringArray(R.array.categories);
@@ -72,12 +73,11 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         for (int i = 0; i < checkboxes.length; i++) {
             checkboxes[i] = true;
         }
-        neighbourhoodSelected = getIntent().getExtras().getString("NEIGHBOURHOOD_SELECTED");
-        description = getIntent().getExtras().getString("NEIGHBOURHOOD_DESCRIPTION");
         setContentView(R.layout.activity_zone_details);
         Toolbar toolbar = findViewById(R.id.zoneDetailsToolbar);
         setSupportActionBar(toolbar);
 
+        description = getIntent().getExtras().getString("NEIGHBOURHOOD_DESCRIPTION");
         TextView zoneDetailsDescription = findViewById(R.id.zoneDetailsDescriptionTextView);
         zoneDetailsDescription.setText(description);
 
@@ -274,15 +274,15 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         protected void onPreExecute() {
             super.onPreExecute();
 
-//            pDialog = new ProgressDialog(ZoneDetailsActivity.this);
-//            pDialog.setMessage("Please wait...");
-//            pDialog.setCancelable(false);
-//            pDialog.show();
+            pDialog = new ProgressDialog(ZoneDetailsActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            QueryDB queryDB = new QueryDB(getApplicationContext(), ZoneDetailsActivity.this, "Uptown");
+            QueryDB queryDB = new QueryDB(getApplicationContext(), ZoneDetailsActivity.this, neighbourhoodSelected);
             queryDB.retrieveAllData();
 
             coordsLong = queryDB.zoneLong;
@@ -346,6 +346,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         protected void onPostExecute(Void result) {
             CustomAdapter customAdapter = new CustomAdapter(checkboxes);
             zoneDetailsListView.setAdapter(customAdapter);
+            pDialog.dismiss();
         }
     }
 
