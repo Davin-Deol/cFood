@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +26,14 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.MapView;
+
 import java.util.ArrayList;
+
+import tourguide.tourguide.Overlay;
+import tourguide.tourguide.Pointer;
+import tourguide.tourguide.ToolTip;
+import tourguide.tourguide.TourGuide;
 
 
 public class ZoneDetailsActivity extends AppCompatActivity{
@@ -35,6 +44,10 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     private boolean[] checkboxes;
     Menu menu;
     CheckBox checkbox;
+    TourGuide mTourGuideHandler;
+    Toolbar toolbar;
+    MapView mMap;
+    View wholePage;
     private int x = 0;
 
     private ShareActionProvider share = null;
@@ -68,6 +81,10 @@ public class ZoneDetailsActivity extends AppCompatActivity{
 
     MapsActivity fragment;
     ListView zoneDetailsListView;
+    TextView zoneDetailsDescription;
+    CustomAdapter customAdapter;
+    private boolean tourMode = false;
+    int tourPhase = 0;
     boolean citySelected = true;
     boolean cityRadioSelected = true;
     boolean nbRadioSelected = false;
@@ -82,25 +99,31 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         new getQuery().execute();
 
         categories = getResources().getStringArray(R.array.categories);
-        checkboxes = new boolean[categories.length + 1];
+        checkboxes = new boolean[categories.length];
         for (int i = 0; i < checkboxes.length; i++) {
             checkboxes[i] = true;
         }
         setContentView(R.layout.activity_zone_details);
-        Toolbar toolbar = findViewById(R.id.zoneDetailsToolbar);
+        toolbar = findViewById(R.id.zoneDetailsToolbar);
+        wholePage = findViewById(R.id.zoneDetailsActivity);
         setSupportActionBar(toolbar);
-
-        description = getIntent().getExtras().getString("NEIGHBOURHOOD_DESCRIPTION");
-        TextView zoneDetailsDescription = findViewById(R.id.zoneDetailsDescriptionTextView);
-        zoneDetailsDescription.setText(description);
-
-        zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
-        CustomAdapter customAdapter = new CustomAdapter(checkboxes);
-        zoneDetailsListView.setAdapter(customAdapter);
         setTitle(neighbourhoodSelected);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        mMap = findViewById(R.id.mapView);
+        description = getIntent().getExtras().getString("NEIGHBOURHOOD_DESCRIPTION");
+        zoneDetailsDescription = findViewById(R.id.zoneDetailsDescriptionTextView);
+
+        zoneDetailsListView = findViewById(R.id.zoneDetailsListView);
+        tourMode = getIntent().getExtras().getBoolean("TOUR_MODE");
+        customAdapter = new CustomAdapter(checkboxes);
+        zoneDetailsListView.setAdapter(customAdapter);
+        if (tourMode) {
+            clickMe1();
+        } else {
+            zoneDetailsDescription.setText(description);
+        }
     }
 
     @Override
@@ -164,14 +187,8 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.layout_zones_details_specs, null);
             TextView savedZonesSpecLabel = view.findViewById(R.id.savedZonesSpecLabel);
-            if (i == 0) {
-                savedZonesSpecLabel.setText("ALL");
-            } else {
-                savedZonesSpecLabel.setText(categories[i - 1]);
-            }
-
-            checkbox = (CheckBox) view.findViewById(R.id.savedZonesCheckbox);
-            allCheckBoxes.add(checkbox);
+            savedZonesSpecLabel.setText(categories[i]);
+            CheckBox checkbox = (CheckBox) view.findViewById(R.id.savedZonesCheckbox);
             final int index = i;
             checkbox.setChecked(values[i]);
             view.setOnClickListener(new View.OnClickListener() {
@@ -586,6 +603,128 @@ public class ZoneDetailsActivity extends AppCompatActivity{
 
                 break;
         }
+    }
 
+    /**
+     * This is the part where we talk about what the activity consists of
+     */
+    public void clickMe1() {
+        ++tourPhase;
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_5)).setDescription(getString(R.string.tourDescription_5)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setOverlay(new Overlay())
+                .playOn(toolbar);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickMe2(view);
+            }
+        });
+    }
+
+    /**
+     * This is the part where we talk about the map fragment
+     */
+    public void clickMe2(View view) {
+        ++tourPhase;
+        mTourGuideHandler.cleanUp();
+        toolbar.setOnClickListener(null);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_6)).setDescription(getString(R.string.tourDescription_6)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setOverlay(new Overlay())
+                .playOn(mMap);
+        findViewById(R.id.zoneDetailsActivity).bringToFront();
+        findViewById(R.id.zoneDetailsActivity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickMe3(view);
+            }
+        });
+    }
+
+    /**
+     * This is the part where we talk about the description view
+     */
+    public void clickMe3(View view) {
+        ++tourPhase;
+        mTourGuideHandler.cleanUp();
+        wholePage.setOnClickListener(null);
+        zoneDetailsDescription.setText(description);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_7)).setDescription(getString(R.string.tourDescription_7)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setOverlay(new Overlay())
+                .playOn(zoneDetailsDescription);
+        wholePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickMe4(view);
+            }
+        });
+    }
+
+    /**
+     * This is the part where we talk about the list view
+     */
+    public void clickMe4(View view) {
+        ++tourPhase;
+        mTourGuideHandler.cleanUp();
+        wholePage.setOnClickListener(null);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_8)).setDescription(getString(R.string.tourDescription_8)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
+                .setOverlay(new Overlay())
+                .playOn(zoneDetailsListView);
+        wholePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickMe5(v);
+            }
+        });
+    }
+
+    /**
+     * This is the part where we talk about the list item
+     */
+    public void clickMe5(View view) {
+        mTourGuideHandler.cleanUp();
+        wholePage.setClickable(false);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_9)).setDescription(getString(R.string.tourDescription_9)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
+                .setOverlay(new Overlay())
+                .playOn(zoneDetailsListView.getChildAt(0));
+        zoneDetailsListView.getChildAt(0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkboxes[0] = !checkboxes[0];
+                customAdapter.checkBoxChanges(0, checkboxes[0]);
+                clickMe6(v);
+            }
+        });
+    }
+
+    /**
+     * This is the part where we talk about the list item
+     */
+    public void clickMe6(View view) {
+        wholePage.setClickable(true);
+        mTourGuideHandler.cleanUp();
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_10)).setDescription(getString(R.string.tourDescription_10)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setOverlay(new Overlay())
+                .playOn(mMap);
+        wholePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ZoneDetailsActivity.this, SavedZonesActivity.class);
+                i.putExtra("END_OF_TOUR", true);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
+            }
+        });
     }
 }
