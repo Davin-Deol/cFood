@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -16,16 +18,20 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
+
+
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-public class ZoneDetailsActivity extends AppCompatActivity {
+public class ZoneDetailsActivity extends AppCompatActivity{
     String neighbourhoodSelected;
     String description;
     String[] categories;
     private boolean[] checkboxes;
     Menu menu;
 
+    private ShareActionProvider share = null;
     private ProgressDialog pDialog;
 
     String [] coordsLong;
@@ -82,6 +88,7 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
 //        Bundle bundle = new Bundle();
 //        bundle.putString("test", recNames[2]);
 //        FragmentManager fragmentManager = getSupportFragmentManager();
@@ -94,10 +101,28 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        this.menu = menu;
+        //this.menu = menu;
         getMenuInflater().inflate(R.menu.menu_neighbourhood_details, menu);
-        return super.onCreateOptionsMenu(menu);
+
+        MenuItem item = menu.findItem(R.id.createEventItem);
+
+        share = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        MenuItemCompat.setActionProvider(item, share);
+
+        Intent myShareIntent = new Intent(Intent.ACTION_SEND);
+        myShareIntent.setType("image/*");
+        //myShareIntent.putExtra(Intent.EXTRA_STREAM, myImageUri);
+
+        share.setShareIntent(myShareIntent);
+
+        // Image has changed! Update the intent:
+       // myShareIntent.putExtra(Intent.EXTRA_STREAM, myNewImageUri);
+        share.setShareIntent(myShareIntent);
+
+        return(super.onCreateOptionsMenu(menu));
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
