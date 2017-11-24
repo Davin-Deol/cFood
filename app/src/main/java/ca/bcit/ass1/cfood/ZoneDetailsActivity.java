@@ -493,7 +493,6 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         fragment.hideBusStops();
     }
 
-
     private void putShopsMarkersNB() {
         fragment.showShopsNB();
     }
@@ -538,6 +537,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         Intent i = new Intent(ZoneDetailsActivity.this, ZoneDetailsActivity.class);
         i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoodSelected);
         i.putExtra("NEIGHBOURHOOD_DESCRIPTION", description);
+        i.putExtra("TOUR_MODE", tourMode);
         startActivity(i);
         this.overridePendingTransition(0, 0);
     }
