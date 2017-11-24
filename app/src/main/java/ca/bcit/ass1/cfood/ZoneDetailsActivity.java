@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 public class ZoneDetailsActivity extends AppCompatActivity{
     String neighbourhoodSelected;
+    String title;
     String description;
     String[] categories;
     private boolean[] checkboxes;
@@ -112,7 +113,8 @@ public class ZoneDetailsActivity extends AppCompatActivity{
 
         Intent myShareIntent = new Intent(Intent.ACTION_SEND);
         myShareIntent.setType("text/plain");
-
+        myShareIntent.putExtra(Intent.EXTRA_TEXT, "Interested in moving to: " +
+                neighbourhoodSelected + "\n\n" + "Brief Overview: " + description);
         share.setShareIntent(myShareIntent);
 
         return(super.onCreateOptionsMenu(menu));
