@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">    <item
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
         android:id="@+id/createEventItem"
         android:title="@string/ItemShare"
-        android:icon="@drawable/ic_share_white_24dp"
         app:showAsAction="ifRoom"
-        android:orderInCategory="1" />
+        android:orderInCategory="1"
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider">
+        <menu>
+            <item
+                android:id="@+id/facebook"
+                android:orderInCategory="1"
+
+                android:title="Facebook">
+            </item>
+            <item
+                android:id="@+id/twitter"
+                android:orderInCategory="2"
+
+                android:title="Twitter">
+            </item>
+            <item
+                android:id="@+id/gplus"
+                android:orderInCategory="3"
+
+                android:title="Google Plus">
+            </item>
+            <item
+                android:id="@+id/seeall"
+                android:orderInCategory="4"
+
+                android:title="See All">
+            </item>
+        </menu>
+    </item>
+
 </menu>

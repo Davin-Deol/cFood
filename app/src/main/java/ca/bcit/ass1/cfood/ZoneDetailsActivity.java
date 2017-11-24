@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -18,17 +20,22 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
+
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-public class ZoneDetailsActivity extends AppCompatActivity {
+public class ZoneDetailsActivity extends AppCompatActivity{
     String neighbourhoodSelected;
+    String title;
     String description;
     String[] categories;
     private boolean[] checkboxes;
     Menu menu;
     CheckBox checkbox;
+    private int x = 0;
 
+    private ShareActionProvider share = null;
     private ProgressDialog pDialog;
 
     String [] coordsLong;
@@ -93,10 +100,24 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        this.menu = menu;
+        //this.menu = menu;
         getMenuInflater().inflate(R.menu.menu_neighbourhood_details, menu);
-        return super.onCreateOptionsMenu(menu);
+
+        MenuItem item = menu.findItem(R.id.createEventItem);
+
+        share = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        MenuItemCompat.setActionProvider(item, share);
+
+        Intent myShareIntent = new Intent(Intent.ACTION_SEND);
+        myShareIntent.setType("text/plain");
+        myShareIntent.putExtra(Intent.EXTRA_TEXT, "Interested in moving to: " +
+                neighbourhoodSelected + "\n\n" + "Brief Overview: " + description);
+        share.setShareIntent(myShareIntent);
+
+        return(super.onCreateOptionsMenu(menu));
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

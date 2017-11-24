@@ -55,7 +55,7 @@ public class SavedZonesActivity extends AppCompatActivity {
             for (int i = 0; i < parentArray.length(); i++) {
                 JSONObject finalObject = parentArray.getJSONObject(i);
                 if (finalObject != null) {
-                    neighbourhoods.add(new Neighbourhood(finalObject.getString("NEIGH_NAME"), "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl"));
+                    neighbourhoods.add(new Neighbourhood(finalObject.getString("NEIGH_NAME"), "A brief description of a neighbourhood in New Westminster."));
                 }
             }
         } catch (JSONException e) {
