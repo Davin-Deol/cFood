@@ -190,6 +190,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
             savedZonesSpecLabel.setText(categories[i]);
             CheckBox checkbox = (CheckBox) view.findViewById(R.id.savedZonesCheckbox);
             final int index = i;
+            allCheckBoxes.add(checkbox);
             checkbox.setChecked(values[i]);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
