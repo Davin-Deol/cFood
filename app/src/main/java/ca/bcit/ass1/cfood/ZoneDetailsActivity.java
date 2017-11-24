@@ -169,7 +169,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
 
         @Override
         public int getCount() {
-            return categories.length + 1;
+            return categories.length;
         }
 
         @Override
@@ -546,8 +546,6 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     public void onRadioButtonClicked(View view) {
         RadioButton cityRadio = (RadioButton) view.findViewById(R.id.cityRadio);
         RadioButton neighbourhoodRadio = (RadioButton) view.findViewById(R.id.neighbourhoodRadio);
-
-
         switch(view.getId()) {
             case R.id.cityRadio:
                 if(!cityRadioSelected && nbRadioSelected) {
