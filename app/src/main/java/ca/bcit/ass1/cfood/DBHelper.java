@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static String dbName = "cfood.db";
-    private static int version = 6;
+    private static int version = 9;
     private static String tableZoning = "neighbourhoods";
     private static String tableParks = "parks";
     private static String tableShopping = "shopping";
@@ -148,6 +148,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
         cursor = db.query(tableParks,
                 null, null, null, null, null, null, null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+
+    public Cursor checkTableExists(SQLiteDatabase db) {
+        Cursor cursor;
+        String query = "SELECT name FROM sqlite_master WHERE type=?" +
+                "AND name=?";
+
+        cursor = db.rawQuery(query, new String[] {"table", "neighbourhoods"}, null);
         cursor.moveToFirst();
         return cursor;
     }

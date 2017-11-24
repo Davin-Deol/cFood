@@ -15,7 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 
@@ -25,6 +27,7 @@ public class ZoneDetailsActivity extends AppCompatActivity {
     String[] categories;
     private boolean[] checkboxes;
     Menu menu;
+    CheckBox checkbox;
 
     private ProgressDialog pDialog;
 
@@ -54,6 +57,10 @@ public class ZoneDetailsActivity extends AppCompatActivity {
 
     MapsActivity fragment;
     ListView zoneDetailsListView;
+    boolean citySelected = true;
+    boolean cityRadioSelected = true;
+    boolean nbRadioSelected = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +89,6 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-//        Bundle bundle = new Bundle();
-//        bundle.putString("test", recNames[2]);
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        MapsActivity fragment = new MapsActivity();
-//        fragmentTransaction.replace(R.id.mapView, fragment);
-//        fragmentTransaction.commit();
-//        fragment.setArguments(bundle);
     }
 
     @Override
@@ -134,6 +133,8 @@ public class ZoneDetailsActivity extends AppCompatActivity {
             return 0;
         }
 
+
+
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.layout_zones_details_specs, null);
@@ -143,7 +144,8 @@ public class ZoneDetailsActivity extends AppCompatActivity {
             } else {
                 savedZonesSpecLabel.setText(categories[i - 1]);
             }
-            CheckBox checkbox = (CheckBox) view.findViewById(R.id.savedZonesCheckbox);
+
+            checkbox = (CheckBox) view.findViewById(R.id.savedZonesCheckbox);
             final int index = i;
             checkbox.setChecked(values[i]);
             view.setOnClickListener(new View.OnClickListener() {
@@ -177,66 +179,132 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         }
 
         private void checkBoxChanges(int index, boolean show) {
-            if (show) {
-                if (index == 0) {
-                    for (int i = 0; i < values.length; i++) {
-                        values[i] = true;
-                    }
+            if (citySelected) {
+                if (show) {
+                    if (index == 0) {
+                        for (int i = 0; i < values.length; i++) {
+                            values[i] = true;
+                        }
                     putBusStopMarkers();
                     putShopsMarkers();
                     putRecMarkers();
                     putParksMarkers();
                     putSchoolsMarkers();
+                    } else {
+                        switch (index) {
+                            case 1:
+                                putBusStopMarkers();
+                                break;
+                            case 2:
+                                putShopsMarkers();
+                                break;
+                            case 3:
+                                putRecMarkers();
+                                break;
+                            case 4:
+                                putParksMarkers();
+                                break;
+                            case 5:
+                                putSchoolsMarkers();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 } else {
-                    switch (index) {
-                        case 1:
-                            putBusStopMarkers();
-                            break;
-                        case 2:
-                            putShopsMarkers();
-                            break;
-                        case 3:
-                            putRecMarkers();
-                            break;
-                        case 4:
-                            putParksMarkers();
-                            break;
-                        case 5:
-                            putSchoolsMarkers();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            } else {
-                if (index == 0) {
-                    for (int i = 0; i < values.length; i++) {
-                        values[i] = false;
-                    }
+                    if (index == 0) {
+                        for (int i = 0; i < values.length; i++) {
+                            values[i] = false;
+                        }
                     hideBusStopMarkers();
                     hideShopsMarkers();
                     hideRecMarkers();
                     hideParksMarkers();
                     hideSchoolsMarkers();
+                    } else {
+                        switch (index) {
+                            case 1:
+                                hideBusStopMarkers();
+                                break;
+                            case 2:
+                                hideShopsMarkers();
+                                break;
+                            case 3:
+                                hideRecMarkers();
+                                break;
+                            case 4:
+                                hideParksMarkers();
+                                break;
+                            case 5:
+                                hideSchoolsMarkers();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            } else {
+                if (show) {
+                    if (index == 0) {
+                        for (int i = 0; i < values.length; i++) {
+                            values[i] = true;
+                        }
+                        putBusStopMarkersNB();
+                        putShopsMarkersNB();
+                        putRecMarkersNB();
+                        putParksMarkersNB();
+                        putSchoolsMarkersNB();
+                    } else {
+                        switch (index) {
+                            case 1:
+                                putBusStopMarkersNB();
+                                break;
+                            case 2:
+                                putShopsMarkersNB();
+                                break;
+                            case 3:
+                                putRecMarkersNB();
+                                break;
+                            case 4:
+                                putParksMarkersNB();
+                                break;
+                            case 5:
+                                putSchoolsMarkersNB();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 } else {
-                    switch (index) {
-                        case 1:
-                            hideBusStopMarkers();
-                            break;
-                        case 2:
-                            hideShopsMarkers();
-                            break;
-                        case 3:
-                            hideRecMarkers();
-                            break;
-                        case 4:
-                            hideParksMarkers();
-                            break;
-                        case 5:
-                            hideSchoolsMarkers();
-                            break;
-                        default:
-                            break;
+                    if (index == 0) {
+                        for (int i = 0; i < values.length; i++) {
+                            values[i] = false;
+                        }
+                        hideBusStopMarkersNB();
+                        hideShopsMarkersNB();
+                        hideRecMarkersNB();
+                        hideParksMarkersNB();
+                        hideSchoolsMarkersNB();
+                    } else {
+                        switch (index) {
+                            case 1:
+                                hideBusStopMarkersNB();
+                                break;
+                            case 2:
+                                hideShopsMarkersNB();
+                                break;
+                            case 3:
+                                hideRecMarkersNB();
+                                break;
+                            case 4:
+                                hideParksMarkersNB();
+                                break;
+                            case 5:
+                                hideSchoolsMarkersNB();
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }
@@ -382,11 +450,105 @@ public class ZoneDetailsActivity extends AppCompatActivity {
         fragment.hideBusStops();
     }
 
+
+    private void putShopsMarkersNB() {
+        fragment.showShopsNB();
+    }
+
+    private void hideShopsMarkersNB() {
+        fragment.hideShopsNB();
+    }
+
+    private void putSchoolsMarkersNB() {
+        fragment.showSchoolsNB();
+    }
+
+    private void hideSchoolsMarkersNB() {
+        fragment.hideSchoolsNB();
+    }
+
+    private void putParksMarkersNB() {
+        fragment.showParksNB();
+    }
+
+    private void hideParksMarkersNB() {
+        fragment.hideParksNB();
+    }
+
+    private void putRecMarkersNB() {
+        fragment.showRecNB();
+    }
+
+    private void hideRecMarkersNB() {
+        fragment.hideRecNB();
+    }
+
+    private void putBusStopMarkersNB() {
+        fragment.showBusStopsNB();
+    }
+
+    private void hideBusStopMarkersNB() {
+        fragment.hideBusStopsNB();
+    }
+
     public void refreshMyData(){
         Intent i = new Intent(ZoneDetailsActivity.this, ZoneDetailsActivity.class);
         i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoodSelected);
         i.putExtra("NEIGHBOURHOOD_DESCRIPTION", description);
         startActivity(i);
         this.overridePendingTransition(0, 0);
+    }
+
+    public void onRadioButtonClicked(View view) {
+        RadioButton cityRadio = (RadioButton) view.findViewById(R.id.cityRadio);
+        RadioButton neighbourhoodRadio = (RadioButton) view.findViewById(R.id.neighbourhoodRadio);
+
+
+        switch(view.getId()) {
+            case R.id.cityRadio:
+                if(!cityRadioSelected && nbRadioSelected) {
+                    citySelected = true;
+                    cityRadio.setChecked(true);
+                    hideBusStopMarkersNB();
+                    hideShopsMarkersNB();
+                    hideRecMarkersNB();
+                    hideParksMarkersNB();
+                    hideSchoolsMarkersNB();
+
+                    putBusStopMarkers();
+                    putParksMarkers();
+                    putRecMarkers();
+                    putShopsMarkers();
+                    putSchoolsMarkers();
+                }
+                cityRadioSelected = true;
+                nbRadioSelected = false;
+
+               // checkbox.setChecked(false);
+
+                break;
+            case R.id.neighbourhoodRadio:
+                if(!nbRadioSelected && cityRadioSelected) {
+                    citySelected = false;
+                    neighbourhoodRadio.setChecked(true);
+                    hideBusStopMarkers();
+                    hideShopsMarkers();
+                    hideRecMarkers();
+                    hideParksMarkers();
+                    hideSchoolsMarkers();
+
+                    putBusStopMarkersNB();
+                    putParksMarkersNB();
+                    putRecMarkersNB();
+                    putShopsMarkersNB();
+                    putSchoolsMarkersNB();
+                }
+
+                cityRadioSelected = false;
+                nbRadioSelected = true;
+
+                break;
+        }
+
     }
 }

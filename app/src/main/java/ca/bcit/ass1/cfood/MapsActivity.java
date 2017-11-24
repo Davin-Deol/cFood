@@ -38,26 +38,31 @@ public class MapsActivity extends Fragment {
     String [] shopsX;
     String [] shopsY;
     ArrayList<Marker> shopsMarkers = new ArrayList<Marker>();
+    ArrayList<Marker> shopsMarkersNB = new ArrayList<Marker>();
 
     String [] parksLat;
     String [] parksLong;
     String [] parksNames;
     ArrayList<Marker> parksMarkers = new ArrayList<Marker>();
+    ArrayList<Marker> parksMarkersNB = new ArrayList<Marker>();
 
     String [] busStopX;
     String [] busStopY;
     String [] busStopNames;
     ArrayList<Marker> busStopMarkers = new ArrayList<Marker>();
+    ArrayList<Marker> busStopMarkersNB = new ArrayList<Marker>();
 
     String [] recX;
     String [] recY;
     String [] recNames;
     ArrayList<Marker> recMarkers = new ArrayList<Marker>();
+    ArrayList<Marker> recMarkersNB = new ArrayList<Marker>();
 
     String [] schoolsX;
     String [] schoolsY;
     String [] schoolsNames;
     ArrayList<Marker> schoolsMarkers = new ArrayList<Marker>();
+    ArrayList<Marker> schoolsMarkersNB = new ArrayList<Marker>();
 
     //Contains all the places
      LatLng[] latLngsShops = null;
@@ -68,11 +73,11 @@ public class MapsActivity extends Fragment {
 
     //Contains only those places/landmarks that are within
     //the specified neighbourhood (polygon)
-     LatLng[] latLngsShopsInPolygon = null;
-     LatLng[] latLngsParksInPolygon = null;
-     LatLng[] latLngsBusStopsInPolygon = null;
-     LatLng[] latLngsRecreationInPolygon = null;
-     LatLng[] latLngsSchoolsInPolygon = null;
+     ArrayList<LatLng> latLngsShopsInPolygon = new ArrayList<LatLng>();
+     ArrayList<LatLng> latLngsParksInPolygon = new ArrayList<LatLng>();
+     ArrayList<LatLng> latLngsBusStopsInPolygon = new ArrayList<LatLng>();
+     ArrayList<LatLng> latLngsRecreationInPolygon = new ArrayList<LatLng>();
+     ArrayList<LatLng> latLngsSchoolsInPolygon = new ArrayList<LatLng>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -122,11 +127,11 @@ public class MapsActivity extends Fragment {
 
         //Contains only those places/landmarks that are within
         //the specified neighbourhood (polygon)
-        latLngsShopsInPolygon = new LatLng[shopsX.length];
-        latLngsParksInPolygon = new LatLng[parksLat.length];
-        latLngsBusStopsInPolygon = new LatLng[busStopX.length];
-        latLngsRecreationInPolygon = new LatLng[recX.length];
-        latLngsSchoolsInPolygon = new LatLng[schoolsX.length];
+//        latLngsShopsInPolygon = new LatLng[shopsX.length];
+//        latLngsParksInPolygon = new LatLng[parksLat.length];
+//        latLngsBusStopsInPolygon = new LatLng[busStopX.length];
+//        latLngsRecreationInPolygon = new LatLng[recX.length];
+//        latLngsSchoolsInPolygon = new LatLng[schoolsX.length];
 
 //        shopsMarkers = new ArrayList<Marker>();
 
@@ -170,7 +175,9 @@ public class MapsActivity extends Fragment {
                     if(PolyUtil.containsLocation(
                             Float.parseFloat(shopsX[j]),
                             Float.parseFloat(shopsY[j]), polygon.getPoints(), false)) {
-                        latLngsShopsInPolygon[j] = new LatLng(Float.parseFloat(shopsX[j]), Float.parseFloat(shopsY[j]));
+                        latLngsShopsInPolygon
+                        .add(new LatLng(Float.parseFloat(shopsX[j]),
+                                Float.parseFloat(shopsY[j])));
                     }
                 }
 
@@ -179,7 +186,9 @@ public class MapsActivity extends Fragment {
                     if(PolyUtil.containsLocation(
                             Float.parseFloat(parksLat[j]),
                             Float.parseFloat(parksLong[j]), polygon.getPoints(), false)) {
-                        latLngsParksInPolygon[j] = new LatLng(Float.parseFloat(parksLat[j]), Float.parseFloat(parksLong[j]));
+                        latLngsParksInPolygon
+                                .add(new LatLng(Float.parseFloat(parksLat[j]),
+                                        Float.parseFloat(parksLong[j])));
                     }
                 }
 
@@ -189,7 +198,9 @@ public class MapsActivity extends Fragment {
                     if(PolyUtil.containsLocation(
                             Float.parseFloat(busStopX[j]),
                             Float.parseFloat(busStopY[j]), polygon.getPoints(), false)) {
-                        latLngsBusStopsInPolygon[j] = new LatLng(Float.parseFloat(busStopX[j]), Float.parseFloat(busStopY[j]));
+                        latLngsBusStopsInPolygon
+                        .add(new LatLng(Float.parseFloat(busStopX[j]),
+                                Float.parseFloat(busStopY[j])));
                     }
                 }
 
@@ -199,7 +210,9 @@ public class MapsActivity extends Fragment {
                     if(PolyUtil.containsLocation(
                             Float.parseFloat(recX[j]),
                             Float.parseFloat(recY[j]), polygon.getPoints(), false)) {
-                        latLngsRecreationInPolygon[j] = new LatLng(Float.parseFloat(recX[j]), Float.parseFloat(recY[j]));
+                        latLngsRecreationInPolygon
+                        .add(new LatLng(Float.parseFloat(recX[j]),
+                                Float.parseFloat(recY[j])));
                     }
                 }
 
@@ -209,7 +222,9 @@ public class MapsActivity extends Fragment {
                     if(PolyUtil.containsLocation(
                             Float.parseFloat(schoolsX[j]),
                             Float.parseFloat(schoolsY[j]), polygon.getPoints(), false)) {
-                        latLngsSchoolsInPolygon[j] = new LatLng(Float.parseFloat(schoolsX[j]), Float.parseFloat(schoolsY[j]));
+                        latLngsSchoolsInPolygon
+                        .add(new LatLng(Float.parseFloat(schoolsX[j]),
+                                Float.parseFloat(schoolsY[j])));
                     }
                 }
 
@@ -330,6 +345,91 @@ public class MapsActivity extends Fragment {
     public void hideRec() {
         for(int j = 0; j < recMarkers.size(); j++) {
             recMarkers.get(j).remove();
+        }
+    }
+
+    public void showShopsNB() {
+        for(int j = 0; j < latLngsShopsInPolygon.size(); j++) {
+            Marker marker = googleMap.addMarker(new MarkerOptions()
+                    .position((LatLng)latLngsShopsInPolygon.get(j))
+                    .title(shopsNames[j])
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+            );
+            shopsMarkersNB.add(marker);
+        }
+    }
+
+    public void hideShopsNB() {
+        for(int j = 0; j < shopsMarkersNB.size(); j++) {
+            shopsMarkersNB.get(j).remove();
+        }
+    }
+
+    public void showSchoolsNB() {
+        for(int j = 0; j < latLngsSchoolsInPolygon.size(); j++) {
+            Marker marker = googleMap.addMarker(new MarkerOptions()
+                    .position((LatLng)latLngsSchoolsInPolygon.get(j))
+                    .title(schoolsNames[j])
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+            );
+            schoolsMarkersNB.add(marker);
+        }
+    }
+
+    public void hideSchoolsNB() {
+        for(int j = 0; j < schoolsMarkersNB.size(); j++) {
+            schoolsMarkersNB.get(j).remove();
+        }
+    }
+
+    public void showParksNB() {
+        for(int j = 0; j < latLngsParksInPolygon.size(); j++) {
+            Marker marker = googleMap.addMarker(new MarkerOptions()
+                    .position((LatLng)latLngsParksInPolygon.get(j))
+                    .title(parksNames[j])
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+            );
+            parksMarkersNB.add(marker);
+        }
+    }
+
+    public void hideParksNB() {
+        for(int j = 0; j < parksMarkersNB.size(); j++) {
+            parksMarkersNB.get(j).remove();
+        }
+    }
+
+    public void showBusStopsNB() {
+        for(int j = 0; j < latLngsBusStopsInPolygon.size(); j++) {
+            Marker marker = googleMap.addMarker(new MarkerOptions()
+                    .position((LatLng)latLngsBusStopsInPolygon.get(j))
+                    .title(busStopNames[j])
+                    .icon(BitmapDescriptorFactory
+                            .fromResource(R.drawable.reticle)));
+            busStopMarkersNB.add(marker);
+        }
+    }
+
+    public void hideBusStopsNB() {
+        for(int j = 0; j < busStopMarkersNB.size(); j++) {
+            busStopMarkersNB.get(j).remove();
+        }
+    }
+
+    public void showRecNB() {
+        for(int j = 0; j < latLngsRecreationInPolygon.size(); j++) {
+            Marker marker = googleMap.addMarker(new MarkerOptions()
+                    .position((LatLng)latLngsRecreationInPolygon.get(j))
+                    .title(recNames[j])
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+            );
+            recMarkersNB.add(marker);
+        }
+    }
+
+    public void hideRecNB() {
+        for(int j = 0; j < recMarkersNB.size(); j++) {
+            recMarkersNB.get(j).remove();
         }
     }
 }
