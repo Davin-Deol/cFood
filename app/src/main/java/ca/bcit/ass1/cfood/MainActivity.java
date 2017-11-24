@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 v.setSelected(true);
                 Intent intent = new Intent(MainActivity.this, SavedZonesActivity.class);
-                intent.putExtra("INTROMODE", true);
+                intent.putExtra("TOUR_MODE", true);
                 startActivity(intent);
             }
         });

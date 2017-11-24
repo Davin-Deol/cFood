@@ -8,6 +8,16 @@
     tools:context="ca.bcit.ass1.cfood.SavedZonesActivity">
 
     <View
+        android:id="@+id/savedZonesActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#FFF"

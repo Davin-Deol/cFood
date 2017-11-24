@@ -6,11 +6,7 @@
     android:layout_height="match_parent"
     tools:context="ca.bcit.ass1.cfood.ZoneDetailsActivity">
     <include layout="@layout/toolbar_top"
-        android:id="@+id/zoneDetailsToolbar"
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp" />
+        android:id="@+id/zoneDetailsToolbar" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
@@ -60,9 +56,16 @@
                 android:text="Neighbourhood"
                 android:onClick="onRadioButtonClicked"/>
         </RadioGroup>
-
 </LinearLayout>
-
+    <View
+        android:id="@+id/zoneDetailsActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="0dp"

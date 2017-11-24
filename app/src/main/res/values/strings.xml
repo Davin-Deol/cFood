@@ -10,6 +10,7 @@
     <string name="ItemShare">Share</string>
 
     <string-array name="categories">
+        <item>ALL</item>
         <item>Bus Stops</item>
         <item>Major Shopping Area</item>
         <item>Recreational Centre</item>
@@ -24,14 +25,32 @@
     <string name="tourDescription_1">The app consists of 3 pages: Main (where we just were), Neighbourhoods (where we are) and Details (where we\'re going to be)</string>
 
     <string name="tourTitle_2">Neighbourhoods Activity</string>
-    <string name="tourDescription_2">This page lists all the different neighbourhoods. We get the list from the database which is populated using JSON objects</string>
+    <string name="tourDescription_2">This page lists all the different neighbourhoods. We get the list from the database which is populated using JSON files from the New Westminster data sets</string>
 
     <string name="tourTitle_3">List of Neighbourhoods</string>
-    <string name="tourDescription_3">This activity main content with a listview with a custom layout for each item</string>
+    <string name="tourDescription_3">This activity\'s main content is a list with a custom layout and style for each item</string>
 
-    <string name="tourTitle_4">Neighbourhood</string>
-    <string name="tourDescription_4">You\'ll notice that not only is the layout unique but so is the style. This is done using XML files in the folder: drawable</string>
+    <string name="tourTitle_4">Item</string>
+    <string name="tourDescription_4">When tapped, the next activity will open with a custom animation. Let\'s try it!</string>
 
-    <string name="tourTitle_5">Tap Me</string>
-    <string name="tourDescription_5">Now we can move on to the next page by tapping an item</string>
+    <string name="tourTitle_5">Details Activity</string>
+    <string name="tourDescription_5">This page displays a map of the neighbourhood, a brief description and a list of items that allows us to toggle what the map shows</string>
+
+    <string name="tourTitle_6">Map</string>
+    <string name="tourDescription_6">First we load the map. Although it only makes up half the screen, it actually requires 700+ lines of code, compared to the app\'s total 1800+ lines of code</string>
+
+    <string name="tourTitle_7">Description</string>
+    <string name="tourDescription_7">The description is much simpler. Just some text with the ability to scroll so that nothing gets pushed out of what we see</string>
+
+    <string name="tourTitle_8">List of Toggles</string>
+    <string name="tourDescription_8">Unlike the previous activity\s list, this one uses checkboxes and directly affects what the map displays!</string>
+
+    <string name="tourTitle_9">Toggle</string>
+    <string name="tourDescription_9">Let\s try it out</string>
+
+    <string name="tourTitle_10">Result</string>
+    <string name="tourDescription_10">Notice how the item corresponding to what you selected has now vanished from the map. To bring it back, just tap the item again</string>
+
+    <string name="tourTitle_11">Conclusion</string>
+    <string name="tourDescription_11">And that concludes our tour. We hope this tour has helped give you a little behind-the-scenes view of our app and maybe other apps. Have a good one!</string>
 </resources>

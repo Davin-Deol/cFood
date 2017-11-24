@@ -34,20 +34,24 @@ public class SavedZonesActivity extends AppCompatActivity {
     TourGuide mTourGuideHandler;
     Toolbar toolbar;
     ListView listView;
+    View wholePage;
     private int tourPhase = 0;
     boolean tourMode = false;
+    boolean endOfTour = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_zones);
         toolbar = findViewById(R.id.savedZonesToolbar);
+        wholePage = findViewById(R.id.savedZonesActivity);
         setSupportActionBar(toolbar);
 
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
             tourMode= false;
         } else {
-            tourMode= extras.getBoolean("INTROMODE");
+            tourMode= extras.getBoolean("TOUR_MODE");
+            endOfTour = extras.getBoolean("END_OF_TOUR");
         }
 
         try {
@@ -55,7 +59,7 @@ public class SavedZonesActivity extends AppCompatActivity {
             for (int i = 0; i < parentArray.length(); i++) {
                 JSONObject finalObject = parentArray.getJSONObject(i);
                 if (finalObject != null) {
-                    neighbourhoods.add(new Neighbourhood(finalObject.getString("NEIGH_NAME"), "A brief description of a neighbourhood in New Westminster."));
+                    neighbourhoods.add(new Neighbourhood(finalObject.getString("NEIGH_NAME"), "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl"));
                 }
             }
         } catch (JSONException e) {
@@ -65,8 +69,11 @@ public class SavedZonesActivity extends AppCompatActivity {
             clickMe1();
         } else {
             listView = findViewById(R.id.savedZonesListView);
-            customAdapter = new SavedZonesActivity.CustomAdapter(tourMode, 0);
+            customAdapter = new SavedZonesActivity.CustomAdapter(tourMode);
             listView.setAdapter(customAdapter);
+        }
+        if (endOfTour) {
+            finalClickMe();
         }
     }
 
@@ -77,10 +84,8 @@ public class SavedZonesActivity extends AppCompatActivity {
 
     private class CustomAdapter extends BaseAdapter {
         boolean tourMode = false;
-        int tourPhase = 0;
-        public CustomAdapter(boolean tourMode, int tourPhase) {
+        public CustomAdapter(boolean tourMode) {
             this.tourMode = tourMode;
-            this.tourPhase = tourPhase;
         }
 
         @Override
@@ -105,64 +110,22 @@ public class SavedZonesActivity extends AppCompatActivity {
             zoneID.setText(neighbourhoods.get(i).neighbourhood);
             TextView savedZonesZoneDescription = view.findViewById(R.id.savedZonesZoneDescription);
             savedZonesZoneDescription.setText(neighbourhoods.get(i).description);
-            if (!tourMode) {
-                final View v = view;
-                final int index = i;
-                view.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        v.setSelected(true);
-                        Intent i = new Intent(SavedZonesActivity.this, ZoneDetailsActivity.class);
-                        i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoods.get(index).neighbourhood);
-                        i.putExtra("NEIGHBOURHOOD_DESCRIPTION", neighbourhoods.get(index).description);
-                        startActivity(i);
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    }
-
-                });
-                return view;
-            } else {
-                // Only if we're at the part where we tap the item and nothing happens
-                if (tourPhase == 4) {
-                    // Only make the first list item clickable
-                    if (i == 0) {
-                        mTourGuideHandler = TourGuide.init(SavedZonesActivity.this).with(TourGuide.Technique.Click)
-                                .setPointer(new Pointer())
-                                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_4)).setDescription(getString(R.string.tourDescription_4)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
-                                .setOverlay(new Overlay())
-                                .playOn(view);
-                        view.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                clickMe5(view);
-                            }
-                        });
-                    }
-                } else if (tourPhase == 5) {
-                    if (i == 0) {
-                        final View v = view;
-                        final int index = i;
-                        mTourGuideHandler = TourGuide.init(SavedZonesActivity.this).with(TourGuide.Technique.Click)
-                                .setPointer(new Pointer())
-                                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_5)).setDescription(getString(R.string.tourDescription_5)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
-                                .setOverlay(new Overlay())
-                                .playOn(view);
-                        view.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                v.setSelected(true);
-                                Intent i = new Intent(SavedZonesActivity.this, ZoneDetailsActivity.class);
-                                i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoods.get(index).neighbourhood);
-                                i.putExtra("NEIGHBOURHOOD_DESCRIPTION", neighbourhoods.get(index).description);
-                                i.putExtra("TOUR_MODE", false);
-                                startActivity(i);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            }
-                        });
-                    }
+            final View v = view;
+            final int index = i;
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    v.setSelected(true);
+                    Intent i = new Intent(SavedZonesActivity.this, ZoneDetailsActivity.class);
+                    i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoods.get(index).neighbourhood);
+                    i.putExtra("NEIGHBOURHOOD_DESCRIPTION", neighbourhoods.get(index).description);
+                    i.putExtra("TOUR_MODE", tourMode);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
-                return view;
-            }
+
+            });
+            return view;
         }
     }
 
@@ -199,15 +162,16 @@ public class SavedZonesActivity extends AppCompatActivity {
     }
 
     /**
-     * This is the part where we talk about what the activity consists of
+     * This is the part where we talk about the activity's layout
      */
     public void clickMe1() {
+        wholePage.bringToFront();
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
                 .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_1)).setDescription(getString(R.string.tourDescription_1)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
                 .setOverlay(new Overlay())
                 .playOn(toolbar);
-        toolbar.setOnClickListener(new View.OnClickListener() {
+        wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickMe2(view);
@@ -226,7 +190,7 @@ public class SavedZonesActivity extends AppCompatActivity {
                 .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_2)).setDescription(getString(R.string.tourDescription_2)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
                 .setOverlay(new Overlay())
                 .playOn(toolbar);
-        toolbar.setOnClickListener(new View.OnClickListener() {
+        wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickMe3(view);
@@ -242,15 +206,16 @@ public class SavedZonesActivity extends AppCompatActivity {
         mTourGuideHandler.cleanUp();
         toolbar.setOnClickListener(null);
         listView = findViewById(R.id.savedZonesListView);
-        customAdapter = new SavedZonesActivity.CustomAdapter(tourMode, 3);
+        customAdapter = new SavedZonesActivity.CustomAdapter(tourMode);
         listView.setAdapter(customAdapter);
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
                 .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_3)).setDescription(getString(R.string.tourDescription_3)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
                 .setOverlay(new Overlay())
                 .playOn(listView);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        wholePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 clickMe4(view);
             }
         });
@@ -262,19 +227,27 @@ public class SavedZonesActivity extends AppCompatActivity {
      */
     public void clickMe4(View view) {
         mTourGuideHandler.cleanUp();
+        wholePage.setClickable(false);
         listView = findViewById(R.id.savedZonesListView);
-        customAdapter = new SavedZonesActivity.CustomAdapter(tourMode, 4);
-        listView.setAdapter(customAdapter);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_4)).setDescription(getString(R.string.tourDescription_4)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setOverlay(new Overlay())
+                .playOn(listView.getChildAt(0));
     }
 
-    /**
-     * This is the part where tapping the list item takes them to the next activity
-     * @param view
-     */
-    public void clickMe5(View view) {
-        mTourGuideHandler.cleanUp();
-        listView = findViewById(R.id.savedZonesListView);
-        customAdapter = new SavedZonesActivity.CustomAdapter(tourMode, 5);
-        listView.setAdapter(customAdapter);
+    public void finalClickMe() {
+        wholePage.bringToFront();
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_11)).setDescription(getString(R.string.tourDescription_11)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setOverlay(new Overlay())
+                .playOn(toolbar);
+        wholePage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(SavedZonesActivity.this, SavedZonesActivity.class));
+                overridePendingTransition(0, 0);
+            }
+        });
     }
 }
