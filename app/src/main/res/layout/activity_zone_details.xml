@@ -61,39 +61,6 @@
                 android:onClick="onRadioButtonClicked"/>
         </RadioGroup>
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="City"-->
-            <!--android:id="@+id/markersSelectAll"-->
-            <!--android:textSize="18dp"-->
-            <!--android:gravity="left"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_marginRight="10dp">-->
-
-        <!--</TextView>-->
-        <!--<RadioButton android:id="@+id/radio_pirates"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="asdfsdfasf"-->
-            <!--android:onClick="onRadioButtonClicked"/>-->
-        <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/allCheckbox"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Neighbourhood"-->
-            <!--android:id="@+id/markersSelectZone"-->
-            <!--android:textSize="18dp"-->
-            <!--android:gravity="left"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_marginRight="10dp">-->
-        <!--</TextView>-->
-
-
 </LinearLayout>
 
     <android.support.constraint.Guideline
