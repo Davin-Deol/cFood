@@ -111,13 +111,8 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         MenuItemCompat.setActionProvider(item, share);
 
         Intent myShareIntent = new Intent(Intent.ACTION_SEND);
-        myShareIntent.setType("image/*");
-        //myShareIntent.putExtra(Intent.EXTRA_STREAM, myImageUri);
+        myShareIntent.setType("text/plain");
 
-        share.setShareIntent(myShareIntent);
-
-        // Image has changed! Update the intent:
-       // myShareIntent.putExtra(Intent.EXTRA_STREAM, myNewImageUri);
         share.setShareIntent(myShareIntent);
 
         return(super.onCreateOptionsMenu(menu));
