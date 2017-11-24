@@ -30,6 +30,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     String[] categories;
     private boolean[] checkboxes;
     Menu menu;
+    private int x = 0;
 
     private ShareActionProvider share = null;
     private ProgressDialog pDialog;
