@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static String dbName = "cfood.db";
-    private static int version = 9;
+    private static int version = 11;
     private static String tableZoning = "neighbourhoods";
     private static String tableParks = "parks";
     private static String tableShopping = "shopping";
@@ -157,7 +157,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String query = "SELECT name FROM sqlite_master WHERE type=?" +
                 "AND name=?";
 
-        cursor = db.rawQuery(query, new String[] {"table", "neighbourhoods"}, null);
+        cursor = db.rawQuery(query, new String[] {"table", tableZoning}, null);
         cursor.moveToFirst();
         return cursor;
     }

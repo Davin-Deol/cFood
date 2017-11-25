@@ -57,11 +57,12 @@ public class MainActivity extends AppCompatActivity {
         } else if(file.exists()) {
             db = openHelper.getReadableDatabase();
             Cursor cursor = openHelper.getAllZones(db);
-            String name = null;
             try {
-                if(cursor.moveToFirst()) {
-                    name = cursor.getString(1);
+                if(!cursor.moveToFirst()) {
+                    PopulateDB populate = new PopulateDB(getApplicationContext(), this);
+                    populate.init();
                 }
+
             } catch (Exception e) {
                 PopulateDB populate = new PopulateDB(getApplicationContext(), this);
                 populate.init();
