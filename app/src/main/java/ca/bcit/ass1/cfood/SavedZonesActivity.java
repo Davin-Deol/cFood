@@ -53,13 +53,16 @@ public class SavedZonesActivity extends AppCompatActivity {
             tourMode= extras.getBoolean("TOUR_MODE");
             endOfTour = extras.getBoolean("END_OF_TOUR");
         }
+        QueryDB queryDB;
 
         try {
             JSONArray parentArray = new JSONArray(loadJSONFromAsset());
             for (int i = 0; i < parentArray.length(); i++) {
                 JSONObject finalObject = parentArray.getJSONObject(i);
+                queryDB = new QueryDB(getApplicationContext(), SavedZonesActivity.this, finalObject.getString("NEIGH_NAME"));
                 if (finalObject != null) {
-                    neighbourhoods.add(new Neighbourhood(finalObject.getString("NEIGH_NAME"), "flksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk flflksajhflk asdflk aslfka lskdfh kasdhf lkashf lkas dfkjhaflah l adslkf alsdk fl"));
+                    neighbourhoods.add(new Neighbourhood(finalObject.getString("NEIGH_NAME"),
+                            queryDB.getDesc(finalObject.getString("NEIGH_NAME"))));
                 }
             }
         } catch (JSONException e) {

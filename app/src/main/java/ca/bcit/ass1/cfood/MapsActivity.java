@@ -30,6 +30,7 @@ public class MapsActivity extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
+    String[] zoneDesc;
     String [] coordsLat;
     String [] coordsLong;
     LatLng[] latLngs;
@@ -91,6 +92,7 @@ public class MapsActivity extends Fragment {
         }
         coordsLat = getArguments().getStringArray("coordsLat");
         coordsLong = getArguments().getStringArray("coordsLong");
+       // zoneDesc = getArguments().getStringArray("zoneDesc");
 
         shopsNames = getArguments().getStringArray("shopsNames");
         shopsX = getArguments().getStringArray("shopsX");

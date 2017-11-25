@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static String dbName = "cfood.db";
-    private static int version = 11;
+    private static int version = 12;
     private static String tableZoning = "neighbourhoods";
     private static String tableParks = "parks";
     private static String tableShopping = "shopping";
@@ -27,6 +27,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String columnName = "name";
     public static String columnX = "X";
     public static String columnY = "Y";
+    public static String columnDesc = "description";
+
     //public static SQLiteDatabase db;
 
     public DBHelper(Context context) {
@@ -35,12 +37,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(createZoneTable());
-        db.execSQL(createParksTable());
-        db.execSQL(createShoppingTable());
-        db.execSQL(createSchoolsTable());
-        db.execSQL(createRecreationTable());
-        db.execSQL(createBusTable());
+        db.execSQL(createNeighbourhoodTable());
+//        db.execSQL(createParksTable());
+//        db.execSQL(createShoppingTable());
+//        db.execSQL(createSchoolsTable());
+//        db.execSQL(createRecreationTable());
+//        db.execSQL(createBusTable());
 
         // this.db = db;
     }
@@ -48,12 +50,11 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS neighbourhoods");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS parks");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS shopping");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS recreation");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS busstops");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS schools");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS zones");
+//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS parks");
+//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS shopping");
+//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS recreation");
+//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS busstops");
+//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS schools");
 
         onCreate(sqLiteDatabase);
     }
@@ -107,11 +108,12 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(tableParks, null, contentValues);
     }
 
-    public void insertZone(final SQLiteDatabase db, String zoneType, String zoneCoords) {
+    public void insertZone(final SQLiteDatabase db, String zoneType, String zoneCoords, String zoneDesc) {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(columnZoneType, zoneType);
         contentValues.put(columnJSONCoord, zoneCoords);
+        contentValues.put(columnDesc, zoneDesc);
 
         db.insert(tableZoning, null, contentValues);
     }
@@ -234,11 +236,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return createTable;
     }
 
-    public String createZoneTable() {
+    public String createNeighbourhoodTable() {
         String createTable = "CREATE TABLE IF NOT EXISTS "  + tableZoning + " ( " +
                 columnID   + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 columnZoneType + " TEXT NOT NULL, " +
-                columnJSONCoord + " TEXT NOT NULL)";
+                columnJSONCoord + " TEXT NOT NULL, " +
+                columnDesc + " TEXT NOT NULL)";
         return createTable;
     }
 

@@ -3,6 +3,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "2",
 		"NEIGH_NAME" : "Connaught Heights",
+		"DESCRIPTION" : "Located on the hill along Marine Drive on the North-West part of the city, Connaught Heights is a small residential community near Downtown, New Westminster, with the 22nd Sky train station near by. The area contains several schools and parks and is a border community to City of Burnaby.",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -44,6 +45,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "D",
 		"NEIGH_NAME" : "Downtown",
+		"DESCRIPTION" : "Stretched across the Fraser River, Downtown is the heritage site of the city, with a strip of shops, restaurants and tourist sites along the infamous Columbia Street. The area contains two major Sky train stops, New Westminster station and Columbia Station, as well as, Douglas College.",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -82,6 +84,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "A",
 		"NEIGH_NAME" : "North Arm South",
+		"DESCRIPTION" : "Across the Queensborough Bridge from Downtown, New Westminster, North Arm North is part of the Queensborough community, next to the shopping outlets, Wallmart and Starlight Casino; A previously industrial area now turned into thriving community in south part of town. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -169,6 +172,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "F",
 		"NEIGH_NAME" : "Brunette Creek",
+		"DESCRIPTION" : "Located near Sapperton station, Brunette Creek is an industrial area, with no residential properties, along which the New Westminster railroad runs through. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -223,6 +227,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "9",
 		"NEIGH_NAME" : "Sapperton",
+		"DESCRIPTION" : "A major eastern neighbourhood of New Westminster, Sapperton is home to Royal Columbia Hospital and several major shopping centers in the area. Sapperton Sky train station is located near the hospital, along with several high-rise residential properties.",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -286,6 +291,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "E",
 		"NEIGH_NAME" : "Glenbrooke South",
+		"DESCRIPTION" : "Situated between Downtown and Sapperton, Glenbrooke is a quiet area that encompasses one of the largest parks in New Westminster, Glenrooke Ravine Park. With mainly high-rises in the area, Glenbrooke is a peaceful jewel. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -339,6 +345,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "8",
 		"NEIGH_NAME" : "Victory Heights",
+		"DESCRIPTION" : "Located on a large hill above Sapperton, Victory Heights is a peaceful neighbourhood with many private homes and townhouses. It is relatively close to Sapperton Sky train station and contains several shopping centers. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -382,6 +389,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "7",
 		"NEIGH_NAME" : "Queens Park",
+		"DESCRIPTION" : "A busy residential area between Downtown and Glebrooke South, Queens Park is one the central locations of New Westminster. Apartment buildings and private homes provide housing for the residents and Royal City Center is a short walk West.",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -428,6 +436,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "6",
 		"NEIGH_NAME" : "Glenbrooke North",
+		"DESCRIPTION" : "Just above Queens Park, Glenbrooke North is a peaceful neighbourhood of private houses, in the center of New Westminster. Located East of Glenbrooke North is the Justice Institute of British Columbia and Royal City Center, as well as, New Westminster High to the West. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -462,6 +471,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "C",
 		"NEIGH_NAME" : "Uptown",
+		"DESCRIPTION" : "The second heart of New Westminster, Uptown stretches from Downtown towards Moody Park and Royal City Center. The area is filled with apartment buildings, shops and stores, and is probably the most central location in all of New Westminster. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -508,6 +518,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "5",
 		"NEIGH_NAME" : "Brow of the Hill",
+		"DESCRIPTION" : "Located on the hill west of Uptown, Brow of the Hill is a residential area that overlooks the South beauty of Fraser River. It is close to both New Westminster Station and Royal City shops, which are just up the road. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -559,6 +570,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "4",
 		"NEIGH_NAME" : "Kelvin",
+		"DESCRIPTION" : "Kelvin is a northern neighbourhood in New Westminster, which encompasses New Westminster High School, as well as Moody Park. It is one of the smallest neighbourhoods in New Westminster and is mostly residential. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -591,6 +603,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "3",
 		"NEIGH_NAME" : "Westend",
+		"DESCRIPTION" : "Heritage Style private homes overlook the Fraser River along the Western hill of Westend; a luxurious gem of New Westminster, Westend is a short walk from Uptown yet, it maintains a sense of privacy for the residents. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -620,6 +633,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "1",
 		"NEIGH_NAME" : "Queensborough",
+		"DESCRIPTION" : "A residential neighbourhood across the Queensborough bridge, Queensborough sits on the Fraser River next to North Arm South. A quiet yet thriving community, Queensborough is one of the most up-and-coming neighbourhoods of New Westminster. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [
@@ -690,6 +704,7 @@
 		"json_featuretype" : "NEIGHBOURHOOD_2017",
 		"NEIGHNUM" : "B",
 		"NEIGH_NAME" : "North Arm North",
+		"DESCRIPTION" : "Similarly to Brunette Creek, North Arm North is commercial neighbourhood, along the West of the Fraser River. Several high-rise homes are situated along the banks of North Arm North, are a relatively short from Downtown, New Westminster. ",
 		"json_geometry" : {
 			"type" : "Polygon",
 			"coordinates" : [

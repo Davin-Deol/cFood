@@ -32,16 +32,6 @@ public class PopulateDB {
         this.activity = activity;
     }
 
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//
-//        super.onCreate(savedInstanceState);
-////        openHelper = new DBHelper(this);
-//
-//        // init();
-//    }
-
     public void init() {
         openHelper = new DBHelper(context);
     db = openHelper.getWritableDatabase();
@@ -56,7 +46,7 @@ public class PopulateDB {
     for(int i = 0; i < zones.length; i++) {
         db.beginTransaction();
         try {
-            openHelper.insertZone(db, zones[i][0], zones[i][1]);
+            openHelper.insertZone(db, zones[i][0], zones[i][1], zones[i][2]);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -154,16 +144,18 @@ public class PopulateDB {
                 //for(int j = 0; j < jsonImport.size(); j++) {
 
                 JSONArray zoneJSONArray = new JSONArray(jsonImport.get(5));
-                zoneArray = new String[zoneJSONArray.length()][2];
+                zoneArray = new String[zoneJSONArray.length()][3];
                 for (int i = 0; i < zoneJSONArray.length(); i++) {
                     JSONObject obj = zoneJSONArray.getJSONObject(i);
 
                     String category = obj.getString("NEIGH_NAME");
                     String coords = obj.getJSONObject("json_geometry")
                             .getJSONArray("coordinates").toString();
+                    String description = obj.getString("DESCRIPTION");
 
                     zoneArray[i][0] = category;
                     zoneArray[i][1] = coords;
+                    zoneArray[i][2] = description;
                 }
 
                 JSONArray busJSONArray = new JSONArray(jsonImport.get(0));

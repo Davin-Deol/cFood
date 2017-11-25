@@ -20,6 +20,7 @@ public class QueryDB {
     String zoneCoords = null;
     String[] zoneLat = null;
     String[] zoneLong = null;
+    String zoneDesc = null;
 
     ArrayList<String> shopsNames = new ArrayList<String>();
     ArrayList<String> shopsX = new ArrayList<String>();
@@ -54,8 +55,6 @@ public class QueryDB {
         this.activity = activity;
         this.zoneName = zoneName;
         openHelper = new DBHelper(context);
-
-
     }
 
     public void retrieveAllData() {
@@ -65,34 +64,6 @@ public class QueryDB {
         getBusStops();
         getSchools();
         getRecreation();
-
-        //return shopsX.toArray(new String[shopsX.size()]);
-
-//        Intent intent = new Intent(activity, ZoneDetailsActivity.class);
-//        intent.putExtra("coordsLat", zoneLong);
-//        intent.putExtra("coordsLong", zoneLat);
-//
-//        intent.putExtra("shopsX", shopsX.toArray(new String[shopsX.size()]));
-//        intent.putExtra("shopsY", shopsY.toArray(new String[shopsY.size()]));
-//        intent.putExtra("shopsNames",  shopsNames.toArray(new String[shopsNames.size()]));
-//
-//        intent.putExtra("parksLat", parksLat);
-//        intent.putExtra("parksLong", parksLong);
-//        intent.putExtra("parksNames", parksNames.toArray(new String[parksNames.size()]));
-//
-//        intent.putExtra("busStopX", busStopX.toArray(new String[busStopX.size()]));
-//        intent.putExtra("busStopY", busStopY.toArray(new String[busStopY.size()]));
-//        intent.putExtra("busStopNames", busStopNames.toArray(new String[busStopNames.size()]));
-//
-//        intent.putExtra("recX", recX.toArray(new String[recX.size()]));
-//        intent.putExtra("recY", recY.toArray(new String[recY.size()]));
-//        intent.putExtra("recNames", recNames.toArray(new String[recNames.size()]));
-//
-//        intent.putExtra("schoolsX", schoolsX.toArray(new String[schoolsX.size()]));
-//        intent.putExtra("schoolsY", schoolsY.toArray(new String[schoolsY.size()]));
-//        intent.putExtra("schoolsNames", schoolsNames.toArray(new String[schoolsNames.size()]));
-//
-//        activity.startActivity(intent);
     }
 
     private void getSchools() {
@@ -202,12 +173,24 @@ public class QueryDB {
         cursor.close();
     }
 
+    public String getDesc(String zone) {
+        db = openHelper.getReadableDatabase();
+        Cursor cursor = openHelper.getZoneCoords(db, zone);
+
+        if (cursor.moveToFirst() ) {
+            zoneDesc = cursor.getString(3);
+        }
+        cursor.close();
+        return zoneDesc;
+    }
+
     private void getZone(String zone) {
         db = openHelper.getReadableDatabase();
         Cursor cursor = openHelper.getZoneCoords(db, zone);
 
         if (cursor.moveToFirst() ) {
             zoneCoords = cursor.getString(2);
+            //zoneDesc = cursor.getString(3);
         }
         cursor.close();
 

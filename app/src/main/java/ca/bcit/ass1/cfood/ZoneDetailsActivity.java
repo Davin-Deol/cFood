@@ -57,6 +57,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
 
     String [] coordsLong;
     String [] coordsLat;
+    String zoneDesc;
 
     String [] shopsNames;
     String [] shopsX;
@@ -111,6 +112,9 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        QueryDB queryDB = new QueryDB(getApplicationContext(), ZoneDetailsActivity.this, neighbourhoodSelected);
+        String desc = queryDB.getDesc(neighbourhoodSelected);
+
         mMap = findViewById(R.id.mapView);
         description = getIntent().getExtras().getString("NEIGHBOURHOOD_DESCRIPTION");
         zoneDetailsDescription = findViewById(R.id.zoneDetailsDescriptionTextView);
@@ -122,13 +126,12 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         if (tourMode) {
             clickMe1();
         } else {
-            zoneDetailsDescription.setText(description);
+            zoneDetailsDescription.setText(desc);
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //this.menu = menu;
         getMenuInflater().inflate(R.menu.menu_neighbourhood_details, menu);
 
         MenuItem item = menu.findItem(R.id.createEventItem);
@@ -141,11 +144,8 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         myShareIntent.putExtra(Intent.EXTRA_TEXT, "Interested in moving to: " +
                 neighbourhoodSelected + "\n\n" + "Brief Overview: " + description);
         share.setShareIntent(myShareIntent);
-
-        return(super.onCreateOptionsMenu(menu));
+        return (super.onCreateOptionsMenu(menu));
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -181,7 +181,6 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         public long getItemId(int i) {
             return 0;
         }
-
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
@@ -360,11 +359,6 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            pDialog = new ProgressDialog(ZoneDetailsActivity.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
         }
 
         @Override
@@ -374,6 +368,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
 
             coordsLong = queryDB.zoneLong;
             coordsLat = queryDB.zoneLat;
+            zoneDesc = queryDB.zoneDesc;//.toArray(new String[queryDB.zoneDesc.size()]);
 
             shopsNames = queryDB.shopsNames.toArray(new String[queryDB.shopsNames.size()]);
             shopsX = queryDB.shopsX.toArray(new String[queryDB.shopsX.size()]);
@@ -398,6 +393,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
             bundle = new Bundle();
             bundle.putStringArray("coordsLat", coordsLat);
             bundle.putStringArray("coordsLong", coordsLong);
+           // bundle.putStringArray("zoneDesc", zoneDesc);
 
             bundle.putStringArray("shopsNames", shopsNames);
             bundle.putStringArray("shopsX", shopsX);
@@ -419,6 +415,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
             bundle.putStringArray("schoolsX", schoolsX);
             bundle.putStringArray("schoolsY", schoolsY);
 
+
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragment = new MapsActivity();
@@ -433,7 +430,6 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         protected void onPostExecute(Void result) {
             CustomAdapter customAdapter = new CustomAdapter(checkboxes);
             zoneDetailsListView.setAdapter(customAdapter);
-            pDialog.dismiss();
         }
     }
 
@@ -537,7 +533,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     public void refreshMyData(){
         Intent i = new Intent(ZoneDetailsActivity.this, ZoneDetailsActivity.class);
         i.putExtra("NEIGHBOURHOOD_SELECTED", neighbourhoodSelected);
-        i.putExtra("NEIGHBOURHOOD_DESCRIPTION", description);
+        i.putExtra("NEIGHBOURHOOD_DESCRIPTION", zoneDesc);
         i.putExtra("TOUR_MODE", tourMode);
         startActivity(i);
         this.overridePendingTransition(0, 0);
