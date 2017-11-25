@@ -71,7 +71,7 @@ public class SavedZonesActivity extends AppCompatActivity {
             System.err.print(e.toString());
         }
         if (tourMode) {
-            clickMe1();
+            beginTour();
         } else {
             listView = findViewById(R.id.savedZonesListView);
             customAdapter = new SavedZonesActivity.CustomAdapter(tourMode);
@@ -134,7 +134,7 @@ public class SavedZonesActivity extends AppCompatActivity {
             if (!animatedAlready[i]) {
                 animatedAlready[i] = true;
                 Animation animation = AnimationUtils.loadAnimation(SavedZonesActivity.this, R.anim.slide_in_right);
-                animation.setStartOffset(300);
+                animation.setStartOffset(200);
                 animation.setDuration(500);
                 view.startAnimation(animation);
             }
@@ -177,11 +177,26 @@ public class SavedZonesActivity extends AppCompatActivity {
     /**
      * This is the part where we talk about the activity's layout
      */
-    public void clickMe1() {
+    public void beginTour() {
         wholePage.bringToFront();
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_1)).setDescription(getString(R.string.tourDescription_1)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourIntroductionHeader)).setDescription(getString(R.string.tourIntroductionText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setOverlay(new Overlay())
+                .playOn(toolbar);
+        wholePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tourAppLayout();
+            }
+        });
+    }
+
+    public void tourAppLayout() {
+        mTourGuideHandler.cleanUp();
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourAppLayoutHeader)).setDescription(getString(R.string.tourAppLayoutText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
                 .setOverlay(new Overlay())
                 .playOn(toolbar);
         wholePage.setOnClickListener(new View.OnClickListener() {
@@ -258,9 +273,13 @@ public class SavedZonesActivity extends AppCompatActivity {
                 .playOn(toolbar);
         wholePage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                startActivity(new Intent(SavedZonesActivity.this, SavedZonesActivity.class));
-                overridePendingTransition(0, 0);
+                endTour();
             }
         });
+    }
+
+    public void endTour() {
+        wholePage.setClickable(false);
+        mTourGuideHandler.cleanUp();
     }
 }

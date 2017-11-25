@@ -21,8 +21,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="tourTitle_1">Basic Layout</string>
-    <string name="tourDescription_1">The app consists of 3 pages: Main (where we just were), Neighbourhoods (where we are) and Details (where we\'re going to be)</string>
+    <string name="tourIntroductionHeader">Introduction</string>
+    <string name="tourIntroductionText">This app was created by: Elisa Chu, Rost Myshkin and Davin Deol</string>
+
+    <string name="tourAppLayoutHeader">App Layout</string>
+    <string name="tourAppLayoutText">It consists of 3 pages: Main (where we just were), Neighbourhoods (where we are) and Details (where we are going to be)</string>
 
     <string name="tourTitle_2">Neighbourhoods Activity</string>
     <string name="tourDescription_2">This page lists all the different neighbourhoods. We get the list from the database which is populated using JSON files from the New Westminster data sets</string>
