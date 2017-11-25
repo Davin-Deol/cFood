@@ -10,6 +10,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -87,6 +89,7 @@ public class SavedZonesActivity extends AppCompatActivity {
 
     private class CustomAdapter extends BaseAdapter {
         boolean tourMode = false;
+        boolean[] animatedAlready = new boolean[neighbourhoods.size()];
         public CustomAdapter(boolean tourMode) {
             this.tourMode = tourMode;
         }
@@ -128,6 +131,13 @@ public class SavedZonesActivity extends AppCompatActivity {
                 }
 
             });
+            if (!animatedAlready[i]) {
+                animatedAlready[i] = true;
+                Animation animation = AnimationUtils.loadAnimation(SavedZonesActivity.this, R.anim.slide_in_right);
+                animation.setStartOffset(300);
+                animation.setDuration(500);
+                view.startAnimation(animation);
+            }
             return view;
         }
     }
