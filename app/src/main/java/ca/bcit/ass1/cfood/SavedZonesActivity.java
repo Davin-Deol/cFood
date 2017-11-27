@@ -202,35 +202,51 @@ public class SavedZonesActivity extends AppCompatActivity {
         wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickMe2(view);
+                tourNeighbourhoodActivityOverview();
             }
         });
     }
 
     /**
      * This is the part where we talk about what the activity consists of
-     * @param view
      */
-    public void clickMe2(View view) {
+    public void tourNeighbourhoodActivityOverview() {
         mTourGuideHandler.cleanUp();
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_2)).setDescription(getString(R.string.tourDescription_2)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourNeighbourhoodActivityOverviewHeader)).setDescription(getString(R.string.tourNeighbourhoodActivityOverviewText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
                 .setOverlay(new Overlay())
                 .playOn(toolbar);
         wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickMe3(view);
+                tourDatabase();
+            }
+        });
+    }
+
+    /**
+     * This is the part where we talk about what the activity consists of
+     */
+    public void tourDatabase() {
+        mTourGuideHandler.cleanUp();
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourDatabaseHeader)).setDescription(getString(R.string.tourDatabaseText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setOverlay(new Overlay())
+                .playOn(toolbar);
+        wholePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tourNeighbourhoodContent();
             }
         });
     }
 
     /**
      * This is the part where we just show the listview
-     * @param view
      */
-    public void clickMe3(View view) {
+    public void tourNeighbourhoodContent() {
         mTourGuideHandler.cleanUp();
         toolbar.setOnClickListener(null);
         listView = findViewById(R.id.savedZonesListView);
@@ -238,7 +254,7 @@ public class SavedZonesActivity extends AppCompatActivity {
         listView.setAdapter(customAdapter);
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_3)).setDescription(getString(R.string.tourDescription_3)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourNeighbourhoodContentHeader)).setDescription(getString(R.string.tourNeighbourhoodContentText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
                 .setOverlay(new Overlay())
                 .playOn(listView);
         wholePage.setOnClickListener(new View.OnClickListener() {
