@@ -1,5 +1,6 @@
 package ca.bcit.ass1.cfood;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -7,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -85,6 +87,8 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 //        setTitle("Neighbourhood Explorer");
         toolbar = findViewById(R.id.savedZonesToolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         dbHelper = new DBHelper(this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -98,6 +102,19 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         getBusStops();
         getSchools();
         getRecreation();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
