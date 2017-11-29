@@ -23,7 +23,7 @@
         android:text="@string/WelcomeScreenHeader"
         android:textColor="#FFF"
         android:textStyle="bold"
-        android:textSize="40sp"
+        android:textSize="36sp"
         android:layout_marginEnd="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
