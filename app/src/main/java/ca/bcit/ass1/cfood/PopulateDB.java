@@ -67,7 +67,7 @@ public class PopulateDB {
             JSONArray array2 = new JSONArray(array.getJSONArray(0).toString());
             zoneLat[i] = new String[array2.length()];
             zoneLong[i] = new String[array2.length()];
-            // zoneCoords = new String[array2.length()][2];
+
             int length = array2.length();
             for (int j = 0; j < length; j++) {
                 JSONArray array3 = new JSONArray(array2.getJSONArray(j).toString());

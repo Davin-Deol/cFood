@@ -163,7 +163,7 @@ public class MapsActivity extends Fragment {
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centering, 13.0f));
                 PolygonOptions rectOptions = new PolygonOptions()
                         .add(latLngs)
-                        .fillColor(Color.argb(50, 50, 0, 255))
+                        .fillColor(Color.argb(20, 90, 0, 155))
                         .strokeWidth(2.0f);
                 Polygon polygon = googleMap.addPolygon(rectOptions);
 
@@ -265,7 +265,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsShops.length; j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                                 .position((LatLng)latLngsShops[j])
-                                .title(shopsNames[j])
+                                .title("Shop: " +shopsNames[j])
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
                         );
             shopsMarkers.add(marker);
@@ -282,7 +282,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsSchools.length; j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position((LatLng)latLngsSchools[j])
-                    .title("School: \n" + schoolsNames[j])
+                    .title("School: " + schoolsNames[j])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
             );
             schoolsMarkers.add(marker);
@@ -299,7 +299,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsParks.length; j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position((LatLng)latLngsParks[j])
-                    .title("Park: \n" + parksNames[j])
+                    .title("Park: " + parksNames[j])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
             );
             parksMarkers.add(marker);
@@ -316,7 +316,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsBusStops.length; j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                                 .position((LatLng)latLngsBusStops[j])
-                                .title("Bus Stop: \n" + busStopNames[j])
+                                .title("Bus Stop: " + busStopNames[j])
                                 .icon(BitmapDescriptorFactory
                                         .fromResource(R.drawable.reticle)));
             busStopMarkers.add(marker);
@@ -333,7 +333,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsRecreation.length; j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position((LatLng)latLngsRecreation[j])
-                    .title("Recreation Center: \n" + recNames[j])
+                    .title("Recreation Center: " + recNames[j])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
             );
             recMarkers.add(marker);
@@ -350,7 +350,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsShopsInPolygon.size(); j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position((LatLng)latLngsShopsInPolygon.get(j))
-                    .title("Shop: \n" + shopsNames[j])
+                    .title("Shop: " + shopsNames[j])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
             );
             shopsMarkersNB.add(marker);
@@ -367,7 +367,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsSchoolsInPolygon.size(); j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position((LatLng)latLngsSchoolsInPolygon.get(j))
-                    .title("School: \n" + schoolsNames[j])
+                    .title("School: " + schoolsNames[j])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
             );
             schoolsMarkersNB.add(marker);

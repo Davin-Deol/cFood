@@ -40,11 +40,11 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(createNeighbourhoodTable());
-//        db.execSQL(createParksTable());
-//        db.execSQL(createShoppingTable());
-//        db.execSQL(createSchoolsTable());
-//        db.execSQL(createRecreationTable());
-//        db.execSQL(createBusTable());
+        db.execSQL(createParksTable());
+        db.execSQL(createShoppingTable());
+        db.execSQL(createSchoolsTable());
+        db.execSQL(createRecreationTable());
+        db.execSQL(createBusTable());
 
         // this.db = db;
     }
@@ -52,11 +52,11 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS neighbourhoods");
-//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS parks");
-//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS shopping");
-//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS recreation");
-//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS busstops");
-//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS schools");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS parks");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS shopping");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS recreation");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS busstops");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS schools");
 
         onCreate(sqLiteDatabase);
     }

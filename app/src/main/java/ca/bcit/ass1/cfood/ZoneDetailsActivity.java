@@ -373,7 +373,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
             coordsLat = queryDB.zoneLat;
             centerLong = queryDB.centerLong;
             centerLat = queryDB.centerLat;
-            zoneDesc = queryDB.zoneDesc;//.toArray(new String[queryDB.zoneDesc.size()]);
+            zoneDesc = queryDB.zoneDesc;
 
             shopsNames = queryDB.shopsNames.toArray(new String[queryDB.shopsNames.size()]);
             shopsX = queryDB.shopsX.toArray(new String[queryDB.shopsX.size()]);

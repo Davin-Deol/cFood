@@ -131,7 +131,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
             }
             PolygonOptions rectOptions = new PolygonOptions()
                     .add(latLngs[i])
-                    .fillColor(Color.argb(50, 50, 0, 255))
+                    .fillColor(Color.argb(20, 90, 0, 155))
                     .strokeWidth(2.0f);
             Polygon polygon = mMap.addPolygon(rectOptions);
             polygon.setVisible(false);
@@ -139,7 +139,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         }
 
         LatLng latlng = new LatLng(49.208021750106795, -122.91226351780601);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 13.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 13.0f));
     }
 
     @Override
@@ -163,7 +163,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
                 centering = new LatLng(centerLat[j][0], centerLong[j][0]);
                 getAllPoints(currPoly);
                 setTitle(zoneNames.get(j));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(centering, 14.5f));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(centering, 14.0f));
             }
         }
 
@@ -185,7 +185,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position((LatLng)latLngsShopsInPolygon[j])
-                        .title("Shop: \n" + shopsNames.get(j))
+                        .title("Shop: \r" + shopsNames.get(j))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
                 );
                 shopsMarkersNB.add(marker);
@@ -201,7 +201,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position((LatLng)latLngsParksInPolygon[j])
-                        .title("Park: \n" + parksNames.get(j))
+                        .title("Park: \r" + parksNames.get(j))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                 );
                 parksMarkersNB.add(marker);
@@ -216,7 +216,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position((LatLng)latLngsBusStopsInPolygon[j])
-                        .title("Bus Stop: \n" + busStopNames.get(j))
+                        .title("Bus Stop: \r" + busStopNames.get(j))
                         .icon(BitmapDescriptorFactory
                                 .fromResource(R.drawable.reticle))
                 );
@@ -232,7 +232,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position((LatLng)latLngsRecreationInPolygon[j])
-                        .title("Recreation Center: \n" + recNames.get(j))
+                        .title("Recreation Center: \r" + recNames.get(j))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                 );
                 recMarkersNB.add(marker);
@@ -247,7 +247,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position((LatLng)latLngsSchoolsInPolygon[j])
-                        .title("School: \n" + schoolsNames.get(j))
+                        .title("School: \r" + schoolsNames.get(j))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
                 );
                 shopsMarkersNB.add(marker);
