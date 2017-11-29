@@ -21,14 +21,23 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="tourTitle_1">Basic Layout</string>
-    <string name="tourDescription_1">The app consists of 3 pages: Main (where we just were), Neighbourhoods (where we are) and Details (where we\'re going to be)</string>
+    <string name="tourIntroductionHeader">Introduction</string>
+    <string name="tourIntroductionText">This app was created by: Elisa Chu, Rost Myshkin and Davin Deol</string>
 
-    <string name="tourTitle_2">Neighbourhoods Activity</string>
-    <string name="tourDescription_2">This page lists all the different neighbourhoods. We get the list from the database which is populated using JSON files from the New Westminster data sets</string>
+    <string name="tourAppLayoutHeader">App Layout</string>
+    <string name="tourAppLayoutText">It consists of 3 pages: Main, Neighbourhoods and Details (where we are going to be)</string>
 
-    <string name="tourTitle_3">List of Neighbourhoods</string>
-    <string name="tourDescription_3">This activity\'s main content is a list with a custom layout and style for each item</string>
+    <string name="tourNeighbourhoodActivityOverviewHeader">Neighbourhoods Activity</string>
+    <string name="tourNeighbourhoodActivityOverviewText">This page lists all the different neighbourhoods</string>
+
+    <string name="tourDatabaseHeader">Database</string>
+    <string name="tourDatabaseText">We get the list from the database which is populated using files from the New Westminster data sets. This was done by Elisa Chu</string>
+
+    <string name="tourNeighbourhoodContentHeader">List of Neighbourhoods</string>
+    <string name="tourNeighbourhoodContentText">This activity\'s main content is a list with a custom layout and style for each item</string>
+
+    <string name="tourNeighbourhoodListViewHeader">List of Neighbourhoods</string>
+    <string name="tourNeighbourhoodListViewText">This activity\'s main content is a list with a custom layout and style for each item</string>
 
     <string name="tourTitle_4">Item</string>
     <string name="tourDescription_4">When tapped, the next activity will open with a custom animation. Let\'s try it!</string>
