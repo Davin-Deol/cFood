@@ -119,7 +119,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap)  {
         mMap = googleMap;
 
         mMap.setOnMapClickListener(this);
@@ -139,11 +139,12 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         }
 
         LatLng latlng = new LatLng(49.208021750106795, -122.91226351780601);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 13.0f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 13.0f));
     }
 
     @Override
     public void onMapClick(LatLng latLng) {
+        LatLng centering;
 
         for(int j = 0; j < zonePolygons.size(); j++) {
             if(PolyUtil.containsLocation(
@@ -159,13 +160,10 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
                     hideShopsNB();
                 }
                 prevPolygon = currPoly;
-                LatLng centering = new LatLng(centerLat[j][0], centerLong[j][0]);
-                CameraUpdate update = CameraUpdateFactory.newLatLng(centering);
-                CameraUpdate zoom = CameraUpdateFactory.zoomTo(14.5f);
-                mMap.moveCamera(update);
-                mMap.animateCamera(zoom, 1000, null);
+                centering = new LatLng(centerLat[j][0], centerLong[j][0]);
                 getAllPoints(currPoly);
                 setTitle(zoneNames.get(j));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(centering, 14.5f));
             }
         }
 
