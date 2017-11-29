@@ -66,8 +66,20 @@
     <string name="tourMainExploreButtonHeader">Explore Option</string>
     <string name="tourMainExploreButtonText">Now we can move onto the next feature, the ability to explore the city!</string>
 
-    <string name="tourTitle_11">Conclusion</string>
-    <string name="tourDescription_11">And that concludes our tour. We hope this tour has helped give you a little behind-the-scenes view of our app and maybe other apps. Have a good one!</string>
+    <string name="tourExploreActivityOverviewHeader">Explore Page</string>
+    <string name="tourExploreActivityOverviewText">This page displays a map of the city</string>
+
+    <string name="tourExploreMapHeader">Map</string>
+    <string name="tourExploreMapText">What you do is click and region, any region, and the map will display that region</string>
+
+    <string name="tourExploreMapDemoHeader">Tap Me</string>
+    <string name="tourExploreMapDemoText">Let\s try it!</string>
+
+    <string name="tourExploreMapDemoResultHeader">Result</string>
+    <string name="tourExploreMapDemoResultText">And it\s that easy!</string>
+
+    <string name="tourConclusionHeader">Conclusion</string>
+    <string name="tourConclusionText">And that concludes our tour. We hope this tour has helped give you a little behind-the-scenes view of our app and maybe other apps. Have a good one!</string>
     <string name="title_activity_explore_maps">Neighbourhood Explorer</string>
 
     <string name="title_activity_maps">Map</string>

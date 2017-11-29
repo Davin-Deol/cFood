@@ -6,9 +6,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,6 +31,11 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+import tourguide.tourguide.Overlay;
+import tourguide.tourguide.Pointer;
+import tourguide.tourguide.ToolTip;
+import tourguide.tourguide.TourGuide;
+
 public class ExploreMapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMapClickListener {
 
@@ -38,6 +46,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
     ArrayList<String> zoneNames = new ArrayList<String>();
     Toolbar toolbar;
     boolean tourMode = false;
+    TourGuide mTourGuideHandler;
 
     String[][] zoneLong = new String[15][];
     String[][] zoneLat = new String[15][];
@@ -109,6 +118,9 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         getBusStops();
         getSchools();
         getRecreation();
+        if (tourMode) {
+            tourExploreActivityOverview();
+        }
     }
 
     @Override
@@ -171,6 +183,9 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
                 setTitle(zoneNames.get(j));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(centering, 14.0f));
             }
+        }
+        if (tourMode) {
+            tourExploreMapDemoResult();
         }
 
     }
@@ -260,7 +275,6 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
             }
         }
     }
-
 
     public void hideRecNB() {
         for(int j = 0; j < recMarkersNB.size(); j++) {
@@ -429,4 +443,87 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         }
         cursor.close();
     }
+
+
+    public void tourExploreActivityOverview() {
+        toolbar.setOnClickListener(null);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourExploreActivityOverviewHeader)).setDescription(getString(R.string.tourExploreActivityOverviewText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setOverlay(new Overlay())
+                .playOn(toolbar);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tourExploreMap();
+            }
+        });
+    }
+
+    public void tourExploreMap() {
+        mTourGuideHandler.cleanUp();
+        toolbar.setOnClickListener(null);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourExploreMapHeader)).setDescription(getString(R.string.tourExploreMapText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setOverlay(new Overlay())
+                .playOn(toolbar);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tourExploreMapDemo();
+            }
+        });
+    }
+
+    public void tourExploreMapDemo() {
+        mTourGuideHandler.cleanUp();
+        toolbar.setOnClickListener(null);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourExploreMapDemoHeader)).setDescription(getString(R.string.tourExploreMapDemoText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
+                .setOverlay(new Overlay())
+                .playOn(findViewById(R.id.map));
+        findViewById(R.id.map).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tourExploreMapDemoResult();
+            }
+        });
+    }
+
+    public void tourExploreMapDemoResult() {
+        mTourGuideHandler.cleanUp();
+        findViewById(R.id.map).setOnClickListener(null);
+        toolbar.setOnClickListener(null);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourExploreMapDemoResultHeader)).setDescription(getString(R.string.tourExploreMapDemoResultText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setOverlay(new Overlay())
+                .playOn(toolbar);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tourConclusion();
+            }
+        });
+    }
+
+    public void tourConclusion() {
+        mTourGuideHandler.cleanUp();
+        toolbar.setOnClickListener(null);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourConclusionHeader)).setDescription(getString(R.string.tourConclusionText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setOverlay(new Overlay())
+                .playOn(toolbar);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExploreMapsActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
+            }
+        });
+    }
+
 }
