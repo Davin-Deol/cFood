@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -47,6 +48,8 @@ public class SavedZonesActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.savedZonesToolbar);
         wholePage = findViewById(R.id.savedZonesActivity);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
@@ -80,6 +83,19 @@ public class SavedZonesActivity extends AppCompatActivity {
         if (endOfTour) {
             finalClickMe();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
