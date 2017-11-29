@@ -27,38 +27,41 @@
     <string name="tourAppLayoutHeader">App Layout</string>
     <string name="tourAppLayoutText">It consists of 3 pages: Main, Neighbourhoods and Details (where we are going to be)</string>
 
-    <string name="tourNeighbourhoodActivityOverviewHeader">Neighbourhoods Activity</string>
+    <string name="tourNeighbourhoodActivityOverviewHeader">Neighbourhoods Page</string>
     <string name="tourNeighbourhoodActivityOverviewText">This page lists all the different neighbourhoods</string>
 
     <string name="tourDatabaseHeader">Database</string>
-    <string name="tourDatabaseText">We get the list from the database which is populated using files from the New Westminster data sets. This was done by Elisa Chu</string>
+    <string name="tourDatabaseText">We get the list from the database which is populated using the New Westminster data sets (Made by Elisa Chu)</string>
 
     <string name="tourNeighbourhoodContentHeader">List of Neighbourhoods</string>
-    <string name="tourNeighbourhoodContentText">This activity\'s main content is a list with a custom layout and style for each item</string>
+    <string name="tourNeighbourhoodContentText">This page\'s main content is a list with a custom style for each item (Made by Davin Deol)</string>
 
-    <string name="tourNeighbourhoodListViewHeader">List of Neighbourhoods</string>
-    <string name="tourNeighbourhoodListViewText">This activity\'s main content is a list with a custom layout and style for each item</string>
+    <string name="tourTapItemHeader">Item</string>
+    <string name="tourTapItemText">When tapped, the next activity will open with a custom animation! (Made by Davin Deol)</string>
 
-    <string name="tourTitle_4">Item</string>
-    <string name="tourDescription_4">When tapped, the next activity will open with a custom animation. Let\'s try it!</string>
+    <string name="tourDetailsActivityOverviewHeader">Details Page</string>
+    <string name="tourDetailsActivityOverviewText">This page displays a map of the neighbourhood, a brief description and a bunch of toggles</string>
 
-    <string name="tourTitle_5">Details Activity</string>
-    <string name="tourDescription_5">This page displays a map of the neighbourhood, a brief description and a list of items that allows us to toggle what the map shows</string>
+    <string name="tourDetailsMapHeader">Map</string>
+    <string name="tourDetailsMapText">First we load the map. Fun fact, just this part takes up almost 40% of the app\s total code (Made by Elisa)</string>
 
-    <string name="tourTitle_6">Map</string>
-    <string name="tourDescription_6">First we load the map. Although it only makes up half the screen, it actually requires 700+ lines of code, compared to the app\'s total 1800+ lines of code</string>
+    <string name="tourDetailsRadioButtonsHeader">Radio Buttons</string>
+    <string name="tourDetailsRadioButtonsText">These determines whether or not you want info about just the neighbourhood or w/ the surrounding area (Made by Elisa)</string>
 
-    <string name="tourTitle_7">Description</string>
-    <string name="tourDescription_7">The description is much simpler. Just some text with the ability to scroll so that nothing gets pushed out of what we see</string>
+    <string name="tourDetailsDescriptionHeader">Description</string>
+    <string name="tourDetailsDescriptionText">The description is much simpler. Just some text with the ability to scroll so that nothing gets pushed out of what we see</string>
 
-    <string name="tourTitle_8">List of Toggles</string>
-    <string name="tourDescription_8">Unlike the previous activity\s list, this one uses checkboxes and directly affects what the map displays!</string>
+    <string name="tourDetailsListOfTogglesHeader">List of Toggles</string>
+    <string name="tourDetailsListOfTogglesText">This activity\s list uses checkboxes and directly affects what the map displays</string>
 
-    <string name="tourTitle_9">Toggle</string>
-    <string name="tourDescription_9">Let\s try it out</string>
+    <string name="tourDetailsToggleExampleHeader">Toggle</string>
+    <string name="tourDetailsToggleExampleText">Let\s try it out</string>
 
-    <string name="tourTitle_10">Result</string>
-    <string name="tourDescription_10">Notice how the item corresponding to what you selected has now vanished from the map. To bring it back, just tap the item again</string>
+    <string name="tourDetailsMapAfterToggleHeader">Result</string>
+    <string name="tourDetailsMapAfterToggleText">Notice how the item corresponding to what you selected has now vanished from the map. To bring it back, just tap the item again</string>
+
+    <string name="tourDetailsShareHeader">Share Your Interest</string>
+    <string name="tourDetailsShareText">And if you\'re interested, you can actually share your interest in the city to Twitter</string>
 
     <string name="tourTitle_11">Conclusion</string>
     <string name="tourDescription_11">And that concludes our tour. We hope this tour has helped give you a little behind-the-scenes view of our app and maybe other apps. Have a good one!</string>

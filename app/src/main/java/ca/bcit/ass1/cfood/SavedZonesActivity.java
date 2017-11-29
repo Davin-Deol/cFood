@@ -194,12 +194,12 @@ public class SavedZonesActivity extends AppCompatActivity {
      * This is the part where we talk about the activity's layout
      */
     public void beginTour() {
-        wholePage.bringToFront();
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
                 .setToolTip(new ToolTip().setTitle(getString(R.string.tourIntroductionHeader)).setDescription(getString(R.string.tourIntroductionText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
                 .setOverlay(new Overlay())
                 .playOn(toolbar);
+        wholePage.bringToFront();
         wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -276,7 +276,7 @@ public class SavedZonesActivity extends AppCompatActivity {
         wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickMe4(view);
+                tourTapItem(view);
             }
         });
     }
@@ -285,13 +285,13 @@ public class SavedZonesActivity extends AppCompatActivity {
      * This is the part where we just show a list item
      * @param view
      */
-    public void clickMe4(View view) {
+    public void tourTapItem(View view) {
         mTourGuideHandler.cleanUp();
         wholePage.setClickable(false);
         listView = findViewById(R.id.savedZonesListView);
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_4)).setDescription(getString(R.string.tourDescription_4)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTapItemHeader)).setDescription(getString(R.string.tourTapItemText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
                 .setOverlay(new Overlay())
                 .playOn(listView.getChildAt(0));
     }

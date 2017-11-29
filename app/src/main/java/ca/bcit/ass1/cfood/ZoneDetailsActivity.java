@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
@@ -48,6 +49,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     Toolbar toolbar;
     MapView mMap;
     View wholePage;
+    LinearLayout radioButtons;
     private int x = 0;
 
     private ShareActionProvider share = null;
@@ -127,7 +129,8 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         customAdapter = new CustomAdapter(checkboxes);
         zoneDetailsListView.setAdapter(customAdapter);
         if (tourMode) {
-            clickMe1();
+            toolbar.setOnClickListener(null);
+            tourDetailsActivityOverview();
         } else {
             zoneDetailsDescription.setText(desc);
         }
@@ -610,38 +613,56 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     /**
      * This is the part where we talk about what the activity consists of
      */
-    public void clickMe1() {
-        ++tourPhase;
+    public void tourDetailsActivityOverview() {
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_5)).setDescription(getString(R.string.tourDescription_5)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourDetailsActivityOverviewHeader)).setDescription(getString(R.string.tourDetailsActivityOverviewText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
                 .setOverlay(new Overlay())
                 .playOn(toolbar);
-        toolbar.setOnClickListener(new View.OnClickListener() {
+        wholePage.bringToFront();
+        wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickMe2(view);
+                tourDetailsMap();
             }
         });
     }
 
     /**
-     * This is the part where we talk about the map fragment
+     * This is the part where we talk about what the activity consists of
      */
-    public void clickMe2(View view) {
-        ++tourPhase;
+    public void tourDetailsMap() {
         mTourGuideHandler.cleanUp();
-        toolbar.setOnClickListener(null);
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_6)).setDescription(getString(R.string.tourDescription_6)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourDetailsMapHeader)).setDescription(getString(R.string.tourDetailsMapText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
                 .setOverlay(new Overlay())
                 .playOn(mMap);
-        findViewById(R.id.zoneDetailsActivity).bringToFront();
-        findViewById(R.id.zoneDetailsActivity).setOnClickListener(new View.OnClickListener() {
+        wholePage.bringToFront();
+        wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickMe3(view);
+                tourDetailsRadioButtons();
+            }
+        });
+    }
+
+    /**
+     * This is the part where we talk about the radio button
+     */
+    public void tourDetailsRadioButtons() {
+        radioButtons = (LinearLayout) findViewById(R.id.selectAll);
+        ++tourPhase;
+        mTourGuideHandler.cleanUp();
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourDetailsRadioButtonsHeader)).setDescription(getString(R.string.tourDetailsRadioButtonsText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setOverlay(new Overlay())
+                .playOn(radioButtons);
+        wholePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tourDetailsDescription();
             }
         });
     }
@@ -649,20 +670,21 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     /**
      * This is the part where we talk about the description view
      */
-    public void clickMe3(View view) {
+    public void tourDetailsDescription() {
+        radioButtons.setOnClickListener(null);
         ++tourPhase;
         mTourGuideHandler.cleanUp();
         wholePage.setOnClickListener(null);
         zoneDetailsDescription.setText(description);
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_7)).setDescription(getString(R.string.tourDescription_7)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourDetailsDescriptionHeader)).setDescription(getString(R.string.tourDetailsDescriptionText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)))
                 .setOverlay(new Overlay())
                 .playOn(zoneDetailsDescription);
         wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickMe4(view);
+                tourDetailsListOfToggles();
             }
         });
     }
@@ -670,19 +692,19 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     /**
      * This is the part where we talk about the list view
      */
-    public void clickMe4(View view) {
+    public void tourDetailsListOfToggles() {
         ++tourPhase;
         mTourGuideHandler.cleanUp();
         wholePage.setOnClickListener(null);
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_8)).setDescription(getString(R.string.tourDescription_8)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourDetailsListOfTogglesHeader)).setDescription(getString(R.string.tourDetailsListOfTogglesText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
                 .setOverlay(new Overlay())
                 .playOn(zoneDetailsListView);
         wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickMe5(v);
+                tourDetailsToggleExample();
             }
         });
     }
@@ -690,12 +712,12 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     /**
      * This is the part where we talk about the list item
      */
-    public void clickMe5(View view) {
+    public void tourDetailsToggleExample() {
         mTourGuideHandler.cleanUp();
         wholePage.setClickable(false);
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_9)).setDescription(getString(R.string.tourDescription_9)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourDetailsToggleExampleHeader)).setDescription(getString(R.string.tourDetailsToggleExampleText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
                 .setOverlay(new Overlay())
                 .playOn(zoneDetailsListView.getChildAt(0));
         zoneDetailsListView.getChildAt(0).setOnClickListener(new View.OnClickListener() {
@@ -703,7 +725,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
             public void onClick(View v) {
                 checkboxes[0] = !checkboxes[0];
                 customAdapter.checkBoxChanges(0, checkboxes[0]);
-                clickMe6(v);
+                tourDetailsMapAfterToggle();
             }
         });
     }
@@ -711,14 +733,33 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     /**
      * This is the part where we talk about the list item
      */
-    public void clickMe6(View view) {
+    public void tourDetailsMapAfterToggle() {
         wholePage.setClickable(true);
         mTourGuideHandler.cleanUp();
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_10)).setDescription(getString(R.string.tourDescription_10)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourDetailsMapAfterToggleHeader)).setDescription(getString(R.string.tourDetailsMapAfterToggleText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
                 .setOverlay(new Overlay())
                 .playOn(mMap);
+        wholePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tourDetailsShare();
+            }
+        });
+    }
+
+    /**
+     * This is the part where we talk about the list item
+     */
+    public void tourDetailsShare() {
+        wholePage.setClickable(true);
+        mTourGuideHandler.cleanUp();
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourDetailsShareHeader)).setDescription(getString(R.string.tourDetailsShareText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setOverlay(new Overlay())
+                .playOn(toolbar);
         wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
