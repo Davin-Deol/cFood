@@ -163,7 +163,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
                 CameraUpdate update = CameraUpdateFactory.newLatLng(centering);
                 CameraUpdate zoom = CameraUpdateFactory.zoomTo(14.5f);
                 mMap.moveCamera(update);
-                mMap.animateCamera(zoom);
+                mMap.animateCamera(zoom, 1000, null);
                 getAllPoints(currPoly);
                 setTitle(zoneNames.get(j));
             }
