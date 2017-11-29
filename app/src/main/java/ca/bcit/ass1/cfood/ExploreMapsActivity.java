@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -159,7 +160,10 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
                 }
                 prevPolygon = currPoly;
                 LatLng centering = new LatLng(centerLat[j][0], centerLong[j][0]);
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centering, 14.5f));
+                CameraUpdate update = CameraUpdateFactory.newLatLng(centering);
+                CameraUpdate zoom = CameraUpdateFactory.zoomTo(14.5f);
+                mMap.moveCamera(update);
+                mMap.animateCamera(zoom);
                 getAllPoints(currPoly);
                 setTitle(zoneNames.get(j));
             }
@@ -183,7 +187,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position((LatLng)latLngsShopsInPolygon[j])
-                        .title(shopsNames.get(j))
+                        .title("Shop: \n" + shopsNames.get(j))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
                 );
                 shopsMarkersNB.add(marker);
@@ -199,7 +203,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position((LatLng)latLngsParksInPolygon[j])
-                        .title(parksNames.get(j))
+                        .title("Park: \n" + parksNames.get(j))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                 );
                 parksMarkersNB.add(marker);
@@ -214,7 +218,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position((LatLng)latLngsBusStopsInPolygon[j])
-                        .title(busStopNames.get(j))
+                        .title("Bus Stop: \n" + busStopNames.get(j))
                         .icon(BitmapDescriptorFactory
                                 .fromResource(R.drawable.reticle))
                 );
@@ -230,7 +234,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position((LatLng)latLngsRecreationInPolygon[j])
-                        .title(recNames.get(j))
+                        .title("Recreation Center: \n" + recNames.get(j))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                 );
                 recMarkersNB.add(marker);
@@ -245,7 +249,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
 
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position((LatLng)latLngsSchoolsInPolygon[j])
-                        .title(schoolsNames.get(j))
+                        .title("School: \n" + schoolsNames.get(j))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
                 );
                 shopsMarkersNB.add(marker);

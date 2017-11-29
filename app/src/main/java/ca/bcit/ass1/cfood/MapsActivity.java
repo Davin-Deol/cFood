@@ -131,16 +131,6 @@ public class MapsActivity extends Fragment {
         latLngsRecreation = new LatLng[recX.length];
         latLngsSchools = new LatLng[schoolsX.length];
 
-        //Contains only those places/landmarks that are within
-        //the specified neighbourhood (polygon)
-//        latLngsShopsInPolygon = new LatLng[shopsX.length];
-//        latLngsParksInPolygon = new LatLng[parksLat.length];
-//        latLngsBusStopsInPolygon = new LatLng[busStopX.length];
-//        latLngsRecreationInPolygon = new LatLng[recX.length];
-//        latLngsSchoolsInPolygon = new LatLng[schoolsX.length];
-
-//        shopsMarkers = new ArrayList<Marker>();
-
         mMapView = (MapView) rootView.findViewById(R.id.mapView2);
         if (mMapView == null) {
             ZoneDetailsActivity mDashboardActivity = (ZoneDetailsActivity) getActivity();
@@ -292,7 +282,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsSchools.length; j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position((LatLng)latLngsSchools[j])
-                    .title(schoolsNames[j])
+                    .title("School: \n" + schoolsNames[j])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
             );
             schoolsMarkers.add(marker);
@@ -309,7 +299,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsParks.length; j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position((LatLng)latLngsParks[j])
-                    .title(parksNames[j])
+                    .title("Park: \n" + parksNames[j])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
             );
             parksMarkers.add(marker);
@@ -326,7 +316,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsBusStops.length; j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                                 .position((LatLng)latLngsBusStops[j])
-                                .title(busStopNames[j])
+                                .title("Bus Stop: \n" + busStopNames[j])
                                 .icon(BitmapDescriptorFactory
                                         .fromResource(R.drawable.reticle)));
             busStopMarkers.add(marker);
@@ -343,7 +333,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsRecreation.length; j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position((LatLng)latLngsRecreation[j])
-                    .title(recNames[j])
+                    .title("Recreation Center: \n" + recNames[j])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
             );
             recMarkers.add(marker);
@@ -360,7 +350,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsShopsInPolygon.size(); j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position((LatLng)latLngsShopsInPolygon.get(j))
-                    .title(shopsNames[j])
+                    .title("Shop: \n" + shopsNames[j])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
             );
             shopsMarkersNB.add(marker);
@@ -377,7 +367,7 @@ public class MapsActivity extends Fragment {
         for(int j = 0; j < latLngsSchoolsInPolygon.size(); j++) {
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position((LatLng)latLngsSchoolsInPolygon.get(j))
-                    .title(schoolsNames[j])
+                    .title("School: \n" + schoolsNames[j])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
             );
             schoolsMarkersNB.add(marker);
