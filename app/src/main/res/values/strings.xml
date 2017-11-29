@@ -52,22 +52,22 @@
     <string name="tourDetailsDescriptionText">The description is simply some text that you can scroll through (Made by Rost)</string>
 
     <string name="tourDetailsListOfTogglesHeader">List of Toggles</string>
-    <string name="tourDetailsListOfTogglesText">This activity\s list uses checkboxes and directly affects what the map displays</string>
+    <string name="tourDetailsListOfTogglesText">This activity\s list uses checkboxes and directly affects what the map displays (Made by Davin + Elisa)</string>
 
     <string name="tourDetailsToggleExampleHeader">Toggle</string>
     <string name="tourDetailsToggleExampleText">Let\s try it out</string>
 
     <string name="tourDetailsMapAfterToggleHeader">Result</string>
-    <string name="tourDetailsMapAfterToggleText">Notice how the item corresponding to what you selected has now vanished from the map. To bring it back, just tap the item again</string>
+    <string name="tourDetailsMapAfterToggleText">Notice how the item corresponding to what you selected has now vanished from the map. To bring it back, just tap the item again (Made by Elisa)</string>
 
     <string name="tourDetailsShareHeader">Share Your Interest</string>
-    <string name="tourDetailsShareText">And if you\'re interested, you can actually share your interest in the city to Twitter</string>
+    <string name="tourDetailsShareText">And if you\'re interested, you can actually share your interest in the city to Twitter (Made by Rost)</string>
 
     <string name="tourMainExploreButtonHeader">Explore Option</string>
     <string name="tourMainExploreButtonText">Now we can move onto the next feature, the ability to explore the city!</string>
 
     <string name="tourExploreActivityOverviewHeader">Explore Page</string>
-    <string name="tourExploreActivityOverviewText">This page displays a map of the city</string>
+    <string name="tourExploreActivityOverviewText">This page displays a map of the city (Made by Elisa)</string>
 
     <string name="tourExploreMapHeader">Map</string>
     <string name="tourExploreMapText">What you do is click and region, any region, and the map will display that region</string>
@@ -79,7 +79,7 @@
     <string name="tourExploreMapDemoResultText">And it\s that easy!</string>
 
     <string name="tourConclusionHeader">Conclusion</string>
-    <string name="tourConclusionText">And that concludes our tour. We hope this tour has helped give you a little behind-the-scenes view of our app and maybe other apps. Have a good one!</string>
+    <string name="tourConclusionText">And that concludes our tour. We hope this tour has helped give you a little behind-the-scenes view of our app and maybe other apps. Have a good one! (Made by Davin)</string>
     <string name="title_activity_explore_maps">Neighbourhood Explorer</string>
 
     <string name="title_activity_maps">Map</string>
