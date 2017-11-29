@@ -31,13 +31,13 @@
     <string name="tourNeighbourhoodActivityOverviewText">This page lists all the different neighbourhoods</string>
 
     <string name="tourDatabaseHeader">Database</string>
-    <string name="tourDatabaseText">We get the list from the database which is populated using the New Westminster data sets (Made by Elisa Chu)</string>
+    <string name="tourDatabaseText">We get the list from the database which is populated using the New Westminster data sets (Made by Elisa)</string>
 
     <string name="tourNeighbourhoodContentHeader">List of Neighbourhoods</string>
-    <string name="tourNeighbourhoodContentText">This page\'s main content is a list with a custom style for each item (Made by Davin Deol)</string>
+    <string name="tourNeighbourhoodContentText">This page\'s main content is a list with a custom style for each item (Made by Davin)</string>
 
     <string name="tourTapItemHeader">Item</string>
-    <string name="tourTapItemText">When tapped, the next activity will open with a custom animation! (Made by Davin Deol)</string>
+    <string name="tourTapItemText">When tapped, the next activity will open with a custom animation! (Made by Davin)</string>
 
     <string name="tourDetailsActivityOverviewHeader">Details Page</string>
     <string name="tourDetailsActivityOverviewText">This page displays a map of the neighbourhood, a brief description and a bunch of toggles</string>
@@ -49,7 +49,7 @@
     <string name="tourDetailsRadioButtonsText">These determines whether or not you want info about just the neighbourhood or w/ the surrounding area (Made by Elisa)</string>
 
     <string name="tourDetailsDescriptionHeader">Description</string>
-    <string name="tourDetailsDescriptionText">The description is much simpler. Just some text with the ability to scroll so that nothing gets pushed out of what we see</string>
+    <string name="tourDetailsDescriptionText">The description is simply some text that you can scroll through (Made by Rost)</string>
 
     <string name="tourDetailsListOfTogglesHeader">List of Toggles</string>
     <string name="tourDetailsListOfTogglesText">This activity\s list uses checkboxes and directly affects what the map displays</string>
@@ -62,6 +62,9 @@
 
     <string name="tourDetailsShareHeader">Share Your Interest</string>
     <string name="tourDetailsShareText">And if you\'re interested, you can actually share your interest in the city to Twitter</string>
+
+    <string name="tourMainExploreButtonHeader">Explore Option</string>
+    <string name="tourMainExploreButtonText">Now we can move onto the next feature, the ability to explore the city!</string>
 
     <string name="tourTitle_11">Conclusion</string>
     <string name="tourDescription_11">And that concludes our tour. We hope this tour has helped give you a little behind-the-scenes view of our app and maybe other apps. Have a good one!</string>

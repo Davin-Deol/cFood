@@ -40,7 +40,6 @@ public class SavedZonesActivity extends AppCompatActivity {
     View wholePage;
     private int tourPhase = 0;
     boolean tourMode = false;
-    boolean endOfTour = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +55,6 @@ public class SavedZonesActivity extends AppCompatActivity {
             tourMode= false;
         } else {
             tourMode= extras.getBoolean("TOUR_MODE");
-            endOfTour = extras.getBoolean("END_OF_TOUR");
         }
         QueryDB queryDB;
 
@@ -79,9 +77,6 @@ public class SavedZonesActivity extends AppCompatActivity {
             listView = findViewById(R.id.savedZonesListView);
             customAdapter = new SavedZonesActivity.CustomAdapter(tourMode);
             listView.setAdapter(customAdapter);
-        }
-        if (endOfTour) {
-            finalClickMe();
         }
     }
 
@@ -294,24 +289,5 @@ public class SavedZonesActivity extends AppCompatActivity {
                 .setToolTip(new ToolTip().setTitle(getString(R.string.tourTapItemHeader)).setDescription(getString(R.string.tourTapItemText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
                 .setOverlay(new Overlay())
                 .playOn(listView.getChildAt(0));
-    }
-
-    public void finalClickMe() {
-        wholePage.bringToFront();
-        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
-                .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourTitle_11)).setDescription(getString(R.string.tourDescription_11)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
-                .setOverlay(new Overlay())
-                .playOn(toolbar);
-        wholePage.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                endTour();
-            }
-        });
-    }
-
-    public void endTour() {
-        wholePage.setClickable(false);
-        mTourGuideHandler.cleanUp();
     }
 }

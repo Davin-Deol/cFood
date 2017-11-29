@@ -763,8 +763,8 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         wholePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ZoneDetailsActivity.this, SavedZonesActivity.class);
-                i.putExtra("END_OF_TOUR", true);
+                Intent i = new Intent(ZoneDetailsActivity.this, MainActivity.class);
+                i.putExtra("TOUR_MODE", true);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
             }

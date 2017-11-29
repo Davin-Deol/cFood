@@ -37,6 +37,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
     String zoneCoords;
     ArrayList<String> zoneNames = new ArrayList<String>();
     Toolbar toolbar;
+    boolean tourMode = false;
 
     String[][] zoneLong = new String[15][];
     String[][] zoneLat = new String[15][];
@@ -85,7 +86,12 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore_maps);
-//        setTitle("Neighbourhood Explorer");
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) {
+            tourMode= false;
+        } else {
+            tourMode= extras.getBoolean("TOUR_MODE");
+        }
         toolbar = findViewById(R.id.savedZonesToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
