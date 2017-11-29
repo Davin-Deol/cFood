@@ -26,6 +26,16 @@ public class MainActivity extends AppCompatActivity {
 
         checkDBExist();
 
+        FloatingActionButton exploreFloatingActionButton = (FloatingActionButton) findViewById(R.id.mainExploreFloatingActionButton);
+        exploreFloatingActionButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ExploreMapsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.mainFloatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener(){
             @Override

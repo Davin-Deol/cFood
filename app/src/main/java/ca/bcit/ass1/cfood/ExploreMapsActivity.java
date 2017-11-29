@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,6 +33,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
     private DBHelper dbHelper;
     String zoneCoords;
     ArrayList<String> zoneNames = new ArrayList<String>();
+    Toolbar toolbar;
 
     String[][] zoneLong = new String[15][];
     String[][] zoneLat = new String[15][];
@@ -81,7 +83,8 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore_maps);
 //        setTitle("Neighbourhood Explorer");
-
+        toolbar = findViewById(R.id.savedZonesToolbar);
+        setSupportActionBar(toolbar);
         dbHelper = new DBHelper(this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.

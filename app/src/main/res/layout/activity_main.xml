@@ -82,4 +82,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="30dp" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/mainExploreFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="30dp"
+        app:srcCompat="@android:drawable/btn_plus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
