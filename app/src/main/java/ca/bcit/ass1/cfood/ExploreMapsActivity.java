@@ -47,6 +47,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
     Toolbar toolbar;
     boolean tourMode = false;
     TourGuide mTourGuideHandler;
+    boolean goNext = false;
 
     String[][] zoneLong = new String[15][];
     String[][] zoneLat = new String[15][];
@@ -184,8 +185,11 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(centering, 14.0f));
             }
         }
-        if (tourMode) {
+        if ((tourMode) && (!goNext)) {
             tourExploreMapDemoResult();
+            goNext = true;
+        } else if (tourMode) {
+            tourConclusion();
         }
 
     }
@@ -498,9 +502,9 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         toolbar.setOnClickListener(null);
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourExploreMapDemoResultHeader)).setDescription(getString(R.string.tourExploreMapDemoResultText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourExploreMapDemoResultHeader)).setDescription(getString(R.string.tourExploreMapDemoResultText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
                 .setOverlay(new Overlay())
-                .playOn(toolbar);
+                .playOn(findViewById(R.id.map));
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
