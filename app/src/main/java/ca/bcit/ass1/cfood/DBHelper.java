@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static String dbName = "cfood.db";
-    private static int version = 12;
+    private static int version = 13;
     private static String tableZoning = "neighbourhoods";
     private static String tableParks = "parks";
     private static String tableShopping = "shopping";
@@ -28,6 +28,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String columnX = "X";
     public static String columnY = "Y";
     public static String columnDesc = "description";
+    public static String columnCenterLong = "centerLong";
+    public static String columnCenterLat = "centerLat";
 
     //public static SQLiteDatabase db;
 
@@ -108,12 +110,15 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(tableParks, null, contentValues);
     }
 
-    public void insertZone(final SQLiteDatabase db, String zoneType, String zoneCoords, String zoneDesc) {
+    public void insertZone(final SQLiteDatabase db, String zoneType, String zoneCoords, String zoneDesc,
+                           float centerLong, float centerLat) {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(columnZoneType, zoneType);
         contentValues.put(columnJSONCoord, zoneCoords);
         contentValues.put(columnDesc, zoneDesc);
+        contentValues.put(columnCenterLong, centerLong);
+        contentValues.put(columnCenterLat, centerLat);
 
         db.insert(tableZoning, null, contentValues);
     }
@@ -188,7 +193,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         cursor = db.query(tableZoning,
                 null, null, null, null, null, null, null);
-
+        cursor.moveToFirst();
         return cursor;
     }
 
@@ -241,7 +246,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 columnID   + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 columnZoneType + " TEXT NOT NULL, " +
                 columnJSONCoord + " TEXT NOT NULL, " +
-                columnDesc + " TEXT NOT NULL)";
+                columnDesc + " TEXT NOT NULL, " +
+                columnCenterLong + " INTEGER NOT NULL, " +
+                columnCenterLat + " INTEGER NOT NULL)";
         return createTable;
     }
 

@@ -34,6 +34,8 @@ public class MapsActivity extends Fragment {
     String [] coordsLat;
     String [] coordsLong;
     LatLng[] latLngs;
+    float centerLat = 0.0f;
+    float centerLong = 0.0f;
 
     String [] shopsNames;
     String [] shopsX;
@@ -92,6 +94,8 @@ public class MapsActivity extends Fragment {
         }
         coordsLat = getArguments().getStringArray("coordsLat");
         coordsLong = getArguments().getStringArray("coordsLong");
+        centerLong = getArguments().getFloat("centerLong");
+        centerLat = getArguments().getFloat("centerLat");
        // zoneDesc = getArguments().getStringArray("zoneDesc");
 
         shopsNames = getArguments().getStringArray("shopsNames");
@@ -164,7 +168,9 @@ public class MapsActivity extends Fragment {
                     latLngs[i] = new LatLng(Float.parseFloat(coordsLong[i]), Float.parseFloat(coordsLat[i]));
                 }
 
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngs[4], 14.0f));
+                LatLng centering = new LatLng(centerLat, centerLong);
+
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centering, 13.0f));
                 PolygonOptions rectOptions = new PolygonOptions()
                         .add(latLngs)
                         .fillColor(Color.argb(50, 50, 0, 255))

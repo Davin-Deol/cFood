@@ -27,6 +27,13 @@ public class PopulateDB {
     Context context;
     Activity activity;
 
+
+    String zoneCoords = null;
+    ArrayList<String> zoneNames = new ArrayList<String>();
+    String[][] zoneAll = new String[16][];
+    String[][] zoneLong = new String[16][];
+    String[][] zoneLat = new String[16][];
+
     public PopulateDB(Context context, Activity activity) {
         this.context = context;
         this.activity = activity;
@@ -44,9 +51,52 @@ public class PopulateDB {
     String[][] schools = jsonResult.get(5);
 
     for(int i = 0; i < zones.length; i++) {
+
+        zoneCoords = zones[i][1];
+
+        float north = 0;
+        float south = 50;
+        float east = -123;
+        float west = 0;
+
+        float centerLong = 0;
+        float centerLat = 0;
+
+        try {
+            JSONArray array = new JSONArray(zoneCoords);
+            JSONArray array2 = new JSONArray(array.getJSONArray(0).toString());
+            zoneLat[i] = new String[array2.length()];
+            zoneLong[i] = new String[array2.length()];
+            // zoneCoords = new String[array2.length()][2];
+            int length = array2.length();
+            for (int j = 0; j < length; j++) {
+                JSONArray array3 = new JSONArray(array2.getJSONArray(j).toString());
+                zoneLong[i][j] = array3.get(1).toString();
+                zoneLat[i][j] = array3.get(0).toString();
+                if(Float.parseFloat(zoneLong[i][j]) > north) {
+                    north = Float.parseFloat(zoneLong[i][j]);
+                }
+                if(Float.parseFloat(zoneLong[i][j]) < south) {
+                    south = Float.parseFloat(zoneLong[i][j]);
+                }
+                if(Float.parseFloat(zoneLat[i][j]) > east) {
+                    east = Float.parseFloat(zoneLat[i][j]);
+                }
+                if(Float.parseFloat(zoneLat[i][j]) < west) {
+                    west = Float.parseFloat(zoneLat[i][j]);
+                }
+            }
+            centerLat = south + ((north - south)/2);
+            centerLong = west + ((east - west)/2);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         db.beginTransaction();
         try {
-            openHelper.insertZone(db, zones[i][0], zones[i][1], zones[i][2]);
+            openHelper.insertZone(db, zones[i][0], zones[i][1], zones[i][2], centerLong, centerLat);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();

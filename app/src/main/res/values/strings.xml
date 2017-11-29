@@ -53,4 +53,8 @@
 
     <string name="tourTitle_11">Conclusion</string>
     <string name="tourDescription_11">And that concludes our tour. We hope this tour has helped give you a little behind-the-scenes view of our app and maybe other apps. Have a good one!</string>
+    <string name="title_activity_explore_maps">Neighbourhood Explorer</string>
+
+    <string name="title_activity_maps">Map</string>
+
 </resources>

@@ -59,6 +59,9 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     String [] coordsLat;
     String zoneDesc;
 
+    float centerLat = 0.0f;
+    float centerLong = 0.0f;
+
     String [] shopsNames;
     String [] shopsX;
     String [] shopsY;
@@ -364,10 +367,12 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         @Override
         protected Void doInBackground(Void... voids) {
             QueryDB queryDB = new QueryDB(getApplicationContext(), ZoneDetailsActivity.this, neighbourhoodSelected);
-            queryDB.retrieveAllData();
+            queryDB.retrieveAllZoneData();
 
             coordsLong = queryDB.zoneLong;
             coordsLat = queryDB.zoneLat;
+            centerLong = queryDB.centerLong;
+            centerLat = queryDB.centerLat;
             zoneDesc = queryDB.zoneDesc;//.toArray(new String[queryDB.zoneDesc.size()]);
 
             shopsNames = queryDB.shopsNames.toArray(new String[queryDB.shopsNames.size()]);
@@ -393,6 +398,8 @@ public class ZoneDetailsActivity extends AppCompatActivity{
             bundle = new Bundle();
             bundle.putStringArray("coordsLat", coordsLat);
             bundle.putStringArray("coordsLong", coordsLong);
+            bundle.putFloat("centerLong", centerLong);
+            bundle.putFloat("centerLat", centerLat);
            // bundle.putStringArray("zoneDesc", zoneDesc);
 
             bundle.putStringArray("shopsNames", shopsNames);
