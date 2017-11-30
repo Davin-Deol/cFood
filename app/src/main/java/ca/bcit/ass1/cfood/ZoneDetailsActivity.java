@@ -1,14 +1,13 @@
 package ca.bcit.ass1.cfood;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -19,13 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
-
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.MapView;
 
@@ -39,12 +35,10 @@ import tourguide.tourguide.TourGuide;
 
 public class ZoneDetailsActivity extends AppCompatActivity{
     String neighbourhoodSelected;
-    String title;
     String description;
     String[] categories;
     private boolean[] checkboxes;
-    Menu menu;
-    CheckBox checkbox;
+
     TourGuide mTourGuideHandler;
     Toolbar toolbar;
     MapView mMap;
@@ -53,9 +47,6 @@ public class ZoneDetailsActivity extends AppCompatActivity{
     private int x = 0;
 
     private ShareActionProvider share = null;
-    private ProgressDialog pDialog;
-
-    boolean[] values;
 
     String [] coordsLong;
     String [] coordsLat;
@@ -227,6 +218,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
             return view;
         }
 
+        //Change checkbox on toggle
         private void checkBoxChanges(int index, boolean show) {
             if (citySelected) {
                 if (show) {
@@ -360,6 +352,7 @@ public class ZoneDetailsActivity extends AppCompatActivity{
         }
     }
 
+    //Get all the data points
     private class getQuery extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -403,7 +396,6 @@ public class ZoneDetailsActivity extends AppCompatActivity{
             bundle.putStringArray("coordsLong", coordsLong);
             bundle.putFloat("centerLong", centerLong);
             bundle.putFloat("centerLat", centerLat);
-           // bundle.putStringArray("zoneDesc", zoneDesc);
 
             bundle.putStringArray("shopsNames", shopsNames);
             bundle.putStringArray("shopsX", shopsX);
@@ -424,7 +416,6 @@ public class ZoneDetailsActivity extends AppCompatActivity{
             bundle.putStringArray("schoolsNames", schoolsNames);
             bundle.putStringArray("schoolsX", schoolsX);
             bundle.putStringArray("schoolsY", schoolsY);
-
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -605,7 +596,6 @@ public class ZoneDetailsActivity extends AppCompatActivity{
 
                 cityRadioSelected = false;
                 nbRadioSelected = true;
-
                 break;
         }
     }

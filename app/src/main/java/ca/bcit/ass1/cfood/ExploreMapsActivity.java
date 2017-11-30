@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -47,6 +45,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
     Toolbar toolbar;
     boolean tourMode = false;
     TourGuide mTourGuideHandler;
+    boolean goNext = false;
 
     String[][] zoneLong = new String[15][];
     String[][] zoneLat = new String[15][];
@@ -112,6 +111,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //Get all the values for each dataset
         getAllZones();
         getShops();
         getParks();
@@ -136,6 +136,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         return super.onOptionsItemSelected(item);
     }
 
+    //Prepopulate the map with all the neighbourhood polygons
     @Override
     public void onMapReady(GoogleMap googleMap)  {
         mMap = googleMap;
@@ -160,6 +161,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 13.0f));
     }
 
+    //Show the polygon when the map is clicked
     @Override
     public void onMapClick(LatLng latLng) {
         LatLng centering;
@@ -184,12 +186,16 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(centering, 14.0f));
             }
         }
-        if (tourMode) {
+        if ((tourMode) && (!goNext)) {
             tourExploreMapDemoResult();
+            goNext = true;
+        } else if (tourMode) {
+            tourConclusion();
         }
 
     }
 
+    //Get all the markers from each dataset that are within the neighbourhood
     private void getAllPoints(Polygon polygon) {
 
         latLngsShopsInPolygon = new LatLng[shopsNames.size()];
@@ -306,6 +312,7 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         }
     }
 
+    //Get all the neighbourhood data including the coordinates, names, and centering coordinates
     private void getAllZones() {
         db = dbHelper.getReadableDatabase();
         Cursor cursor = dbHelper.getAllZones(db);
@@ -498,9 +505,9 @@ public class ExploreMapsActivity extends AppCompatActivity implements OnMapReady
         toolbar.setOnClickListener(null);
         mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
                 .setPointer(new Pointer())
-                .setToolTip(new ToolTip().setTitle(getString(R.string.tourExploreMapDemoResultHeader)).setDescription(getString(R.string.tourExploreMapDemoResultText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.BOTTOM))
+                .setToolTip(new ToolTip().setTitle(getString(R.string.tourExploreMapDemoResultHeader)).setDescription(getString(R.string.tourExploreMapDemoResultText)).setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null)).setGravity(Gravity.TOP))
                 .setOverlay(new Overlay())
-                .playOn(toolbar);
+                .playOn(findViewById(R.id.map));
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

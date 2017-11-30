@@ -73,6 +73,8 @@ public class PopulateDB {
                 JSONArray array3 = new JSONArray(array2.getJSONArray(j).toString());
                 zoneLong[i][j] = array3.get(1).toString();
                 zoneLat[i][j] = array3.get(0).toString();
+
+                //calculate the center point of the polygon
                 if(Float.parseFloat(zoneLong[i][j]) > north) {
                     north = Float.parseFloat(zoneLong[i][j]);
                 }
@@ -92,7 +94,6 @@ public class PopulateDB {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         db.beginTransaction();
         try {
@@ -153,7 +154,6 @@ public class PopulateDB {
         }
     }
 }
-
         public ArrayList<String> importJSON() {
             ArrayList<String> jsonList = new ArrayList();
             try {
@@ -178,6 +178,7 @@ public class PopulateDB {
             return jsonList;
         }
 
+        //Get JSON strings from the files, for all datasets
         public ArrayList<String[][]> getJSONString() {
 
             ArrayList<String[][]> allJson = new ArrayList<String[][]>();
@@ -191,8 +192,6 @@ public class PopulateDB {
             String[][] shoppingArray = null;
 
             try {
-                //for(int j = 0; j < jsonImport.size(); j++) {
-
                 JSONArray zoneJSONArray = new JSONArray(jsonImport.get(5));
                 zoneArray = new String[zoneJSONArray.length()][3];
                 for (int i = 0; i < zoneJSONArray.length(); i++) {
@@ -214,8 +213,6 @@ public class PopulateDB {
                     JSONObject obj = busJSONArray.getJSONObject(i);
 
                     String category = obj.getString("BUSSTOPNUM");
-//                String coords = obj.getJSONObject("json_geometry")
-//                        .getJSONArray("coordinates").toString();
                     String longitude = obj.getString("X");
                     String latitude = obj.getString("Y");
 
@@ -230,8 +227,6 @@ public class PopulateDB {
                     JSONObject obj = shopJSONArray.getJSONObject(i);
 
                     String category = obj.getString("BLDGNAM");
-//                String coords = obj.getJSONObject("json_geometry")
-//                        .getJSONArray("coordinates").toString();
                     String longitude = obj.getString("X");
                     String latitude = obj.getString("Y");
 
@@ -259,8 +254,6 @@ public class PopulateDB {
                     JSONObject obj = recJSONArray.getJSONObject(i);
 
                     String category = obj.getString("Name");
-//                String coords = obj.getJSONObject("json_geometry")
-//                        .getJSONArray("coordinates").toString();
                     String longitude = obj.getString("X");
                     String latitude = obj.getString("Y");
 
@@ -275,8 +268,6 @@ public class PopulateDB {
                     JSONObject obj = schoolsJSONArray.getJSONObject(i);
 
                     String category = obj.getString("BLDGNAM");
-//                String coords = obj.getJSONObject("json_geometry")
-//                        .getJSONArray("coordinates").toString();
                     String longitude = obj.getString("X");
                     String latitude = obj.getString("Y");
 
@@ -292,7 +283,6 @@ public class PopulateDB {
                 allJson.add(recreationArray);
                 allJson.add(schoolsArray);
 
-                //  }
             }catch (final JSONException e) {
                 Log.e(TAG, "Json parsing error: " + e.getMessage());
                 activity.runOnUiThread(new Runnable() {

@@ -22,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static String tableSchools = "schools";
 
     private static String columnID = "_id";
-    public static String columnZoneType = "type";
+    public static String columnNeighbourhoodType = "type";
     public static String columnJSONCoord = "coords";
     public static String columnName = "name";
     public static String columnX = "X";
@@ -30,8 +30,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String columnDesc = "description";
     public static String columnCenterLong = "centerLong";
     public static String columnCenterLat = "centerLat";
-
-    //public static SQLiteDatabase db;
 
     public DBHelper(Context context) {
         super(context, dbName, null, version);
@@ -45,8 +43,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createSchoolsTable());
         db.execSQL(createRecreationTable());
         db.execSQL(createBusTable());
-
-        // this.db = db;
     }
 
     @Override
@@ -114,7 +110,7 @@ public class DBHelper extends SQLiteOpenHelper {
                            float centerLong, float centerLat) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(columnZoneType, zoneType);
+        contentValues.put(columnNeighbourhoodType, zoneType);
         contentValues.put(columnJSONCoord, zoneCoords);
         contentValues.put(columnDesc, zoneDesc);
         contentValues.put(columnCenterLong, centerLong);
@@ -155,16 +151,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         cursor = db.query(tableParks,
                 null, null, null, null, null, null, null);
-        cursor.moveToFirst();
-        return cursor;
-    }
-
-    public Cursor checkTableExists(SQLiteDatabase db) {
-        Cursor cursor;
-        String query = "SELECT name FROM sqlite_master WHERE type=?" +
-                "AND name=?";
-
-        cursor = db.rawQuery(query, new String[] {"table", tableZoning}, null);
         cursor.moveToFirst();
         return cursor;
     }
@@ -244,7 +230,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public String createNeighbourhoodTable() {
         String createTable = "CREATE TABLE IF NOT EXISTS "  + tableZoning + " ( " +
                 columnID   + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                columnZoneType + " TEXT NOT NULL, " +
+                columnNeighbourhoodType + " TEXT NOT NULL, " +
                 columnJSONCoord + " TEXT NOT NULL, " +
                 columnDesc + " TEXT NOT NULL, " +
                 columnCenterLong + " INTEGER NOT NULL, " +

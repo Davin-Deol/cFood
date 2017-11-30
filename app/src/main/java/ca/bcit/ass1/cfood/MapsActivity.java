@@ -1,13 +1,11 @@
 package ca.bcit.ass1.cfood;
-import android.content.Intent;
+
 import android.graphics.Color;
-import android.os.Parcelable;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,7 +13,6 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -30,7 +27,6 @@ public class MapsActivity extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
-    String[] zoneDesc;
     String [] coordsLat;
     String [] coordsLong;
     LatLng[] latLngs;
@@ -96,7 +92,6 @@ public class MapsActivity extends Fragment {
         coordsLong = getArguments().getStringArray("coordsLong");
         centerLong = getArguments().getFloat("centerLong");
         centerLat = getArguments().getFloat("centerLat");
-       // zoneDesc = getArguments().getStringArray("zoneDesc");
 
         shopsNames = getArguments().getStringArray("shopsNames");
         shopsX = getArguments().getStringArray("shopsX");
@@ -118,12 +113,6 @@ public class MapsActivity extends Fragment {
         schoolsX = getArguments().getStringArray("schoolsX");
         schoolsY = getArguments().getStringArray("schoolsY");
 
-//        //Add the polygon's LatLngs
-//        latLngs = new LatLng[coordsLat.length];
-//        for(int i = 0; i < coordsLat.length; i++) {
-//            latLngs[i] = new LatLng(Float.parseFloat(coordsLong[i]), Float.parseFloat(coordsLat[i]));
-//        }
-
         latLngs = new LatLng[coordsLat.length];
         latLngsShops = new LatLng[shopsX.length];
         latLngsParks = new LatLng[parksLat.length];
@@ -139,7 +128,7 @@ public class MapsActivity extends Fragment {
             }
         }
         mMapView.onCreate(savedInstanceState);
-        mMapView.onResume(); // needed to get the map to display immediately
+        mMapView.onResume();
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -157,7 +146,7 @@ public class MapsActivity extends Fragment {
                 for(int i = 0; i < coordsLat.length; i++) {
                     latLngs[i] = new LatLng(Float.parseFloat(coordsLong[i]), Float.parseFloat(coordsLat[i]));
                 }
-
+                //center the polygon
                 LatLng centering = new LatLng(centerLat, centerLong);
 
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centering, 13.0f));
@@ -167,7 +156,7 @@ public class MapsActivity extends Fragment {
                         .strokeWidth(2.0f);
                 Polygon polygon = googleMap.addPolygon(rectOptions);
 
-
+                //Get all the shops, parks, bus, rec, schools
                 for(int j = 0; j < shopsX.length; j++) {
                     latLngsShops[j] = new LatLng(Float.parseFloat(shopsX[j]), Float.parseFloat(shopsY[j]));
                     if(PolyUtil.containsLocation(

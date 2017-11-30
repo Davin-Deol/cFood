@@ -2,7 +2,6 @@ package ca.bcit.ass1.cfood;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -66,21 +65,6 @@ public class QueryDB {
         openHelper = new DBHelper(context);
     }
 
-    public QueryDB(Context context, Activity activity) {
-        this.context = context;
-        this.activity = activity;
-        openHelper = new DBHelper(context);
-    }
-
-    public void retrieveAllData() {
-        getAllZones();
-        getShops();
-        getParks();
-        getBusStops();
-        getSchools();
-        getRecreation();
-    }
-
     public void retrieveAllZoneData() {
         getZone(zoneName);
         getShops();
@@ -88,43 +72,6 @@ public class QueryDB {
         getBusStops();
         getSchools();
         getRecreation();
-    }
-
-    private void getAllZones() {
-        db = openHelper.getReadableDatabase();
-        Cursor cursor = openHelper.getAllZones(db);
-        int count = 0;
-
-        while(cursor.moveToNext()) {
-
-            zoneNames.add(cursor.getString(1));
-            zoneCoords = cursor.getString(2);
-            centerLongAll [count][0] = Float.parseFloat(cursor.getString(4));
-            centerLatAll [count][0] = Float.parseFloat(cursor.getString(5));
-
-            try {
-                JSONArray array = new JSONArray(zoneCoords);
-                JSONArray array2 = new JSONArray(array.getJSONArray(0).toString());
-                zoneLatAll [count] = new String[array2.length()];
-                zoneLongAll [count] = new String[array2.length()];
-                // zoneCoords = new String[array2.length()][2];
-                int length = array2.length();
-                for (int i = 0; i < length; i++) {
-                    JSONArray array3 = new JSONArray(array2.getJSONArray(i).toString());
-                    zoneLongAll [count][i] = array3.get(1).toString();
-                    zoneLatAll [count][i] = array3.get(0).toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //zoneLong2.add(zoneLong);
-            //zoneLat2.add(zoneLat);
-
-            //zoneAll[count][0] = zoneLong1;
-            count++;
-        }
-
-        cursor.close();
     }
 
     private void getSchools() {
@@ -206,7 +153,6 @@ public class QueryDB {
             try {
                 JSONArray array = new JSONArray(parksCoords.get(j));
                 JSONArray array2 = new JSONArray(array.getJSONArray(0).toString());
-                int length = array2.length();
                 JSONArray array3 = new JSONArray(array2.getJSONArray(0).toString());
                 parksLat[j] = array3.get(1).toString();
                 parksLong[j] = array3.get(0).toString();
@@ -251,7 +197,6 @@ public class QueryDB {
 
         if (cursor.moveToFirst() ) {
             zoneCoords = cursor.getString(2);
-            //zoneDesc = cursor.getString(3);
             centerLong = Float.parseFloat(cursor.getString(4));
             centerLat = Float.parseFloat(cursor.getString(5));
         }
@@ -262,7 +207,6 @@ public class QueryDB {
             JSONArray array2 = new JSONArray(array.getJSONArray(0).toString());
             zoneLat = new String[array2.length()];
             zoneLong = new String[array2.length()];
-            // zoneCoords = new String[array2.length()][2];
             int length = array2.length();
             for(int i = 0; i < length; i++) {
                 JSONArray array3 = new JSONArray(array2.getJSONArray(i).toString());
